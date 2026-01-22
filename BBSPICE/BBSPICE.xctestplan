@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "3E184EFE-09D5-4E72-81E0-BC43FA4941C3",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:BBSPICE.xcodeproj",
+      "identifier" : "DCD9194D2F0440D10003FB08",
+      "name" : "BBSPICE"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:BBSPICE.xcodeproj",
+        "identifier" : "DCD9195A2F0440D20003FB08",
+        "name" : "BBSPICETests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:BBSPICE.xcodeproj",
+        "identifier" : "DCD919642F0440D20003FB08",
+        "name" : "BBSPICEUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

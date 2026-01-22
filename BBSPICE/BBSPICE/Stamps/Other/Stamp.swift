@@ -1,0 +1,30 @@
+//
+//  Stamp.swift
+//  BBSPICE
+//
+//  Created by Oleksandr Bolbat on 30.12.2025.
+//
+
+import Foundation
+
+
+class Stamp {
+    let id: UUID
+    
+    init() {
+        self.id = UUID()
+        print("Stamp created, id: \(self.id)")
+    }
+    
+    deinit {
+        print("Stamp deleted, id: \(self.id)")
+    }
+    
+    func getGMatrix() throws -> Matrix? {
+        return nil
+    }
+    
+    func getIMatrix() throws -> Matrix? {
+        return nil
+    }
+}
