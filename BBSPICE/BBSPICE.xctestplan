@@ -9,6 +9,11 @@
     }
   ],
   "defaultOptions" : {
+    "addressSanitizer" : {
+      "enabled" : true
+    },
+    "mallocGuardEdgesEnabled" : true,
+    "mallocScribbleEnabled" : true,
     "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {
       "containerPath" : "container:BBSPICE.xcodeproj",

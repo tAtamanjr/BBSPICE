@@ -155,6 +155,50 @@ final class BBSpiceMatrixTests: XCTestCase {
         let V_Matrix = try G_Matrix!.devide(I_Matrix!)
         V_Matrix!.show()
     }
+ 
+//    @MainActor func testSpeed() throws {
+    func testSpeed() throws {
+        let system = try makeSystemForSpeedTest(3)
+
+        for _ in 0..<3 {
+            let a = system.a
+            let b = system.b
+            _ = try a.devide(b)
+        }
+
+        measure(metrics: [XCTClockMetric()]) {
+            do {
+                let a = system.a
+                let b = system.b
+                _ = try a.devide(b)
+            } catch {}
+        }
+    }
     
 }
 
+private func makeSystemForSpeedTest(_ size: Int) throws -> (a: Matrix, b: Matrix) {
+    precondition(size > 0)
+    
+    let a = GMatrix(size)
+    let b = IMatrix(size)
+    
+    for i in 1..<size + 1 {
+        try b.add(i, Double(i))
+    }
+    
+    for i in 1..<size + 1 {
+        var sum: Double = 0.0
+        
+        for j in 1..<size + 1 where j != i {
+            let v = 0.001 * Double(i + 2 * j)
+            try a.add(i, j, v)
+            sum += abs(v)
+        }
+        
+        let diag = sum + 1.0
+        try a.add(i, i, diag)
+    }
+    
+    return (a, b)
+}

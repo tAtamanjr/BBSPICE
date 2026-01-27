@@ -37,7 +37,7 @@ enum FileReadError : Error, Equatable, CustomStringConvertible {
         switch self {
         case let .noSuchFile(txtFileName):
             return "There no such file: \(txtFileName)"
-        case let .empty(txtFileName):
+        case let .emptyFile(txtFileName):
             return "File: \(txtFileName) is empty"
         }
     }
