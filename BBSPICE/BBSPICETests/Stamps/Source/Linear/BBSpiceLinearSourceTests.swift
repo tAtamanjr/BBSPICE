@@ -19,7 +19,7 @@ final class BBSpiceLinearSourceTests: XCTestCase {
         let stamps: [Stamp] = try [DCCS(0, 1, 5), R(1, 2, 5), R(2, 3, 5), R(2, 3, 5), R(3, 0, 5)]
         
         let G_Matrix: Matrix? = Matrix(3, 3)
-        let I_Matrix: Matrix? = Matrix(3, 1)
+        var I_Matrix: Matrix? = Matrix(3, 1)
         
         for stamp in stamps {
             try G_Matrix!.add(stamp.getGMatrix())
@@ -37,7 +37,7 @@ final class BBSpiceLinearSourceTests: XCTestCase {
         let stamps = try [DCVS(1, 0, 3, 5), R(1, 2, 5), R(2, 0, 5)]
         
         let G_Matrix: Matrix? = Matrix(3, 3)
-        let I_Mtarix: Matrix? = Matrix(3, 1)
+        var I_Mtarix: Matrix? = Matrix(3, 1)
         
         for stamp in stamps {
             try G_Matrix!.add(stamp.getGMatrix())
@@ -54,72 +54,72 @@ final class BBSpiceLinearSourceTests: XCTestCase {
     @MainActor func testVCCS() async throws {
         let stamps: [Stamp] = try [DCVS(1, 0, 3, 5), VCCS(1, 0, 2, 0, 2), R(2, 0, 5)]
         
-        let GMatrix: Matrix? = GMatrix(3)
-        let IMatrix: Matrix? = IMatrix(3)
+        let Gmatrix: Matrix? = GMatrix(3)
+        let Imatrix: Matrix? = IMatrix(3)
         
         for stamp in stamps {
-            try GMatrix!.add(stamp.getGMatrix())
-            try IMatrix!.add(stamp.getIMatrix())
+            try Gmatrix!.add(stamp.getGMatrix())
+            try Imatrix!.add(stamp.getIMatrix())
         }
         
-        GMatrix!.show()
-        IMatrix!.show()
+        Gmatrix!.show()
+        Imatrix!.show()
         
-        let VMatrix = try GMatrix!.devide(IMatrix)
+        let VMatrix = try Gmatrix!.devide(Imatrix)
         VMatrix!.show()
     }
     
     @MainActor func testCCCS() async throws {
         let stamps: [Stamp] = try [DCCS(1, 0, 5), CCCS(1, 0, 2, 0, 3, 2), R(2, 0, 5)]
         
-        let GMatrix: Matrix? = GMatrix(3)
-        let IMatrix: Matrix? = IMatrix(3)
+        let Gmatrix: Matrix? = GMatrix(3)
+        let Imatrix: Matrix? = IMatrix(3)
         
         for stamp in stamps {
-            try GMatrix!.add(stamp.getGMatrix())
-            try IMatrix!.add(stamp.getIMatrix())
+            try Gmatrix!.add(stamp.getGMatrix())
+            try Imatrix!.add(stamp.getIMatrix())
         }
         
-        GMatrix!.show()
-        IMatrix!.show()
+        Gmatrix!.show()
+        Imatrix!.show()
         
-        let VMatrix = try GMatrix!.devide(IMatrix)
+        let VMatrix = try Gmatrix!.devide(Imatrix)
         VMatrix!.show()
     }
     
     @MainActor func testVCVS() async throws {
         let stamps: [Stamp] = try [DCVS(1, 0, 3, 5), VCVS(1, 0, 2, 0, 4, 2), R(2, 0, 5)]
         
-        let GMatrix: Matrix? = GMatrix(4)
-        let IMatrix: Matrix? = IMatrix(4)
+        let Gmatrix: Matrix? = GMatrix(4)
+        let Imatrix: Matrix? = IMatrix(4)
         
         for stamp in stamps {
-            try GMatrix!.add(stamp.getGMatrix())
-            try IMatrix!.add(stamp.getIMatrix())
+            try Gmatrix!.add(stamp.getGMatrix())
+            try Imatrix!.add(stamp.getIMatrix())
         }
         
-        GMatrix!.show()
-        IMatrix!.show()
+        Gmatrix!.show()
+        Imatrix!.show()
         
-        let VMatrix = try GMatrix!.devide(IMatrix)
+        let VMatrix = try Gmatrix!.devide(Imatrix)
         VMatrix!.show()
     }
     
     @MainActor func testCCVS() async throws {
         let stamps: [Stamp] = try [DCCS(1, 0, 5), CCVS(1, 0, 2, 0, 3, 4, 2), R(2, 0, 5)]
         
-        let GMatrix: Matrix? = GMatrix(4)
-        let IMatrix: Matrix? = IMatrix(4)
+        let Gmatrix: Matrix? = GMatrix(4)
+        let Imatrix: Matrix? = IMatrix(4)
         
         for stamp in stamps {
-            try GMatrix!.add(stamp.getGMatrix())
-            try IMatrix!.add(stamp.getIMatrix())
+            try Gmatrix!.add(stamp.getGMatrix())
+            try Imatrix!.add(stamp.getIMatrix())
         }
         
-        GMatrix!.show()
-        IMatrix!.show()
+        Gmatrix!.show()
+        Imatrix!.show()
         
-        let VMatrix = try GMatrix!.devide(IMatrix)
+        let VMatrix = try Gmatrix!.devide(Imatrix)
         VMatrix!.show()
     }
     

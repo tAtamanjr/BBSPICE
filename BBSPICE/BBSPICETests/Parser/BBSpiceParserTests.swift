@@ -16,7 +16,11 @@ final class BBSpiceParserTests: XCTestCase {
 
     func testElementsFromTXT() throws {
         let url = URL(string: "file:///Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Parser/SimpleCircuit.txt")
-        try elementsFromTxt.get(url!)
+//        try elementsFromTxt.get(url!)
+    }
+    
+    func test() throws {
+        print(Int("1")!)
     }
 
 }

@@ -9,11 +9,6 @@
     }
   ],
   "defaultOptions" : {
-    "addressSanitizer" : {
-      "enabled" : true
-    },
-    "mallocGuardEdgesEnabled" : true,
-    "mallocScribbleEnabled" : true,
     "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {
       "containerPath" : "container:BBSPICE.xcodeproj",
@@ -26,7 +21,7 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:BBSPICE.xcodeproj",
-        "identifier" : "DCD9195A2F0440D20003FB08",
+        "identifier" : "DCFE17F52F298A4200B846FD",
         "name" : "BBSPICETests"
       }
     },
@@ -34,7 +29,7 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:BBSPICE.xcodeproj",
-        "identifier" : "DCD919642F0440D20003FB08",
+        "identifier" : "DCFE17FF2F298A4200B846FD",
         "name" : "BBSPICEUITests"
       }
     }

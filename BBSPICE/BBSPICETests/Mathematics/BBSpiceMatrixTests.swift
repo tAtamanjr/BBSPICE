@@ -155,21 +155,100 @@ final class BBSpiceMatrixTests: XCTestCase {
         let V_Matrix = try G_Matrix!.devide(I_Matrix!)
         V_Matrix!.show()
     }
- 
-//    @MainActor func testSpeed() throws {
-    func testSpeed() throws {
-        let system = try makeSystemForSpeedTest(3)
-
+    
+    @MainActor func testSpeed_50() async throws {
+        let (a, b) = try makeSystemForDivisionTest(50)
         for _ in 0..<3 {
-            let a = system.a
-            let b = system.b
-            _ = try a.devide(b)
+            do {
+                _ = try a.devide(b)
+            } catch {}
         }
-
         measure(metrics: [XCTClockMetric()]) {
             do {
-                let a = system.a
-                let b = system.b
+                _ = try a.devide(b)
+            } catch {}
+        }
+    }
+    
+    @MainActor func testSpeed_100() async throws {
+        let (a, b) = try makeSystemForDivisionTest(100)
+        for _ in 0..<3 {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+        measure(metrics: [XCTClockMetric()]) {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+    }
+    
+    @MainActor func testSpeed_200() async throws {
+        let (a, b) = try makeSystemForDivisionTest(200)
+        for _ in 0..<3 {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+        measure(metrics: [XCTClockMetric()]) {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+    }
+    
+    @MainActor func testSpeed_500() async throws {
+        let (a, b) = try makeSystemForDivisionTest(500)
+        for _ in 0..<3 {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+        measure(metrics: [XCTClockMetric()]) {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+    }
+    
+    @MainActor func testSpeed_1000() async throws {
+        let (a, b) = try makeSystemForDivisionTest(1000)
+        for _ in 0..<3 {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+        measure(metrics: [XCTClockMetric()]) {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+    }
+    
+    @MainActor func testSpeed_2000() async throws {
+        let (a, b) = try makeSystemForDivisionTest(2000)
+        for _ in 0..<3 {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+        measure(metrics: [XCTClockMetric()]) {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+    }
+    
+    @MainActor func testSpeed_5000() async throws {
+        let (a, b) = try makeSystemForDivisionTest(5000)
+        for _ in 0..<3 {
+            do {
+                _ = try a.devide(b)
+            } catch {}
+        }
+        measure(metrics: [XCTClockMetric()]) {
+            do {
                 _ = try a.devide(b)
             } catch {}
         }
@@ -177,28 +256,14 @@ final class BBSpiceMatrixTests: XCTestCase {
     
 }
 
-private func makeSystemForSpeedTest(_ size: Int) throws -> (a: Matrix, b: Matrix) {
-    precondition(size > 0)
-    
-    let a = GMatrix(size)
-    let b = IMatrix(size)
-    
-    for i in 1..<size + 1 {
-        try b.add(i, Double(i))
-    }
-    
-    for i in 1..<size + 1 {
-        var sum: Double = 0.0
-        
-        for j in 1..<size + 1 where j != i {
-            let v = 0.001 * Double(i + 2 * j)
-            try a.add(i, j, v)
-            sum += abs(v)
+private func makeSystemForDivisionTest(_ size: Int) throws -> (A: Matrix, b: Matrix?) {
+        let a = GMatrix(size)
+        let b = IMatrix(size)
+
+        for i in 1..<size + 1 {
+            try a.add(i, i, Double(i))
+            try b.add(i, Double(i))
         }
-        
-        let diag = sum + 1.0
-        try a.add(i, i, diag)
+
+        return (a, b)
     }
-    
-    return (a, b)
-}

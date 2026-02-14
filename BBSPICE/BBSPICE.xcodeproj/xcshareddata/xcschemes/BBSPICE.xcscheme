@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DCD9194D2F0440D10003FB08"
+               BlueprintIdentifier = "DCFE17E82F298A4100B846FD"
                BuildableName = "BBSPICE.app"
                BlueprintName = "BBSPICE"
                ReferencedContainer = "container:BBSPICE.xcodeproj">
@@ -40,7 +40,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DCD9195A2F0440D20003FB08"
+               BlueprintIdentifier = "DCFE17F52F298A4200B846FD"
                BuildableName = "BBSPICETests.xctest"
                BlueprintName = "BBSPICETests"
                ReferencedContainer = "container:BBSPICE.xcodeproj">
@@ -51,7 +51,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DCD919642F0440D20003FB08"
+               BlueprintIdentifier = "DCFE17FF2F298A4200B846FD"
                BuildableName = "BBSPICEUITests.xctest"
                BlueprintName = "BBSPICEUITests"
                ReferencedContainer = "container:BBSPICE.xcodeproj">
@@ -73,7 +73,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCD9194D2F0440D10003FB08"
+            BlueprintIdentifier = "DCFE17E82F298A4100B846FD"
             BuildableName = "BBSPICE.app"
             BlueprintName = "BBSPICE"
             ReferencedContainer = "container:BBSPICE.xcodeproj">
@@ -97,7 +97,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCD9194D2F0440D10003FB08"
+            BlueprintIdentifier = "DCFE17E82F298A4100B846FD"
             BuildableName = "BBSPICE.app"
             BlueprintName = "BBSPICE"
             ReferencedContainer = "container:BBSPICE.xcodeproj">

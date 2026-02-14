@@ -12,9 +12,18 @@ class R : TwoNodeStamp {
     let resistance: Double
     
     init(_ nodeS: Int, _ nodeE: Int, _ resistance: Double) throws {
-        if resistance < 0 { throw ResistorError.resistanceLessThanZero(nodeS, nodeE, resistance) }
+        if resistance < 0 { throw ResistorError.negativeResistance(nodeS, nodeE, resistance) }
         self.resistance = resistance
         super.init(nodeS, nodeE)
+    }
+    
+    init(_ description: [String]) throws {
+        if description.isEmpty || description[0] != "R" { throw ResistorError.wrongDescription(0) }
+        let (s, e, r) = (Int(description[1]), Int(description[2]), Double(description[3]))
+        if s == nil || e == nil || r == nil { throw ResistorError.wrongDescription(1) }
+        if r! < 0 { throw ResistorError.negativeResistance(s!, e!, r!) }
+        self.resistance = r!
+        super.init(s!, e!)
     }
     
     override func getGMatrix() throws -> Matrix? {
@@ -30,12 +39,15 @@ class R : TwoNodeStamp {
 }
 
 enum ResistorError : Error, Equatable, CustomStringConvertible {
-    case resistanceLessThanZero(_ nodeS: Int, _ nodeE: Int, _ resistance: Double)
+    case wrongDescription(_ corrupsion: Int)
+    case negativeResistance(_ nodeS: Int, _ nodeE: Int, _ resistance: Double)
     
     var description: String {
         switch self {
-        case let .resistanceLessThanZero(nodeS, nodeE, resistance):
-            return "Resistor between nodes \(nodeS) and \(nodeE) has resistance: \(resistance)"
+        case let .wrongDescription(corruption):
+            return corruption == 0 ? "Description of wrong element" : "Wrong parameters for resistor"
+        case let .negativeResistance(nodeS, nodeE, resistance):
+            return "Resistor between nodes \(nodeS) and \(nodeE) has negative resistance: \(resistance)"
         }
     }
 }
