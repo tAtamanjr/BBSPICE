@@ -257,13 +257,13 @@ final class BBSpiceMatrixTests: XCTestCase {
 }
 
 private func makeSystemForDivisionTest(_ size: Int) throws -> (A: Matrix, b: Matrix?) {
-        let a = GMatrix(size)
-        let b = IMatrix(size)
+    let a = GMatrix(size)
+    let b = IMatrix(size)
 
-        for i in 1..<size + 1 {
-            try a.add(i, i, Double(i))
-            try b.add(i, Double(i))
-        }
-
-        return (a, b)
+    for i in 1..<size + 1 {
+        try a.add(i, i, Double(i))
+        try b.add(i, Double(i))
     }
+
+    return (a, b)
+}

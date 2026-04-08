@@ -8,6 +8,7 @@
 import Foundation
 import Accelerate
 
+
 class Matrix {
     let id: UUID
     let rows: Int
