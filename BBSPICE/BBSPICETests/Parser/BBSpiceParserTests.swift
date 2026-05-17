@@ -15,7 +15,7 @@ final class BBSpiceParserTests: XCTestCase {
     override func tearDownWithError() throws { }
 
     func testElementsFromTXT() throws {
-        let url = URL(string: "file:///Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Parser/SimpleCircuit.txt")
+        let _ = URL(string: "file:///Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Parser/SimpleCircuit.txt")
 //        try elementsFromTxt.get(url!)
     }
     

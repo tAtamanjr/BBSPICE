@@ -7,6 +7,7 @@
 
 import Foundation
 import Accelerate
+import Combine
 
 
 class Matrix {
@@ -20,12 +21,7 @@ class Matrix {
         self.rows = rows
         self.columns = columns
         self.values = Array(repeating: 0.0, count: rows * columns)
-//        print("Matrix created, rows: \(self.rows), columns: \(self.columns), id: \(self.id)")
     }
-    
-//    deinit {
-//        print("Matrix deleted, rows: \(self.rows), columns: \(self.columns), id: \(self.id)")
-//    }
     
     func show() {
         var matrix = "Matrix rows: \(self.rows), columns: \(self.columns), id: \(self.id): ["
@@ -72,6 +68,11 @@ class Matrix {
         if self.rows > Int(Int32.max) {
             throw MatrixError.toBigMatrix(id, matrix!.id, rows)
         }
+        
+        var copy: [Double] = []
+        if self.rows <= 200 {
+            copy = LU_Division(self.values, &matrix!.values, self.rows)
+        }
             
         var a = Array(repeating: 0.0, count: rows * columns)
         for r in 0..<rows {
@@ -79,7 +80,6 @@ class Matrix {
                     a[c * rows + r] = self.values[r * columns + c]
                 }
             }
-        var copy = matrix!.values
 
         var n: __LAPACK_int = __LAPACK_int(self.rows)
         var nrhs: __LAPACK_int = 1
@@ -138,3 +138,4 @@ enum MatrixError : Error, Equatable, CustomStringConvertible {
         }
     }
 }
+

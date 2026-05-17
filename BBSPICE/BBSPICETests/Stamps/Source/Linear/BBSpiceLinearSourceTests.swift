@@ -19,7 +19,7 @@ final class BBSpiceLinearSourceTests: XCTestCase {
         let stamps: [Stamp] = try [DCCS(0, 1, 5), R(1, 2, 5), R(2, 3, 5), R(2, 3, 5), R(3, 0, 5)]
         
         let G_Matrix: Matrix? = Matrix(3, 3)
-        var I_Matrix: Matrix? = Matrix(3, 1)
+        let I_Matrix: Matrix? = Matrix(3, 1)
         
         for stamp in stamps {
             try G_Matrix!.add(stamp.getGMatrix())
@@ -37,7 +37,7 @@ final class BBSpiceLinearSourceTests: XCTestCase {
         let stamps = try [DCVS(1, 0, 3, 5), R(1, 2, 5), R(2, 0, 5)]
         
         let G_Matrix: Matrix? = Matrix(3, 3)
-        var I_Mtarix: Matrix? = Matrix(3, 1)
+        let I_Mtarix: Matrix? = Matrix(3, 1)
         
         for stamp in stamps {
             try G_Matrix!.add(stamp.getGMatrix())
