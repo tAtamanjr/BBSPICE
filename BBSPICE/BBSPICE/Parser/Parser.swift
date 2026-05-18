@@ -11,24 +11,52 @@ import Foundation
 class Parser {
     func parse(_ url: URL) throws -> [Stamp] {
         let text = try String(contentsOf: url)
+        var lines: [ParserLine] = []
         var stamps: [Stamp] = []
+        var nodeCount = 0
         
         for (index, line) in text.components(separatedBy: .newlines).enumerated() {
             let lineNumber = index + 1
-            let tokens = line.split(separator: " ").map(String.init)
+            let tokens = line.split(whereSeparator: { $0.isWhitespace }).map(String.init)
             guard let firstToken = tokens.first else { continue }
             
             if firstToken.hasPrefix("*") || firstToken == ".op" { continue }
             
             let elementType = try ElementType(firstToken, lineNumber)
+            if tokens.count != elementType.parametersCount { throw ParserError.wrongParametersCount(lineNumber) }
             
-            switch elementType {
+            let parserLine = ParserLine(lineNumber, elementType, tokens)
+            lines.append(parserLine)
+            
+            for nodeIndex in elementType.nodeIndexes {
+                nodeCount = max(nodeCount, try parseInt(tokens[nodeIndex], lineNumber))
+            }
+        }
+        
+        var newRowAmount = 0
+        
+        for line in lines {
+            switch line.elementType {
             case .resistor:
-                if tokens.count != 4 { throw ParserError.wrongParametersCount(lineNumber) }
-                stamps.append(try makeResistor(tokens, lineNumber))
+                stamps.append(try makeResistor(line.tokens, line.lineNumber))
             case .DCCS:
-                if tokens.count != 4 { throw ParserError.wrongParametersCount(lineNumber) }
-                stamps.append(try makeDCCS(tokens, lineNumber))
+                stamps.append(try makeDCCS(line.tokens, line.lineNumber))
+            case .DCVS:
+                newRowAmount += 1
+                stamps.append(try makeDCVS(line.tokens, line.lineNumber, nodeCount + newRowAmount))
+            case .CCCS:
+                newRowAmount += 1
+                stamps.append(try makeCCCS(line.tokens, line.lineNumber, nodeCount + newRowAmount))
+            case .VCCS:
+                stamps.append(try makeVCCS(line.tokens, line.lineNumber))
+            case .CCVS:
+                newRowAmount += 1
+                let newRow = nodeCount + newRowAmount
+                newRowAmount += 1
+                stamps.append(try makeCCVS(line.tokens, line.lineNumber, newRow, nodeCount + newRowAmount))
+            case .VCVS:
+                newRowAmount += 1
+                stamps.append(try makeVCVS(line.tokens, line.lineNumber, nodeCount + newRowAmount))
             }
         }
         
@@ -36,27 +64,112 @@ class Parser {
     }
     
     private func makeResistor(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
-        guard let nodeS = Int(tokens[1]), let nodeE = Int(tokens[2]), let resistance = Double(tokens[3]) else {
-            throw ParserError.wrongParameterType(lineNumber)
-        }
-        
         do {
-            return try R(nodeS, nodeE, resistance)
+            return try R(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseDouble(tokens[3], lineNumber)
+            )
         } catch let error as StampParameterError {
             throw parserError(error, lineNumber)
         }
     }
     
     private func makeDCCS(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
-        guard let nodeS = Int(tokens[1]), let nodeE = Int(tokens[2]), let current = Double(tokens[3]) else {
-            throw ParserError.wrongParameterType(lineNumber)
-        }
-        
         do {
-            return try DCCS(nodeS, nodeE, current)
+            return try DCCS(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseDouble(tokens[3], lineNumber)
+            )
         } catch let error as StampParameterError {
             throw parserError(error, lineNumber)
         }
+    }
+    
+    private func makeDCVS(_ tokens: [String], _ lineNumber: Int, _ newRow: Int) throws -> Stamp {
+        do {
+            return try DCVS(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                newRow,
+                parseDouble(tokens[3], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
+    private func makeCCCS(_ tokens: [String], _ lineNumber: Int, _ newRow: Int) throws -> Stamp {
+        do {
+            return try CCCS(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseInt(tokens[3], lineNumber),
+                parseInt(tokens[4], lineNumber),
+                newRow,
+                parseDouble(tokens[5], lineNumber),
+                parseDouble(tokens[6], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
+    private func makeVCCS(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
+        do {
+            return try VCCS(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseInt(tokens[3], lineNumber),
+                parseInt(tokens[4], lineNumber),
+                parseDouble(tokens[5], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
+    private func makeCCVS(_ tokens: [String], _ lineNumber: Int, _ newRow: Int, _ newRow2: Int) throws -> Stamp {
+        do {
+            return try CCVS(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseInt(tokens[3], lineNumber),
+                parseInt(tokens[4], lineNumber),
+                newRow,
+                newRow2,
+                parseDouble(tokens[5], lineNumber),
+                parseDouble(tokens[6], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
+    private func makeVCVS(_ tokens: [String], _ lineNumber: Int, _ newRow: Int) throws -> Stamp {
+        do {
+            return try VCVS(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseInt(tokens[3], lineNumber),
+                parseInt(tokens[4], lineNumber),
+                newRow,
+                parseDouble(tokens[5], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
+    private func parseInt(_ token: String, _ lineNumber: Int) throws -> Int {
+        guard let value = Int(token) else { throw ParserError.wrongParameterType(lineNumber) }
+        return value
+    }
+    
+    private func parseDouble(_ token: String, _ lineNumber: Int) throws -> Double {
+        guard let value = Double(token) else { throw ParserError.wrongParameterType(lineNumber) }
+        return value
     }
     
     private func parserError(_ error: StampParameterError, _ lineNumber: Int) -> ParserError {
@@ -69,41 +182,14 @@ class Parser {
     }
 }
 
-enum ElementType {
-    case resistor
-    case DCCS
+struct ParserLine {
+    let lineNumber: Int
+    let elementType: ElementType
+    let tokens: [String]
     
-    init(_ rawValue: String, _ lineNumber: Int) throws {
-        switch rawValue {
-        case "R":
-            self = .resistor
-        case "DCCS":
-            self = .DCCS
-        default:
-            throw ParserError.unknownElement(lineNumber)
-        }
-    }
-}
-
-enum ParserError : Error, Equatable, CustomStringConvertible {
-    case unknownElement(_ line: Int)
-    case wrongParametersCount(_ line: Int)
-    case wrongParameterType(_ line: Int)
-    case wrongStampParameters(_ line: Int)
-    case programFail(_ line: Int)
-    
-    var description: String {
-        switch self {
-        case let .unknownElement(line):
-            return "Parser: Unknown element at line \(line)"
-        case let .wrongParametersCount(line):
-            return "Parser: Wrong parameters count at line \(line)"
-        case let .wrongParameterType(line):
-            return "Parser: Wrong parameter type at line \(line)"
-        case let .wrongStampParameters(line):
-            return "Parser: Wrong stamp parameters at line \(line)"
-        case let .programFail(line):
-            return "Parser: Program failed at line \(line)"
-        }
+    init(_ lineNumber: Int, _ elementType: ElementType, _ tokens: [String]) {
+        self.lineNumber = lineNumber
+        self.elementType = elementType
+        self.tokens = tokens
     }
 }
