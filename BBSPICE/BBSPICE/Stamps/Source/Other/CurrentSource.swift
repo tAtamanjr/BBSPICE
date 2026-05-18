@@ -11,8 +11,9 @@ import Foundation
 class CurrentSource : TwoNodeStamp {
     let current: Double
     
-    init(_ nodeS: Int, _ nodeE: Int, _ current: Double) {
+    init(_ nodeS: Int, _ nodeE: Int, _ current: Double) throws {
+        if !current.isFinite { throw StampParameterError.parameterError }
         self.current = current
-        super.init(nodeS, nodeE)
+        try super.init(nodeS, nodeE)
     }
 }

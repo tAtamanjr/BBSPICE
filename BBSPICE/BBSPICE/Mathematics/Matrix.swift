@@ -69,11 +69,11 @@ class Matrix {
             throw MatrixError.toBigMatrix(id, matrix!.id, rows)
         }
         
-        var copy: [Double] = []
         if self.rows <= 200 {
-            copy = LU_Division(self.values, &matrix!.values, self.rows)
+            var copy = LU_Division(self.values, &matrix!.values, self.rows)
+            return VMatrix(copy)
         }
-            
+        
         var a = Array(repeating: 0.0, count: rows * columns)
         for r in 0..<rows {
                 for c in 0..<columns {
@@ -81,6 +81,8 @@ class Matrix {
                 }
             }
 
+        var copy = matrix!.values
+        
         var n: __LAPACK_int = __LAPACK_int(self.rows)
         var nrhs: __LAPACK_int = 1
         var lda = n

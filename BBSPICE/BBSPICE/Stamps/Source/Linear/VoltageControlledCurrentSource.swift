@@ -11,9 +11,10 @@ import Foundation
 class VCCS : ControlledSource {
     let transconductance: Double
     
-    init(_ nodeWeP: Int, _ nodeWeM: Int, _ nodeWyP: Int, _ nodeWyM: Int, _ transconductance: Double) {
+    init(_ nodeWeP: Int, _ nodeWeM: Int, _ nodeWyP: Int, _ nodeWyM: Int, _ transconductance: Double) throws {
+        if !transconductance.isFinite { throw StampParameterError.parameterError }
         self.transconductance = transconductance
-        super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
+        try super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
     }
     
     override func getGMatrix() throws -> Matrix? {

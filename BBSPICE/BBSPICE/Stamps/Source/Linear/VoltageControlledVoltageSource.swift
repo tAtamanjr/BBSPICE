@@ -12,10 +12,12 @@ class VCVS : ControlledSource {
     let newRow: Int
     let gain: Double
     
-    init(_ nodeWeP: Int, _ nodeWeM: Int, _ nodeWyP: Int, _ nodeWyM: Int, _ newRow: Int, _ gain: Double) {
+    init(_ nodeWeP: Int, _ nodeWeM: Int, _ nodeWyP: Int, _ nodeWyM: Int, _ newRow: Int, _ gain: Double) throws {
+        if newRow < 0 { throw StampParameterError.programFail }
+        if !gain.isFinite { throw StampParameterError.parameterError }
         self.newRow = newRow
         self.gain = gain
-        super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
+        try super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
     }
     
     override func getGMatrix() throws -> Matrix? {

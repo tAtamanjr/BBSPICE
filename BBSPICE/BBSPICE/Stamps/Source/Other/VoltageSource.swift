@@ -12,9 +12,11 @@ class VoltageSource : TwoNodeStamp {
     let newRow: Int
     let amplitude: Double
     
-    init(_ nodeS : Int, _ nodeE: Int, _ newRow: Int, _ amplitude: Double) {
+    init(_ nodeS : Int, _ nodeE: Int, _ newRow: Int, _ amplitude: Double) throws {
+        if newRow < 0 { throw StampParameterError.programFail }
+        if !amplitude.isFinite { throw StampParameterError.parameterError }
         self.newRow = newRow
         self.amplitude = amplitude
-        super.init(nodeS, nodeE)
+        try super.init(nodeS, nodeE)
     }
 }

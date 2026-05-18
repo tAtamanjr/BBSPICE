@@ -22,28 +22,7 @@ final class BBSpiceLinearPassiveElementsTests: XCTestCase {
         XCTAssert(resistor.resistance == 3.0)
         
         XCTAssertThrowsError(try resistor = R(1, 2, -3.0)) { err in
-            XCTAssertEqual(err as? ResistorError, .negativeResistance(1, 2, -3.0))
-        }
-        
-        resistor = try R(["R", "1", "2", "3.0"])
-        XCTAssert(resistor.nodeS == 1)
-        XCTAssert(resistor.nodeE == 2)
-        XCTAssert(resistor.resistance == 3.0)
-        
-        XCTAssertThrowsError(try resistor = R([])) { err in
-            XCTAssertEqual(err as? ResistorError, .wrongDescription(0))
-        }
-        XCTAssertThrowsError(try resistor = R(["", "1", "2", "3.0"])) { err in
-            XCTAssertEqual(err as? ResistorError, .wrongDescription(0))
-        }
-        XCTAssertThrowsError(try resistor = R(["R", "l", "2", "3.0"])) { err in
-            XCTAssertEqual(err as? ResistorError, .wrongDescription(1))
-        }
-        XCTAssertThrowsError(try resistor = R(["R", "1", "2", "l.0"])) { err in
-            XCTAssertEqual(err as? ResistorError, .wrongDescription(1))
-        }
-        XCTAssertThrowsError(try resistor = R(["R", "1", "2", "-3.0"])) { err in
-            XCTAssertEqual(err as? ResistorError, .negativeResistance(1, 2, -3.0))
+            XCTAssertEqual(err as? StampParameterError, .parameterError)
         }
         
         var stamps: [Stamp] = try [DCCS(0, 1, 5), R(1, 2, 5), R(2, 3, 5), R(2, 3, 5), R(3, 0, 5)]

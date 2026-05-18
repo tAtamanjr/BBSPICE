@@ -13,11 +13,13 @@ class CCCS : ControlledSource {
     let gain: Double
     let inputVoltage: Double
     
-    init(_ nodeWeP: Int, _ nodeWeM: Int, _ nodeWyP: Int, _ nodeWyM: Int, _ newRow: Int, _ gain: Double, _ inputVoltage: Double = 0) {
+    init(_ nodeWeP: Int, _ nodeWeM: Int, _ nodeWyP: Int, _ nodeWyM: Int, _ newRow: Int, _ gain: Double, _ inputVoltage: Double = 0) throws {
+        if newRow < 0 { throw StampParameterError.programFail }
+        if !gain.isFinite || !inputVoltage.isFinite { throw StampParameterError.parameterError }
         self.newRow = newRow
         self.gain = gain
         self.inputVoltage = inputVoltage
-        super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
+        try super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
     }
     
     override func getGMatrix() throws -> Matrix? {

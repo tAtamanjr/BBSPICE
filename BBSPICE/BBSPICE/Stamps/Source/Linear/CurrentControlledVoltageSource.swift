@@ -15,12 +15,14 @@ class CCVS : ControlledSource {
     let inputVoltage: Double
     
     init(_ nodeWeP: Int, _ nodeWeM: Int, _ nodeWyP: Int, _ nodeWyM: Int, _ newRow: Int, _ newRow2: Int,
-         _ transresistance: Double, _ inputVoltage: Double = 0.0) {
+         _ transresistance: Double, _ inputVoltage: Double = 0.0) throws {
+        if newRow < 0 || newRow2 < 0 { throw StampParameterError.programFail }
+        if !transresistance.isFinite || !inputVoltage.isFinite { throw StampParameterError.parameterError }
         self.newRow = newRow
         self.newRow2 = newRow2
         self.transresistance = transresistance
         self.inputVoltage = inputVoltage
-        super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
+        try super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
     }
     
     override func getGMatrix() throws -> Matrix? {

@@ -28,3 +28,20 @@ class Stamp {
         return nil
     }
 }
+
+enum StampParameterError : Error, Equatable, CustomStringConvertible {
+    case negativeNodeIndex
+    case parameterError
+    case programFail
+    
+    var description: String {
+        switch self {
+        case .negativeNodeIndex:
+            return "Stamp: Negative node index"
+        case .parameterError:
+            return "Stamp: Parameters error"
+        case .programFail:
+            return "Stamp: Program failed"
+        }
+    }
+}

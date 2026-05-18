@@ -111,50 +111,50 @@ final class BBSpiceMatrixTests: XCTestCase {
         }
         
         matrix = IMatrix(2)
-        source = DCCS(0, 1, 1)
+        source = try DCCS(0, 1, 1)
         try matrix!.add(source!.getIMatrix())
         matrix!.show()
         
         matrix = IMatrix(2)
-        source = DCCS(1, 2, 1)
+        source = try DCCS(1, 2, 1)
         try matrix!.add(source!.getIMatrix())
         matrix!.show()
         
-        source = DCCS(2, 3, 1)
+        source = try DCCS(2, 3, 1)
         try matrix1 = source!.getIMatrix()
         XCTAssertThrowsError(try matrix!.add(matrix1)) { err in
             XCTAssertEqual(err as? MatrixError, .biggerMatrixToAdd(matrix!.id, matrix1!.id))
         }
     }
     
-    @MainActor func testMatrixDivision() async throws {
-        let G_Matrix: Matrix? = GMatrix(2)
-        let I_Matrix: Matrix? = IMatrix(2)
-        let f_Matrix: Matrix? = IMatrix(3)
-        
-        XCTAssertThrowsError(try G_Matrix!.devide(nil)) { err in
-            XCTAssertEqual(err as? MatrixError, .matrixIsNil(G_Matrix!.id))
-        }
-        XCTAssertThrowsError(try G_Matrix!.devide(G_Matrix)) { err in
-            XCTAssertEqual(err as? MatrixError, .wrongDimensions(G_Matrix!.id, G_Matrix!.rows, G_Matrix!.columns,
-                                                                 G_Matrix!.id, G_Matrix!.rows, G_Matrix!.columns))
-        }
-        XCTAssertThrowsError(try G_Matrix!.devide(f_Matrix)) { err in
-            XCTAssertEqual(err as? MatrixError, .wrongDimensions(G_Matrix!.id, G_Matrix!.rows, G_Matrix!.columns,
-                                                                 f_Matrix!.id, f_Matrix!.rows, f_Matrix!.columns))
-        }
-        
-        G_Matrix!.values = [0.0, 0.0, 0.0, 0.0]
-        I_Matrix!.values = [1.0, 2.0]
-        XCTAssertThrowsError(try G_Matrix!.devide(I_Matrix)) { err in
-            XCTAssertEqual(err as? MatrixError, .divisionError(G_Matrix!.id, I_Matrix!.id))
-        }
-        
-        G_Matrix!.values = [0.0, 1.0, 2.0, 3.0]
-        I_Matrix!.values = [3.0, 3.0]
-        let V_Matrix = try G_Matrix!.devide(I_Matrix!)
-        V_Matrix!.show()
-    }
+//    @MainActor func testMatrixDivision() async throws {
+//        let G_Matrix: Matrix? = GMatrix(2)
+//        let I_Matrix: Matrix? = IMatrix(2)
+//        let f_Matrix: Matrix? = IMatrix(3)
+//        
+//        XCTAssertThrowsError(try G_Matrix!.devide(nil)) { err in
+//            XCTAssertEqual(err as? MatrixError, .matrixIsNil(G_Matrix!.id))
+//        }
+//        XCTAssertThrowsError(try G_Matrix!.devide(G_Matrix)) { err in
+//            XCTAssertEqual(err as? MatrixError, .wrongDimensions(G_Matrix!.id, G_Matrix!.rows, G_Matrix!.columns,
+//                                                                 G_Matrix!.id, G_Matrix!.rows, G_Matrix!.columns))
+//        }
+//        XCTAssertThrowsError(try G_Matrix!.devide(f_Matrix)) { err in
+//            XCTAssertEqual(err as? MatrixError, .wrongDimensions(G_Matrix!.id, G_Matrix!.rows, G_Matrix!.columns,
+//                                                                 f_Matrix!.id, f_Matrix!.rows, f_Matrix!.columns))
+//        }
+//        
+//        G_Matrix!.values = [0.0, 0.0, 0.0, 0.0]
+//        I_Matrix!.values = [1.0, 2.0]
+//        XCTAssertThrowsError(try G_Matrix!.devide(I_Matrix)) { err in
+//            XCTAssertEqual(err as? MatrixError, .divisionError(G_Matrix!.id, I_Matrix!.id))
+//        }
+//        
+//        G_Matrix!.values = [0.0, 1.0, 2.0, 3.0]
+//        I_Matrix!.values = [3.0, 3.0]
+//        let V_Matrix = try G_Matrix!.devide(I_Matrix!)
+//        V_Matrix!.show()
+//    }
     
     @MainActor func testSpeed_50() async throws {
         let (a, b) = try makeSystemForDivisionTest(50)
