@@ -1,0 +1,29 @@
+\chapter{Implementacja}
+\label{chap:implementacja}
+
+\section{Parser}
+\label{sec:parser}
+
+Parser odczytuje plik tekstowy linia po linii, rozpoznaje typ elementu oraz komende analizy. Dla elementow wymagajacych dodatkowych niewiadomych obliczany jest numer nowego wiersza na podstawie liczby wezlow i liczby wczesniej dodanych dodatkowych rownan.
+
+\section{Stemple}
+\label{sec:stemple}
+
+Stempel zawiera macierz lokalna, wektor prawej strony oraz informacje o wierszach i kolumnach, do ktorych dane maja zostac dodane. Takie podejscie pozwala opisac rozne elementy przy pomocy wspolnego interfejsu.
+
+\section{Macierze i rozwiazywanie ukladu}
+\label{sec:macierze-solver}
+
+Solver otrzymuje tablice stempli i komende analizy. Dla komendy \texttt{.op} tworzona jest globalna macierz ukladu, nastepnie wszystkie stemple sa do niej dodawane, a uklad liniowy jest rozwiazywany metoda eliminacji LU \cite{quarteroni2007numerical}.
+
+\section{Przyklad przeplywu danych}
+\label{sec:przeplyw-danych}
+
+Przeplyw danych w programie mozna opisac nastepujaco:
+
+\begin{enumerate}
+  \item Plik tekstowy zostaje odczytany przez parser.
+  \item Parser tworzy stemple elementow i rozpoznaje komende analizy.
+  \item Solver sklada globalna macierz ukladu.
+  \item Solver zwraca macierz wynikowa dla punktu pracy.
+\end{enumerate}

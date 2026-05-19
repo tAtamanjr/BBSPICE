@@ -1,0 +1,29 @@
+\chapter{Projekt programu}
+\label{chap:projekt-programu}
+
+\section{Architektura}
+\label{sec:architektura}
+
+Program zostal podzielony na kilka odpowiedzialnosci: parser, typy elementow, stemple, macierze oraz solver. Taki podzial ulatwia rozszerzanie programu o kolejne elementy i kolejne rodzaje analizy.
+
+\section{Format pliku wejsciowego}
+\label{sec:format-wejsciowy}
+
+Opis ukladu ma postac tekstowa. Kazda linia elementu zaczyna sie od nazwy typu, po ktorej wystepuja numery wezlow i parametry. Przykladowy opis moze wygladac nastepujaco:
+
+\begin{lstlisting}[language=Netlist,caption={Przykladowy opis ukladu}]
+R 1 2 1000
+DCCS 1 0 0.001
+DCVS 2 0 5
+.op
+\end{lstlisting}
+
+\section{Reprezentacja elementow}
+\label{sec:reprezentacja-elementow}
+
+Kazdy element jest reprezentowany przez typ, ktory tworzy odpowiedni stempel. Parser nie rozwiazuje ukladu samodzielnie, lecz przeksztalca opis tekstowy w dane wejsciowe dla solvera.
+
+\section{Obsluga bledow}
+\label{sec:obsluga-bledow}
+
+Bledy parsera dotycza struktury pliku, na przyklad nieznanego elementu, zlej liczby parametrow albo braku komendy analizy. Bledy stempli dotycza niepoprawnych parametrow elementu. Dzieki temu miejsce wykrycia bledu jest oddzielone od miejsca jego opisania.

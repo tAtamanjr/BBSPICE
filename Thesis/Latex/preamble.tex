@@ -1,0 +1,95 @@
+\usepackage[a4paper,inner=30mm,outer=20mm,top=25mm,bottom=25mm,headheight=15pt]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{csquotes}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[backend=biber,style=ieee,sorting=none]{biblatex}
+\usepackage[hidelinks,unicode]{hyperref}
+\usepackage{bookmark}
+\usepackage[english,nameinlink,noabbrev]{cleveref}
+
+\IfFontExistsTF{Times New Roman}
+  {\setmainfont{Times New Roman}}
+  {\setmainfont{TeX Gyre Termes}}
+
+\IfFontExistsTF{Arial}
+  {\newfontfamily\ThesisTitlePageFont{Arial}}
+  {\newfontfamily\ThesisTitlePageFont{TeX Gyre Heros}}
+
+\setmainlanguage{polish}
+\setotherlanguage{english}
+\onehalfspacing
+\graphicspath{{figures/}}
+\addbibresource{references.bib}
+
+\sisetup{
+  locale = PL,
+  per-mode = symbol,
+  detect-all
+}
+
+\hypersetup{
+  pdftitle = {\ThesisTitle},
+  pdfauthor = {\ThesisAuthor},
+  pdfsubject = {Modified Nodal Analysis, symulator układów elektronicznych},
+  pdfkeywords = {MNA, SPICE, Swift, analiza obwodow}
+}
+
+\definecolor{CodeBackground}{HTML}{F7F7F7}
+\definecolor{CodeFrame}{HTML}{D8D8D8}
+\definecolor{CodeKeyword}{HTML}{1F4E79}
+\definecolor{CodeString}{HTML}{7A3E20}
+\definecolor{CodeComment}{HTML}{5A6A5A}
+
+\lstdefinelanguage{Swift}{
+  morekeywords={class,struct,enum,func,let,var,if,else,guard,throw,throws,try,catch,return,import,case,switch,protocol,extension,public,private,internal,init},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]"
+}
+
+\lstdefinelanguage{Netlist}{
+  morekeywords={R,DCCS,DCVS,CCCS,VCCS,CCVS,VCVS,.op,.tran},
+  sensitive=true,
+  morecomment=[l]{;}
+}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{CodeBackground},
+  frame=single,
+  rulecolor=\color{CodeFrame},
+  keywordstyle=\color{CodeKeyword}\bfseries,
+  stringstyle=\color{CodeString},
+  commentstyle=\color{CodeComment},
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
+}
+
+\crefname{chapter}{rozdział}{rozdziały}
+\Crefname{chapter}{Rozdział}{Rozdziały}
+\crefname{section}{sekcja}{sekcje}
+\Crefname{section}{Sekcja}{Sekcje}
+\crefname{figure}{rysunek}{rysunki}
+\Crefname{figure}{Rysunek}{Rysunki}
+\crefname{table}{tabela}{tabele}
+\Crefname{table}{Tabela}{Tabele}
+\crefname{equation}{równanie}{równania}
+\Crefname{equation}{Równanie}{Równania}

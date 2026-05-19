@@ -1,0 +1,22 @@
+\chapter{Podstawy teoretyczne}
+\label{chap:podstawy-teoretyczne}
+
+\section{Opis ukladu elektronicznego}
+\label{sec:opis-ukladu}
+
+Uklad elektroniczny mozna opisac jako zbior elementow polaczonych przez wezly. Kazdy element narzuca zaleznosc pomiedzy napieciami i pradami. Dla elementow liniowych zaleznosci te moga zostac zapisane w postaci ukladu rownan liniowych.
+
+\section{Analiza wezlow}
+\label{sec:analiza-wezlow}
+
+Klasyczna analiza wezlow opiera sie na prawie Kirchhoffa dla pradow. Niewiadomymi sa potencjaly wezlow wzgledem wezla odniesienia. Metoda dobrze opisuje elementy, ktorych prad mozna wyrazic bezposrednio przez napiecia wezlowe, na przyklad rezystory i zrodla pradowe.
+
+\section{Ograniczenia klasycznej analizy wezlow}
+\label{sec:ograniczenia-analizy-wezlow}
+
+Idealne zrodla napieciowe oraz wybrane zrodla sterowane nie zawsze moga byc wygodnie opisane za pomoca samych potencjalow wezlowych. W takich przypadkach do ukladu rownan wprowadza sie dodatkowe niewiadome, najczesciej prady plynace przez zrodla napieciowe.
+
+\section{Idea symulatorow typu SPICE}
+\label{sec:spice}
+
+Symulatory typu SPICE rozbijaja opis obwodu na lokalne wklady elementow. Kazdy element dodaje okreslone wartosci do globalnej macierzy ukladu. Takie podejscie pozwala oddzielic logike elementow od procesu rozwiazywania rownan \cite{chua1975computer}.

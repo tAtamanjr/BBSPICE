@@ -1,0 +1,22 @@
+\chapter{Testy}
+\label{chap:testy}
+
+\section{Zakres testow}
+\label{sec:zakres-testow}
+
+Testy jednostkowe obejmuja parser, tworzenie stempli, obsluge bledow oraz solver. Osobne testy sprawdzaja poprawne dane wejsciowe i przypadki, w ktorych program powinien zglosic blad.
+
+\section{Testy parsera}
+\label{sec:testy-parsera}
+
+Parser jest testowany na pojedynczych elementach oraz na pliku zawierajacym wszystkie obslugiwane typy elementow. Pozwala to sprawdzic, czy program poprawnie rozpoznaje elementy, parametry oraz komende analizy.
+
+\section{Testy solvera}
+\label{sec:testy-solvera}
+
+Testy solvera porownuja wynik rozwiazania ukladu z oczekiwanymi wartosciami dla prostych obwodow. Takie przypadki testowe sa latwe do zweryfikowania recznie i dobrze wykrywaja bledy w skladaniu macierzy.
+
+\section{Testy bledow stempli}
+\label{sec:testy-bledow-stempli}
+
+Bledy parametrow stempli sa sprawdzane oddzielnie od testow parsera i solvera. Dzieki temu testy pozostaja czytelne i kazdy zestaw sprawdza jedna warstwe programu.

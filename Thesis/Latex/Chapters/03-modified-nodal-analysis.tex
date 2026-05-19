@@ -1,0 +1,48 @@
+\chapter{Modified Nodal Analysis}
+\label{chap:mna}
+
+\section{Postac ukladu rownan}
+\label{sec:postac-mna}
+
+W metodzie Modified Nodal Analysis uklad rownan mozna zapisac w postaci:
+
+\begin{equation}
+\label{eq:mna-block}
+\begin{bmatrix}
+G & B \\
+C & D
+\end{bmatrix}
+\begin{bmatrix}
+v \\
+j
+\end{bmatrix}
+=
+\begin{bmatrix}
+i \\
+e
+\end{bmatrix}.
+\end{equation}
+
+Wektor \(v\) zawiera napiecia wezlowe, a wektor \(j\) dodatkowe niewiadome pradowe. Macierz \(G\) opisuje przewodnosci miedzy wezlami, macierze \(B\) i \(C\) lacza wezly z dodatkowymi rownaniami, a macierz \(D\) opisuje zaleznosci pomiedzy dodatkowymi niewiadomymi.
+
+\section{Stemple elementow}
+\label{sec:stemple-elementow}
+
+Stempel elementu jest lokalnym wkladem do macierzy ukladu i wektora prawej strony. Dla rezystora o rezystancji \(R\) przewodnosc wynosi:
+
+\begin{equation}
+\label{eq:conductance}
+g = \frac{1}{R}.
+\end{equation}
+
+Element podlaczony pomiedzy wezlami \(n_1\) i \(n_2\) dodaje przewodnosc do pozycji diagonalnych oraz wartosci przeciwne do pozycji pozadiagonalnych macierzy.
+
+\section{Elementy obslugiwane w programie}
+\label{sec:elementy-obslugiwane}
+
+Implementacja obsluguje rezystor, niezalezne zrodlo pradowe, niezalezne zrodlo napieciowe oraz podstawowe zrodla sterowane: CCCS, VCCS, CCVS i VCVS. Elementy wymagajace dodatkowej niewiadomej zwiekszaja rozmiar macierzy ukladu.
+
+\section{Komenda punktu pracy}
+\label{sec:komenda-op}
+
+Komenda \texttt{.op} oznacza obliczenie punktu pracy. W obecnej wersji programu odpowiada ona zlozeniu macierzy dla opisu obwodu i rozwiazaniu otrzymanego ukladu rownan liniowych.
