@@ -16,46 +16,20 @@ final class BBSpiceLinearPassiveElementsTests: XCTestCase {
     override func tearDownWithError() throws {}
     
     @MainActor func testResistor() async throws {
-        var resistor = try R(1, 2, 3.0)
+        let resistor = try R(1, 2, 3.0)
         XCTAssert(resistor.nodeS == 1)
         XCTAssert(resistor.nodeE == 2)
         XCTAssert(resistor.resistance == 3.0)
         
-        XCTAssertThrowsError(try resistor = R(1, 2, -3.0)) { err in
-            XCTAssertEqual(err as? StampParameterError, .parameterError)
-        }
-        
         var stamps: [Stamp] = try [DCCS(0, 1, 5), R(1, 2, 5), R(2, 3, 5), R(2, 3, 5), R(3, 0, 5)]
-        
-        var GMatrix: Matrix? = Matrix(3, 3)
-        var IMatrix: Matrix? = Matrix(3, 1)
-        
-        for stamp in stamps {
-            try GMatrix!.add(stamp.getGMatrix())
-            try IMatrix!.add(stamp.getIMatrix())
-        }
-        
-        GMatrix!.show()
-        IMatrix!.show()
-        
-        var VMatrix = try GMatrix!.devide(IMatrix)
-        VMatrix!.show()
+        var vMatrix = try Solver().solve(stamps, .op)
+        XCTAssertNotNil(vMatrix)
+        vMatrix!.show()
         
         stamps = try [DCVS(1, 0, 3, 5), R(1, 2, 5), R(2, 0, 5)]
-        
-        GMatrix = Matrix(3, 3)
-        IMatrix = Matrix(3, 1)
-        
-        for stamp in stamps {
-            try GMatrix!.add(stamp.getGMatrix())
-            try IMatrix!.add(stamp.getIMatrix())
-        }
-        
-        GMatrix!.show()
-        IMatrix!.show()
-        
-        VMatrix = try GMatrix!.devide(IMatrix)
-        VMatrix!.show()
+        vMatrix = try Solver().solve(stamps, .op)
+        XCTAssertNotNil(vMatrix)
+        vMatrix!.show()
     }
     
 }

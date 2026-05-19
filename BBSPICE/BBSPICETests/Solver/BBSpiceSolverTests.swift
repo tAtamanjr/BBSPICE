@@ -20,8 +20,9 @@ final class BBSpiceSolverTests: XCTestCase {
         
         let result = try Solver().solve(stamps, .op)
         
-        XCTAssert(result?.rows == 2)
-        XCTAssert(result?.columns == 1)
+        XCTAssertNotNil(result)
+        XCTAssert(result!.rows == 2)
+        XCTAssert(result!.columns == 1)
         XCTAssertEqual(result!.values[0], 5, accuracy: 1e-9)
     }
     
