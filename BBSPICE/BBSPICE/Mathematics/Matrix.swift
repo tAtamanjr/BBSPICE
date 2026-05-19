@@ -70,7 +70,7 @@ class Matrix {
         }
         
         if self.rows <= 200 {
-            var copy = LU_Division(self.values, &matrix!.values, self.rows)
+            let copy = LU_Division(self.values, &matrix!.values, self.rows)
             return VMatrix(copy)
         }
         

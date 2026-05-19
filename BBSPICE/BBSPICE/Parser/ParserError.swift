@@ -12,6 +12,8 @@ enum ParserError : Error, Equatable, CustomStringConvertible {
     case wrongParametersCount(_ line: Int)
     case wrongParameterType(_ line: Int)
     case wrongStampParameters(_ line: Int)
+    case missingCommand
+    case multipleCommands(_ line: Int)
     case programFail(_ line: Int)
     
     var description: String {
@@ -24,6 +26,10 @@ enum ParserError : Error, Equatable, CustomStringConvertible {
             return "Parser: Wrong parameter type at line \(line)"
         case let .wrongStampParameters(line):
             return "Parser: Wrong stamp parameters at line \(line)"
+        case .missingCommand:
+            return "Parser: Missing command"
+        case let .multipleCommands(line):
+            return "Parser: Multiple commands at line \(line)"
         case let .programFail(line):
             return "Parser: Program failed at line \(line)"
         }

@@ -9,10 +9,11 @@ import Foundation
 
 
 class Parser {
-    func parse(_ url: URL) throws -> [Stamp] {
-        let text = try String(contentsOf: url)
+    func parse(_ url: URL) throws -> ParserResult {
+        let text = try String(contentsOf: url, encoding: .utf8)
         var lines: [ParserLine] = []
         var stamps: [Stamp] = []
+        var command: SolverCommand?
         var nodeCount = 0
         
         for (index, line) in text.components(separatedBy: .newlines).enumerated() {
@@ -20,7 +21,12 @@ class Parser {
             let tokens = line.split(whereSeparator: { $0.isWhitespace }).map(String.init)
             guard let firstToken = tokens.first else { continue }
             
-            if firstToken.hasPrefix("*") || firstToken == ".op" { continue }
+            if firstToken.hasPrefix("*") { continue }
+            if let parsedCommand = try parseCommand(tokens, lineNumber) {
+                if command != nil { throw ParserError.multipleCommands(lineNumber) }
+                command = parsedCommand
+                continue
+            }
             
             let elementType = try ElementType(firstToken, lineNumber)
             if tokens.count != elementType.parametersCount { throw ParserError.wrongParametersCount(lineNumber) }
@@ -60,7 +66,9 @@ class Parser {
             }
         }
         
-        return stamps
+        guard let command else { throw ParserError.missingCommand }
+        
+        return ParserResult(stamps, command)
     }
     
     private func makeResistor(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
@@ -172,6 +180,19 @@ class Parser {
         return value
     }
     
+    private func parseCommand(_ tokens: [String], _ lineNumber: Int) throws -> SolverCommand? {
+        switch tokens[0] {
+        case ".op":
+            if tokens.count != 1 { throw ParserError.wrongParametersCount(lineNumber) }
+            return .op
+        case ".tran":
+            if tokens.count != 1 { throw ParserError.wrongParametersCount(lineNumber) }
+            return .tran
+        default:
+            return nil
+        }
+    }
+    
     private func parserError(_ error: StampParameterError, _ lineNumber: Int) -> ParserError {
         switch error {
         case .negativeNodeIndex, .parameterError:
@@ -179,6 +200,16 @@ class Parser {
         case .programFail:
             return .programFail(lineNumber)
         }
+    }
+}
+
+struct ParserResult {
+    let stamps: [Stamp]
+    let command: SolverCommand
+    
+    init(_ stamps: [Stamp], _ command: SolverCommand) {
+        self.stamps = stamps
+        self.command = command
     }
 }
 

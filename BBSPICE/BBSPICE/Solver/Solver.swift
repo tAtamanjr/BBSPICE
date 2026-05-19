@@ -13,6 +13,8 @@ class Solver {
         switch command {
         case .op:
             return try solveOperationPoint(stamps)
+        case .tran:
+            throw SolverError.unsupportedCommand
         }
     }
     

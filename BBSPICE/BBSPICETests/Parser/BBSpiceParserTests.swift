@@ -16,8 +16,10 @@ final class BBSpiceParserTests: XCTestCase {
 
     func testAllElementsFromTXT() throws {
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("AllElementsCircuit.txt")
-        let stamps = try Parser().parse(url)
+        let result = try Parser().parse(url)
+        let stamps = result.stamps
         
+        XCTAssertEqual(result.command, .op)
         XCTAssert(stamps.count == 7)
         XCTAssert(stamps[0] is R)
         XCTAssert(stamps[1] is DCCS)
@@ -57,18 +59,32 @@ final class BBSpiceParserTests: XCTestCase {
     }
     
     func testParserErrors() throws {
-        XCTAssertThrowsError(try Parser().parse(makeTestFile("X 1 2 5"))) { err in
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("X 1 2 5\n.op"))) { err in
             XCTAssertEqual(err as? ParserError, .unknownElement(1))
         }
-        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2"))) { err in
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2\n.op"))) { err in
             XCTAssertEqual(err as? ParserError, .wrongParametersCount(1))
         }
-        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 two 5"))) { err in
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 two 5\n.op"))) { err in
             XCTAssertEqual(err as? ParserError, .wrongParameterType(1))
         }
-        XCTAssertThrowsError(try Parser().parse(makeTestFile("R -1 2 5"))) { err in
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R -1 2 5\n.op"))) { err in
             XCTAssertEqual(err as? ParserError, .wrongStampParameters(1))
         }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5"))) { err in
+            XCTAssertEqual(err as? ParserError, .missingCommand)
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.op\n.tran"))) { err in
+            XCTAssertEqual(err as? ParserError, .multipleCommands(3))
+        }
+    }
+    
+    func testTransientCommand() throws {
+        let result = try Parser().parse(makeTestFile("R 1 2 5\n.tran"))
+        
+        XCTAssertEqual(result.command, .tran)
+        XCTAssert(result.stamps.count == 1)
+        XCTAssert(result.stamps[0] is R)
     }
 
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 
-enum SolverCommand {
+nonisolated enum SolverCommand {
     case op
+    case tran
 }
