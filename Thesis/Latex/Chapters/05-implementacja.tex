@@ -1,29 +1,114 @@
 \chapter{Implementacja}
 \label{chap:implementacja}
 
-\section{Parser}
-\label{sec:parser}
+\section{Struktura kodu}
+\label{sec:struktura-kodu}
 
-Parser odczytuje plik tekstowy linia po linii, rozpoznaje typ elementu oraz komende analizy. Dla elementow wymagajacych dodatkowych niewiadomych obliczany jest numer nowego wiersza na podstawie liczby wezlow i liczby wczesniej dodanych dodatkowych rownan.
+Implementacja aplikacji została podzielona zgodnie z podziałem odpowiedzialności opisanym w \cref{chap:projekt-programu}. Kod źródłowy obejmuje moduły związane z parserem, stemplami elementów, macierzami oraz solverem. Taki układ odpowiada naturalnemu przepływowi danych: od tekstowego opisu obwodu, przez reprezentację elementów, aż do układu równań rozwiązywanego numerycznie.
 
-\section{Stemple}
-\label{sec:stemple}
+Warstwa parsera zawiera typy odpowiedzialne za rozpoznawanie elementów i komend analizy. Warstwa stempli zawiera klasy opisujące konkretne elementy obwodu. Warstwa matematyczna udostępnia macierze oraz operacje potrzebne do ich składania i rozwiązywania. Solver łączy te części, ponieważ otrzymuje gotową listę stempli i wykonuje analizę wskazaną przez komendę.
 
-Stempel zawiera macierz lokalna, wektor prawej strony oraz informacje o wierszach i kolumnach, do ktorych dane maja zostac dodane. Takie podejscie pozwala opisac rozne elementy przy pomocy wspolnego interfejsu.
+W implementacji przyjęto założenie, że elementy nie powinny samodzielnie interpretować tekstu wejściowego. Każdy konstruktor elementu otrzymuje już przetworzone wartości liczbowe: numery węzłów, parametry oraz ewentualne indeksy dodatkowych równań. Dzięki temu błędy składniowe pozostają w parserze, a błędy fizycznie lub numerycznie niepoprawnych parametrów pozostają w warstwie stempli.
 
-\section{Macierze i rozwiazywanie ukladu}
-\label{sec:macierze-solver}
+\section{Parser i wynik parsowania}
+\label{sec:implementacja-parser}
 
-Solver otrzymuje tablice stempli i komende analizy. Dla komendy \texttt{.op} tworzona jest globalna macierz ukladu, nastepnie wszystkie stemple sa do niej dodawane, a uklad liniowy jest rozwiazywany metoda eliminacji LU \cite{quarteroni2007numerical}.
+Parser pracuje na pliku tekstowym zakodowanym jako UTF-8. Każda linia jest dzielona na tokeny, a pierwszy token decyduje o dalszej interpretacji. Jeżeli token odpowiada komendzie analizy, parser zapisuje ją jako polecenie dla solvera. Jeżeli token odpowiada elementowi, parser sprawdza liczbę parametrów oraz zapamiętuje linię do późniejszego utworzenia stempla.
 
-\section{Przyklad przeplywu danych}
-\label{sec:przeplyw-danych}
+Rezultatem parsowania jest struktura zawierająca listę stempli oraz komendę analizy. Taki wynik jest wygodny, ponieważ stanowi pełne wejście dla solvera, ale nie wiąże parsera z konkretną metodą obliczeń.
 
-Przeplyw danych w programie mozna opisac nastepujaco:
+\begin{lstlisting}[language=Swift,caption={Model wyniku parsowania},label={lst:parser-result}]
+struct ParserResult {
+    let stamps: [Stamp]
+    let command: SolverCommand
+}
+\end{lstlisting}
 
-\begin{enumerate}
-  \item Plik tekstowy zostaje odczytany przez parser.
-  \item Parser tworzy stemple elementow i rozpoznaje komende analizy.
-  \item Solver sklada globalna macierz ukladu.
-  \item Solver zwraca macierz wynikowa dla punktu pracy.
-\end{enumerate}
+Ważnym elementem parsera jest typ \texttt{ElementType}. Odpowiada on za powiązanie oznaczeń tekstowych z obsługiwanymi elementami programu. Ten typ przechowuje również informacje o wymaganej liczbie tokenów oraz o pozycjach tokenów, które należy traktować jako numery węzłów.
+
+\begin{lstlisting}[language=Swift,caption={Uproszczona rola typu ElementType},label={lst:element-type}]
+enum ElementType {
+    case resistor
+    case DCCS
+    case DCVS
+    case CCCS
+    case VCCS
+    case CCVS
+    case VCVS
+}
+\end{lstlisting}
+
+Takie rozwiązanie ogranicza liczbę miejsc, w których trzeba zmieniać kod po dodaniu kolejnego elementu. Nowy element wymaga rozszerzenia słownika typów, określenia liczby parametrów oraz dodania funkcji tworzącej właściwy stempel.
+
+\section{Tworzenie stempli}
+\label{sec:implementacja-stemple}
+
+Podstawowym typem wspólnym dla elementów jest \texttt{Stamp}. Udostępnia on metody zwracające lokalną macierz przewodności oraz lokalny wektor wymuszeń. Klasy konkretnych elementów nadpisują te metody zgodnie z równaniami wynikającymi z metody ZMPW.
+
+\begin{lstlisting}[language=Swift,caption={Wspólny interfejs stempla},label={lst:stamp-interface}]
+class Stamp {
+    func getGMatrix() throws -> Matrix? {
+        return nil
+    }
+
+    func getIMatrix() throws -> Matrix? {
+        return nil
+    }
+}
+\end{lstlisting}
+
+Dla elementów pasywnych, takich jak rezystor, najważniejsza jest macierz \texttt{G}. Dla niezależnego źródła prądowego zasadniczy wkład trafia do wektora \texttt{I}. Źródła napięciowe i wybrane źródła sterowane wymagają dodatkowego równania, dlatego ich stemple są większe i obejmują dodatkowe wiersze oraz kolumny.
+
+Z punktu widzenia implementacji istotne jest to, że stempel nie musi znać pełnego rozmiaru układu. Zwraca macierz o takim rozmiarze, który jest potrzebny do zapisania jego największego indeksu. Dopiero solver tworzy macierz globalną o rozmiarze dopasowanym do największego stempla w całej liście.
+
+\section{Macierze}
+\label{sec:implementacja-macierze}
+
+Macierz jest reprezentowana przez liczbę wierszy, liczbę kolumn oraz jednowymiarową tablicę wartości typu \texttt{Double}. Dostęp do elementu macierzy odbywa się przez przeliczenie indeksu wiersza i kolumny na indeks tablicy. W implementacji numery węzłów i równań są zgodne z notacją obwodową, dlatego indeks \texttt{0} oznacza masę i nie jest zapisywany w macierzy.
+
+Dodawanie wartości do macierzy ma charakter akumulacyjny. Jeżeli dwa elementy wnoszą wkład do tej samej pozycji, wartości są sumowane. Jest to bezpośrednie odzwierciedlenie składania równań ZMPW, gdzie każdy element dopisuje lokalny fragment do globalnego układu.
+
+\begin{lstlisting}[language=Swift,caption={Zasada dodawania wartości do macierzy},label={lst:matrix-add}]
+func add(_ row: Int, _ column: Int, _ value: Double) throws {
+    if row == 0 || column == 0 || value == 0 { return }
+    values[columns * (row - 1) + (column - 1)] += value
+}
+\end{lstlisting}
+
+W programie wyróżniono klasy pomocnicze \texttt{GMatrix}, \texttt{IMatrix} oraz \texttt{VMatrix}. Pierwsza reprezentuje macierz układu, druga wektor prawej strony, a trzecia wektor rozwiązania. Ten podział nie zmienia sposobu przechowywania danych, ale zwiększa czytelność kodu.
+
+\section{Solver}
+\label{sec:implementacja-solver}
+
+Solver rozpoczyna pracę od wyznaczenia wymaganego rozmiaru macierzy globalnej. W tym celu przegląda wszystkie stemple i sprawdza rozmiary zwracanych przez nie macierzy. Następnie tworzy pustą macierz \texttt{G} oraz pusty wektor \texttt{I}, po czym dodaje do nich wkład każdego elementu.
+
+\begin{lstlisting}[language=Swift,caption={Schemat składania macierzy globalnej},label={lst:solver-assembly}]
+for stamp in stamps {
+    try gMatrix.add(stamp.getGMatrix())
+    try iMatrix.add(stamp.getIMatrix())
+}
+\end{lstlisting}
+
+Dla analizy punktu pracy układ ma postać
+\begin{equation}
+  \mathbf{G}\mathbf{x} = \mathbf{I}.
+\end{equation}
+Po złożeniu macierzy solver rozwiązuje ten układ i zwraca wektor niewiadomych. Wektor zawiera napięcia węzłowe oraz dodatkowe niewiadome wprowadzone przez źródła napięciowe i źródła sterowane prądem.
+
+Analiza czasowa korzysta z tej samej struktury organizacyjnej. Różnica polega na tym, że macierze dla elementów dynamicznych zależą od kroku czasowego i poprzednich stanów układu. Dzięki temu implementacja \texttt{.tran} może wykorzystywać ten sam mechanizm składania macierzy, który jest używany w analizie punktu pracy.
+
+\section{Obsługa błędów w implementacji}
+\label{sec:implementacja-bledy}
+
+Błędy zostały podzielone na kilka grup. \texttt{ParserError} opisuje problemy z plikiem wejściowym, takie jak nieznany element, zła liczba parametrów, niepoprawny typ parametru, brak komendy albo więcej niż jedna komenda analizy. Każdy błąd parsera związany z konkretną linią zawiera jej numer.
+
+\texttt{StampParameterError} opisuje problemy wykryte przez elementy. Przykładem jest ujemny indeks węzła albo wartość parametru, której nie można użyć w obliczeniach. Parser przechwytuje takie błędy i zamienia je na informację diagnostyczną odnoszącą się do linii pliku. Dzięki temu użytkownik otrzymuje komunikat związany z wejściem, a kod elementów nie musi znać kontekstu tekstowego.
+
+Osobną grupę tworzą błędy macierzy, na przykład przekroczenie rozmiaru macierzy, niezgodne wymiary albo błąd rozwiązania układu. Są to błędy niższego poziomu, które nie wynikają bezpośrednio ze składni netlisty, lecz z niepoprawnego albo osobliwego układu równań.
+
+\section{Uwagi implementacyjne}
+\label{sec:uwagi-implementacyjne}
+
+Implementacja w języku Swift pozwala korzystać z typów statycznych, wyjątków oraz bibliotek systemowych dostępnych na platformie macOS. Dla małych macierzy używana jest własna implementacja rozwiązania układu, natomiast dla większych macierzy można wykorzystać funkcje biblioteki LAPACK dostępne przez framework Accelerate. Takie rozwiązanie pozwala zachować prostotę w przypadkach testowych i jednocześnie pozostawia drogę do obliczeń na większych układach.
+
+Najważniejszą cechą implementacji jest zachowanie prostego kontraktu między warstwami. Parser zwraca stemple i komendę, stemple zwracają macierze lokalne, macierze potrafią dodawać wkłady, a solver wykonuje obliczenia. Dzięki temu każda część programu może być rozwijana i testowana niezależnie.

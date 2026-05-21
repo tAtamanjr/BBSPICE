@@ -5,14 +5,24 @@
 
 \begin{document}
 
+\hypersetup{pageanchor=false}
+\pagenumbering{gobble}
 \input{titlepage}
-
-\pagenumbering{roman}
 \input{chapters/00-streszczenie}
 \tableofcontents
 \clearpage
 
+\hypersetup{pageanchor=true}
 \pagenumbering{arabic}
+\setcounter{page}{1}
+\input{chapters/00-wykaz-symboli}
+\listoffigures
+\addcontentsline{toc}{chapter}{Spis rysunków}
+\clearpage
+\listoftables
+\addcontentsline{toc}{chapter}{Spis tabel}
+\clearpage
+
 \input{chapters/01-wstep}
 \input{chapters/02-podstawy-teoretyczne}
 \input{chapters/03-modified-nodal-analysis}

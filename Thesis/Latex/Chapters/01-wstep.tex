@@ -1,22 +1,26 @@
-\chapter{Wstep}
+\chapter{Wstęp}
 \label{chap:wstep}
 
 \section{Motywacja}
 \label{sec:motywacja}
 
-Symulatory ukladow elektronicznych pozwalaja analizowac zachowanie obwodow bez koniecznosci budowania fizycznego prototypu. Jednym z najwazniejszych podejsc stosowanych w takich narzedziach jest Modified Nodal Analysis, ktora rozszerza klasyczna metode potencjalow wezlowych o dodatkowe niewiadome \cite{ho1975mna}.
+Analiza układów elektronicznych przez wiele lat była wykonywana ręcznie, na podstawie równań obwodowych i obliczeń prowadzonych przez projektantów. Taki sposób pracy był czasochłonny, podatny na błędy i trudny do stosowania w przypadku bardziej rozbudowanych układów. Rozwój komputerów doprowadził do powstania programów wspomagających analizę obwodów, takich jak ECAP oraz SPICE, które stały się podstawą współczesnych symulatorów układów analogowych.
+
+Wraz z rozwojem narzędzi symulacyjnych wzrosła także ich złożoność oraz zależność od określonych platform systemowych. Wiele popularnych programów inżynierskich jest projektowanych przede wszystkim z myślą o systemie Windows albo wymaga na macOS rozwiązań pośrednich, takich jak wirtualizacja. Jednocześnie komputery Apple, szczególnie oparte na układach Apple Silicon, stanowią wydajną platformę do obliczeń numerycznych i tworzenia natywnych aplikacji inżynierskich.
+
+Z tego powodu w pracy podjęto próbę zaprojektowania i zaimplementowania aplikacji do analizy analogowych układów elektronicznych dla systemu macOS. Program opiera się na tekstowym opisie układu, metodzie Modified Nodal Analysis oraz mechanizmie stempli elementów, które pozwalają budować globalny układ równań w sposób modularny \cite{ho1975mna}.
 
 \section{Cel pracy}
 \label{sec:cel-pracy}
 
-Celem pracy jest zaprojektowanie i zaimplementowanie programu, ktory wczytuje tekstowy opis ukladu, przeksztalca elementy obwodu na stemple macierzowe oraz oblicza punkt pracy ukladu.
+Celem pracy jest zaprojektowanie i zaimplementowanie programu, który wczytuje tekstowy opis układu, przekształca elementy obwodu na stemple macierzowe oraz wykonuje podstawowe analizy numeryczne układu. Istotnym założeniem projektu jest zachowanie przejrzystej architektury, w której parser, modele elementów, macierze, solver punktu pracy oraz moduł analizy czasowej stanowią oddzielne bloki programu.
 
 \section{Zakres pracy}
 \label{sec:zakres-pracy}
 
-Zakres implementacji obejmuje parser plikow tekstowych, model stempli elementow liniowych, skladanie macierzy ukladu oraz solver dla komendy punktu pracy. Symulacja czasowa zostala przewidziana jako dalszy etap rozwoju programu.
+Zakres implementacji obejmuje parser plików tekstowych, model stempli podstawowych elementów liniowych, składanie globalnej macierzy układu, solver dla komendy punktu pracy oraz realizację analizy czasowej. Program obsługuje rezystory, niezależne źródła prądowe i napięciowe oraz podstawowe źródła sterowane. Analiza czasowa rozszerza działanie programu o przetwarzanie odpowiedzi układu w kolejnych krokach czasu.
 
 \section{Struktura pracy}
 \label{sec:struktura-pracy}
 
-W \cref{chap:podstawy-teoretyczne} przedstawiono podstawowe pojecia teorii obwodow i symulacji. \Cref{chap:mna} opisuje metode Modified Nodal Analysis. \Cref{chap:projekt-programu} i \cref{chap:implementacja} omawiaja architekture oraz implementacje programu. \Cref{chap:testy} przedstawia sposob weryfikacji, a \cref{chap:podsumowanie} zawiera wnioski i mozliwe kierunki dalszego rozwoju.
+W \cref{chap:podstawy-teoretyczne} przedstawiono podstawowe pojęcia teorii obwodów i symulacji komputerowej. \Cref{chap:mna} opisuje metodę Modified Nodal Analysis oraz ideę stempli elementów. \Cref{chap:projekt-programu} i \cref{chap:implementacja} omawiają architekturę oraz implementację programu. \Cref{chap:testy} przedstawia sposób weryfikacji działania aplikacji, a \cref{chap:podsumowanie} zawiera wnioski i możliwe kierunki dalszego rozwoju.

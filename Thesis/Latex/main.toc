@@ -1,35 +1,55 @@
 \xpg@aux {}{polish}
-\contentsline {chapter}{\numberline {1}Wstep}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Motywacja}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Cel pracy}{1}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Zakres pracy}{1}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Struktura pracy}{1}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Podstawy teoretyczne}{2}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Opis ukladu elektronicznego}{2}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Analiza wezlow}{2}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Ograniczenia klasycznej analizy wezlow}{2}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Idea symulatorow typu SPICE}{2}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Modified Nodal Analysis}{3}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Postac ukladu rownan}{3}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Stemple elementow}{3}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Elementy obslugiwane w programie}{3}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Komenda punktu pracy}{4}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Projekt programu}{5}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Architektura}{5}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Format pliku wejsciowego}{5}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Reprezentacja elementow}{5}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Obsluga bledow}{5}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Implementacja}{6}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Parser}{6}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Stemple}{6}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Macierze i rozwiazywanie ukladu}{6}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Przyklad przeplywu danych}{6}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Testy}{7}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Zakres testow}{7}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Testy parsera}{7}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Testy solvera}{7}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Testy bledow stempli}{7}{section.6.4}%
-\contentsline {chapter}{\numberline {7}Podsumowanie}{8}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Wnioski}{8}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Mozliwe kierunki rozwoju}{8}{section.7.2}%
-\contentsline {chapter}{Bibliografia}{9}{chapter*.4}%
+\contentsline {chapter}{Wykaz symboli i skrótów}{1}{chapter*.4}%
+\contentsline {chapter}{Spis rysunków}{2}{chapter*.5}%
+\contentsline {chapter}{Spis tabel}{3}{chapter*.6}%
+\contentsline {chapter}{\numberline {1}Wstęp}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motywacja}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Cel pracy}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Zakres pracy}{5}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Struktura pracy}{5}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Podstawy teoretyczne}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Równania obwodów}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Metody macierzowe w analizie obwodów}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Klasyczna metoda potencjałów węzłowych}{8}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Zmodyfikowana metoda potencjałów węzłowych}{8}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Punkt pracy DC}{9}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Analiza czasowa}{9}{section.2.6}%
+\contentsline {chapter}{\numberline {3}Zmodyfikowana metoda potencjałów węzłowych i stemple elementów}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Rola stempli w metodzie ZMPW}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Ogólna postać stempla}{11}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Stempel rezystora}{12}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Stemple źródeł niezależnych}{12}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Stemple źródeł sterowanych}{13}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Wypełnianie macierzy globalnej}{14}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Znaczenie dodatkowych wierszy}{14}{section.3.7}%
+\contentsline {chapter}{\numberline {4}Założenia i architektura aplikacji}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Założenia projektowe}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Ogólna architektura}{15}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Format pliku wejściowego}{16}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Parser netlisty}{17}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Przypisywanie dodatkowych równań}{17}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Reprezentacja elementów i stempli}{18}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Solver i komendy analizy}{18}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Obsługa błędów}{19}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Implementacja}{20}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Struktura kodu}{20}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Parser i wynik parsowania}{20}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Tworzenie stempli}{21}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Macierze}{22}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Solver}{22}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Obsługa błędów w implementacji}{23}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Uwagi implementacyjne}{23}{section.5.7}%
+\contentsline {chapter}{\numberline {6}Testy}{25}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Cel testowania}{25}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Zakres testów}{25}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Testy parsera}{26}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Testy stempli i elementów}{26}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Testy błędów stempli}{27}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Testy solvera i macierzy}{27}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Znaczenie testów dla rozwoju programu}{27}{section.6.7}%
+\contentsline {chapter}{\numberline {7}Podsumowanie}{28}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Wnioski}{28}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Ocena przyjętego podejścia}{28}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Możliwe kierunki rozwoju}{29}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Zakończenie}{29}{section.7.4}%
+\contentsline {chapter}{Bibliografia}{31}{chapter*.9}%

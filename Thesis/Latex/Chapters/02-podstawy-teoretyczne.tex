@@ -1,22 +1,168 @@
 \chapter{Podstawy teoretyczne}
 \label{chap:podstawy-teoretyczne}
 
-\section{Opis ukladu elektronicznego}
-\label{sec:opis-ukladu}
+\section{Równania obwodów}
+\label{sec:rownania-obwodow}
 
-Uklad elektroniczny mozna opisac jako zbior elementow polaczonych przez wezly. Kazdy element narzuca zaleznosc pomiedzy napieciami i pradami. Dla elementow liniowych zaleznosci te moga zostac zapisane w postaci ukladu rownan liniowych.
+Podstawą komputerowej analizy obwodów jest zapis zależności pomiędzy prądami i napięciami w postaci równań matematycznych. Obwód można przedstawić jako zbiór elementów połączonych węzłami. Węzeł jest punktem o wspólnym potencjale elektrycznym, natomiast element narzuca zależność między prądem płynącym przez jego zaciski a napięciem na tych zaciskach.
 
-\section{Analiza wezlow}
-\label{sec:analiza-wezlow}
+Najważniejszymi prawami wykorzystywanymi do tworzenia równań obwodowych są prawa Kirchhoffa. Wynikają one z zasad zachowania ładunku i energii, dlatego stanowią podstawę zarówno ręcznej analizy obwodów, jak i algorytmów stosowanych w symulatorach typu SPICE \cite{chua1975computer}.
 
-Klasyczna analiza wezlow opiera sie na prawie Kirchhoffa dla pradow. Niewiadomymi sa potencjaly wezlow wzgledem wezla odniesienia. Metoda dobrze opisuje elementy, ktorych prad mozna wyrazic bezposrednio przez napiecia wezlowe, na przyklad rezystory i zrodla pradowe.
+Pierwsze prawo Kirchhoffa, nazywane prądowym prawem Kirchhoffa lub KCL, mówi, że algebraiczna suma prądów wpływających do dowolnego węzła jest równa zeru:
 
-\section{Ograniczenia klasycznej analizy wezlow}
-\label{sec:ograniczenia-analizy-wezlow}
+\begin{equation}
+\label{eq:kcl}
+\sum_{k=1}^{n} i_k = 0.
+\end{equation}
 
-Idealne zrodla napieciowe oraz wybrane zrodla sterowane nie zawsze moga byc wygodnie opisane za pomoca samych potencjalow wezlowych. W takich przypadkach do ukladu rownan wprowadza sie dodatkowe niewiadome, najczesciej prady plynace przez zrodla napieciowe.
+Znak prądu zależy od przyjętej konwencji. Jeżeli prądy wpływające do węzła uznaje się za dodatnie, to prądy wypływające są ujemne. W praktyce oznacza to, że dla każdego węzła, który nie jest węzłem odniesienia, można zapisać jedno równanie bilansu prądów. Każdy element podłączony do danego węzła wnosi do tego równania składnik zależny od potencjałów węzłowych lub od wartości źródła.
 
-\section{Idea symulatorow typu SPICE}
-\label{sec:spice}
+Dla rezystora połączonego między węzłami \(a\) i \(b\) prąd można zapisać z prawa Ohma:
 
-Symulatory typu SPICE rozbijaja opis obwodu na lokalne wklady elementow. Kazdy element dodaje okreslone wartosci do globalnej macierzy ukladu. Takie podejscie pozwala oddzielic logike elementow od procesu rozwiazywania rownan \cite{chua1975computer}.
+\begin{equation}
+\label{eq:resistor-current}
+i_R = \frac{v_a - v_b}{R} = g(v_a - v_b),
+\end{equation}
+
+gdzie \(R\) oznacza rezystancję, a \(g = 1/R\) jest konduktancją. Po podstawieniu takiej zależności do równania KCL powstaje równanie liniowe względem napięć węzłowych. Właśnie ta własność powoduje, że rezystory i źródła prądowe są naturalnie opisywane metodami węzłowymi.
+
+Drugie prawo Kirchhoffa, nazywane napięciowym prawem Kirchhoffa lub KVL, mówi, że algebraiczna suma napięć wzdłuż dowolnej zamkniętej pętli obwodu jest równa zeru:
+
+\begin{equation}
+\label{eq:kvl}
+\sum_{k=1}^{m} u_k = 0.
+\end{equation}
+
+Prawo to opisuje zachowanie energii w zamkniętej drodze obwodu. Jeżeli przejście przez element odbywa się zgodnie z przyjętym kierunkiem spadku napięcia, składnik ma jeden znak, a przy przejściu przeciwnym znak przeciwny. W metodach oczkowych KVL jest zapisywane bezpośrednio jako równania dla oczek. W analizie węzłowej nie pojawia się zwykle jako osobny zestaw równań, lecz jest uwzględniane pośrednio przez definicję napięć jako różnic potencjałów między węzłami.
+
+Szczególne znaczenie mają idealne źródła napięciowe. Źródło napięciowe połączone między węzłami \(a\) i \(b\) narzuca warunek:
+
+\begin{equation}
+\label{eq:voltage-source}
+v_a - v_b = V_s.
+\end{equation}
+
+Tego równania nie da się w prosty sposób zapisać jako prądu zależnego wyłącznie od potencjałów węzłowych. Z tego powodu idealne źródła napięciowe i część źródeł sterowanych wymagają rozszerzenia klasycznej metody potencjałów węzłowych.
+
+\section{Metody macierzowe w analizie obwodów}
+\label{sec:metody-macierzowe}
+
+Symulacja komputerowa wymaga sprowadzenia równań obwodu do postaci możliwej do rozwiązania numerycznego. Dla obwodów liniowych otrzymuje się układ równań liniowych:
+
+\begin{equation}
+\label{eq:linear-system}
+A x = b,
+\end{equation}
+
+gdzie \(A\) jest macierzą współczynników, \(x\) jest wektorem niewiadomych, a \(b\) jest wektorem wymuszeń. W zależności od zastosowanej metody niewiadomymi mogą być napięcia węzłowe, prądy oczkowe albo dodatkowe prądy wprowadzone przez źródła napięciowe.
+
+Podejście macierzowe jest szczególnie wygodne w programie komputerowym, ponieważ pozwala oddzielić etap tworzenia równań od etapu ich rozwiązywania. Elementy obwodu dodają swoje lokalne wkłady do globalnej macierzy i wektora wymuszeń, a następnie solver rozwiązuje gotowy układ. W przypadku większych układów ten podział ma także znaczenie organizacyjne, ponieważ każdy typ elementu może być opisany osobnym zestawem reguł.
+
+Do rozwiązania układu \cref{eq:linear-system} można wykorzystać standardowe metody algebry liniowej, na przykład eliminację Gaussa albo rozkład LU. W analizie czasowej lub w obecności elementów dynamicznych równania różniczkowe są najpierw dyskretyzowane, a następnie w każdym kroku czasu również sprowadzane do układu liniowego \cite{quarteroni2007numerical}.
+
+\section{Klasyczna metoda potencjałów węzłowych}
+\label{sec:klasyczna-mpw}
+
+Klasyczna metoda potencjałów węzłowych polega na wybraniu jednego węzła odniesienia, zwykle masy, oraz zapisaniu potencjałów pozostałych węzłów jako niewiadomych. Dla każdego węzła niebędącego masą zapisuje się równanie KCL. Prądy przez elementy są wyrażane za pomocą różnic potencjałów między węzłami.
+
+Dla obwodu złożonego z elementów admitancyjnych i źródeł prądowych układ równań można zapisać w postaci:
+
+\begin{equation}
+\label{eq:nodal-analysis}
+Gv = i,
+\end{equation}
+
+gdzie \(G\) jest macierzą konduktancji, \(v\) jest wektorem napięć węzłowych, a \(i\) jest wektorem prądów wstrzykiwanych do węzłów przez źródła prądowe.
+
+Macierz \(G\) ma charakterystyczną strukturę. Elementy diagonalne są sumą konduktancji elementów dołączonych do danego węzła, natomiast elementy pozadiagonalne zawierają ujemne sumy konduktancji łączących pary węzłów. Dla rezystora między węzłami \(a\) i \(b\) do macierzy dodawane są cztery wkłady:
+
+\begin{equation}
+\label{eq:resistor-stamp}
+G_{aa} \mathrel{+}= g,\quad
+G_{bb} \mathrel{+}= g,\quad
+G_{ab} \mathrel{-}= g,\quad
+G_{ba} \mathrel{-}= g.
+\end{equation}
+
+Jeżeli jeden z zacisków elementu jest połączony z masą, odpowiednie wpisy związane z węzłem odniesienia nie są dodawane jako osobne niewiadome. Dzięki temu masa pozostaje punktem odniesienia, a rozmiar układu jest mniejszy.
+
+Ograniczenie klasycznej metody potencjałów węzłowych pojawia się przy elementach, które narzucają napięcie, ale nie definiują bezpośrednio prądu jako funkcji napięć węzłowych. Przykładem jest idealne źródło napięciowe. Można próbować rozwiązywać takie przypadki przez superwęzły albo dodatkowe przekształcenia, jednak w programie komputerowym wygodniejsze jest ujednolicenie zapisu przez wprowadzenie dodatkowych niewiadomych.
+
+\section{Zmodyfikowana metoda potencjałów węzłowych}
+\label{sec:zmodyfikowana-mpw}
+
+Zmodyfikowana metoda potencjałów węzłowych, czyli Modified Nodal Analysis, rozszerza klasyczną metodę potencjałów węzłowych o dodatkowe niewiadome prądowe \cite{ho1975mna}. Najczęściej są to prądy płynące przez idealne źródła napięciowe oraz przez elementy sterowane, które narzucają zależności napięciowe.
+
+Ogólną postać układu równań ZMPW można zapisać blokowo:
+
+\begin{equation}
+\label{eq:mna-system}
+\begin{bmatrix}
+G & B \\
+C & D
+\end{bmatrix}
+\begin{bmatrix}
+v \\
+j
+\end{bmatrix}
+=
+\begin{bmatrix}
+i \\
+e
+\end{bmatrix}.
+\end{equation}
+
+Wektor \(v\) zawiera napięcia węzłowe, natomiast \(j\) zawiera dodatkowe niewiadome prądowe. Macierz \(G\) opisuje zależności wynikające z elementów admitancyjnych, takich jak rezystory. Macierze \(B\) i \(C\) łączą równania węzłowe z dodatkowymi niewiadomymi, a macierz \(D\) opisuje zależności między dodatkowymi równaniami. Wektor \(i\) zawiera wymuszenia prądowe, a wektor \(e\) wymuszenia napięciowe.
+
+Dla idealnego źródła napięciowego między węzłami \(a\) i \(b\) wprowadzana jest dodatkowa niewiadoma \(j_s\), czyli prąd płynący przez źródło. Do układu dodawane jest równanie:
+
+\begin{equation}
+\label{eq:mna-voltage-source}
+v_a - v_b = V_s.
+\end{equation}
+
+Jednocześnie prąd \(j_s\) pojawia się w równaniach KCL dla węzłów \(a\) i \(b\). W ten sposób źródło napięciowe może być opisane bez zastępowania go sztuczną rezystancją i bez ręcznego tworzenia superwęzłów.
+
+Zaletą ZMPW jest jednolity sposób budowania macierzy dla wielu typów elementów. Rezystory dodają wkłady do bloku \(G\), źródła prądowe modyfikują wektor \(i\), a źródła napięciowe oraz część źródeł sterowanych dodają dodatkowe wiersze i kolumny. Taki zapis dobrze odpowiada implementacji opartej na stemplach elementów, ponieważ każdy element może samodzielnie określić, które pozycje macierzy i wektora należy zmodyfikować.
+
+\section{Punkt pracy DC}
+\label{sec:punkt-pracy-dc}
+
+Punkt pracy DC opisuje stan ustalony obwodu przy wymuszeniach stałych. Dla układów liniowych obliczenie punktu pracy sprowadza się do zbudowania macierzy ZMPW i rozwiązania jednego układu równań liniowych. Wynikiem są napięcia węzłowe oraz, jeśli zastosowano dodatkowe niewiadome, prądy przez wybrane elementy.
+
+W analizie punktu pracy wielkości nie zależą od czasu, dlatego pochodne czasowe są równe zeru. W idealnym modelu kondensator w stanie ustalonym zachowuje się jak przerwa, ponieważ prąd stały przez kondensator nie płynie. Cewka zachowuje się jak zwarcie, ponieważ napięcie na idealnej cewce w stanie ustalonym jest równe zeru.
+
+Dla obwodów nieliniowych punkt pracy wymaga zwykle metody iteracyjnej, na przykład metody Newtona-Raphsona. Wtedy element nieliniowy jest w każdej iteracji zastępowany lokalnym modelem liniowym, a układ równań jest rozwiązywany wielokrotnie do osiągnięcia zbieżności. W pracy punkt pracy stanowi podstawową analizę potrzebną do sprawdzenia poprawności zbudowanego układu równań oraz do wyznaczenia warunków początkowych dla analizy czasowej.
+
+\section{Analiza czasowa}
+\label{sec:analiza-czasowa}
+
+Analiza czasowa opisuje odpowiedź układu w funkcji czasu. Jest potrzebna wtedy, gdy wymuszenia zmieniają się w czasie albo gdy w układzie występują elementy magazynujące energię, takie jak kondensatory i cewki. W takim przypadku równania obwodu zawierają pochodne czasowe.
+
+Dla liniowego układu dynamicznego równania można zapisać w postaci:
+
+\begin{equation}
+\label{eq:dynamic-system}
+C\frac{dx(t)}{dt} + Gx(t) = b(t),
+\end{equation}
+
+gdzie \(C\) jest macierzą związaną z elementami dynamicznymi, \(G\) opisuje część rezystancyjną, \(x(t)\) jest wektorem niewiadomych zależnych od czasu, a \(b(t)\) jest wektorem wymuszeń.
+
+Aby rozwiązać taki układ numerycznie, czas jest dzielony na kroki o długości \(\Delta t\). Pochodne zastępuje się przybliżeniami dyskretnymi. Dla wstecznej metody Eulera pochodną można zapisać jako:
+
+\begin{equation}
+\label{eq:backward-euler}
+\frac{dx(t)}{dt} \approx \frac{x_k - x_{k-1}}{\Delta t}.
+\end{equation}
+
+Po podstawieniu do \cref{eq:dynamic-system} otrzymuje się układ liniowy rozwiązywany w kroku \(k\):
+
+\begin{equation}
+\label{eq:dynamic-step}
+\left(G + \frac{C}{\Delta t}\right)x_k =
+b_k + \frac{C}{\Delta t}x_{k-1}.
+\end{equation}
+
+Oznacza to, że analiza czasowa może być zrealizowana jako sekwencja obliczeń podobnych do punktu pracy, wykonywanych dla kolejnych chwil czasu. W każdym kroku aktualizowane są wkłady elementów dynamicznych oraz wymuszenia zależne od czasu. Stabilność i dokładność wyniku zależą od zastosowanej metody całkowania, wartości kroku czasowego oraz właściwego przygotowania warunków początkowych.
+
+Alternatywnym podejściem jest metoda trapezów, która zwykle daje większą dokładność, ale w niektórych przypadkach może prowadzić do oscylacji numerycznych. Z tego powodu wybór metody całkowania jest kompromisem między dokładnością, stabilnością i kosztem obliczeniowym.

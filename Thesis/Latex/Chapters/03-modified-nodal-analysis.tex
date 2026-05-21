@@ -1,13 +1,17 @@
-\chapter{Modified Nodal Analysis}
+\chapter{Zmodyfikowana metoda potencjałów węzłowych i stemple elementów}
 \label{chap:mna}
 
-\section{Postac ukladu rownan}
-\label{sec:postac-mna}
+\section{Rola stempli w metodzie ZMPW}
+\label{sec:rola-stempli}
 
-W metodzie Modified Nodal Analysis uklad rownan mozna zapisac w postaci:
+Zmodyfikowana metoda potencjałów węzłowych pozwala sprowadzić opis obwodu do jednego globalnego układu równań. W praktycznej implementacji wygodne jest jednak, aby nie tworzyć całej macierzy jednocześnie. Zamiast tego każdy element obwodu można opisać przez lokalny wkład do macierzy układu i wektora wymuszeń. Taki lokalny wkład nazywany jest stemplem elementu.
+
+Stempel określa, które wartości należy dodać do globalnej macierzy oraz do wektora prawej strony. Dzięki temu opis elementu jest oddzielony od całego obwodu. Rezystor, źródło prądowe, źródło napięciowe i źródła sterowane mogą być opisane osobnymi regułami, a globalny układ równań powstaje przez sumowanie ich wkładów.
+
+Takie podejście jest zgodne z postacią ZMPW:
 
 \begin{equation}
-\label{eq:mna-block}
+\label{eq:stamps-mna-system}
 \begin{bmatrix}
 G & B \\
 C & D
@@ -23,26 +27,132 @@ e
 \end{bmatrix}.
 \end{equation}
 
-Wektor \(v\) zawiera napiecia wezlowe, a wektor \(j\) dodatkowe niewiadome pradowe. Macierz \(G\) opisuje przewodnosci miedzy wezlami, macierze \(B\) i \(C\) lacza wezly z dodatkowymi rownaniami, a macierz \(D\) opisuje zaleznosci pomiedzy dodatkowymi niewiadomymi.
+Elementy admitancyjne, takie jak rezystory, modyfikują przede wszystkim blok \(G\). Źródła prądowe dodają wartości do wektora \(i\). Źródła napięciowe oraz wybrane źródła sterowane wprowadzają dodatkowe niewiadome prądowe, a więc rozszerzają macierz o nowe wiersze i kolumny.
 
-\section{Stemple elementow}
-\label{sec:stemple-elementow}
+\section{Ogólna postać stempla}
+\label{sec:ogolna-postac-stempla}
 
-Stempel elementu jest lokalnym wkladem do macierzy ukladu i wektora prawej strony. Dla rezystora o rezystancji \(R\) przewodnosc wynosi:
+Stempel elementu można traktować jako małą macierz i mały wektor, którym przypisano konkretne indeksy w globalnym układzie równań. Dla elementu podłączonego do kilku węzłów lokalne indeksy odpowiadają numerom tych węzłów oraz ewentualnym dodatkowym niewiadomym.
+
+Ogólnie wkład elementu można zapisać jako:
 
 \begin{equation}
-\label{eq:conductance}
+\label{eq:stamp-contribution}
+A_{global}(r_p, c_q) \mathrel{+}= A_{local}(p, q),
+\end{equation}
+
+gdzie \(A_{local}\) jest lokalną macierzą elementu, a \(r_p\) i \(c_q\) oznaczają odpowiadające jej indeksy w macierzy globalnej. Analogicznie wartości lokalnego wektora wymuszeń są dodawane do odpowiednich pozycji globalnego wektora prawej strony.
+
+Jeżeli jeden z zacisków elementu jest połączony z masą, jego indeks nie tworzy osobnej niewiadomej. W takim przypadku część wpisów stempla jest pomijana albo dodawana wyłącznie do równań pozostałych węzłów. Dzięki temu potencjał masy pozostaje równy zeru i nie zwiększa rozmiaru układu równań.
+
+\section{Stempel rezystora}
+\label{sec:stempel-rezystora}
+
+Rezystor jest podstawowym przykładem elementu, którego stempel wynika bezpośrednio z prawa Ohma i równania KCL. Dla rezystora o rezystancji \(R\) konduktancja wynosi:
+
+\begin{equation}
+\label{eq:stamp-conductance}
 g = \frac{1}{R}.
 \end{equation}
 
-Element podlaczony pomiedzy wezlami \(n_1\) i \(n_2\) dodaje przewodnosc do pozycji diagonalnych oraz wartosci przeciwne do pozycji pozadiagonalnych macierzy.
+Jeżeli rezystor jest połączony między węzłami \(a\) i \(b\), prąd płynący od węzła \(a\) do węzła \(b\) można zapisać jako:
 
-\section{Elementy obslugiwane w programie}
-\label{sec:elementy-obslugiwane}
+\begin{equation}
+\label{eq:stamp-resistor-current}
+i_R = g(v_a - v_b).
+\end{equation}
 
-Implementacja obsluguje rezystor, niezalezne zrodlo pradowe, niezalezne zrodlo napieciowe oraz podstawowe zrodla sterowane: CCCS, VCCS, CCVS i VCVS. Elementy wymagajace dodatkowej niewiadomej zwiekszaja rozmiar macierzy ukladu.
+Po podstawieniu tej zależności do równań KCL dla obu węzłów otrzymuje się cztery wpisy do macierzy konduktancji:
 
-\section{Komenda punktu pracy}
-\label{sec:komenda-op}
+\begin{equation}
+\label{eq:stamp-resistor}
+G_{aa} \mathrel{+}= g,\quad
+G_{bb} \mathrel{+}= g,\quad
+G_{ab} \mathrel{-}= g,\quad
+G_{ba} \mathrel{-}= g.
+\end{equation}
 
-Komenda \texttt{.op} oznacza obliczenie punktu pracy. W obecnej wersji programu odpowiada ona zlozeniu macierzy dla opisu obwodu i rozwiazaniu otrzymanego ukladu rownan liniowych.
+Wpisy diagonalne zwiększają sumę konduktancji podłączonych do danego węzła, natomiast wpisy pozadiagonalne opisują sprzężenie między węzłami. Taki stempel jest symetryczny, co wynika z pasywnego charakteru rezystora.
+
+\section{Stemple źródeł niezależnych}
+\label{sec:stemple-zrodel-niezaleznych}
+
+Niezależne źródło prądowe nie wprowadza nowej niewiadomej. Jego wpływ polega na dodaniu wartości prądu do wektora wymuszeń. Dla źródła prądowego podłączonego między węzłami \(a\) i \(b\), przy przyjętym kierunku prądu od \(a\) do \(b\), wkład można zapisać jako:
+
+\begin{equation}
+\label{eq:stamp-current-source}
+i_a \mathrel{-}= I_s,\quad
+i_b \mathrel{+}= I_s.
+\end{equation}
+
+Znaki zależą od przyjętej konwencji dla prądów wpływających i wypływających z węzła. Najważniejsze jest zachowanie spójności tej konwencji w całej macierzy.
+
+Niezależne źródło napięciowe wymaga rozszerzenia układu równań. Dla źródła między węzłami \(a\) i \(b\) wprowadza się dodatkową niewiadomą \(j_s\), oznaczającą prąd przez źródło. Równanie napięciowe ma postać:
+
+\begin{equation}
+\label{eq:stamp-voltage-source-equation}
+v_a - v_b = V_s.
+\end{equation}
+
+W macierzy pojawiają się wpisy łączące nową niewiadomą z równaniami KCL węzłów \(a\) i \(b\), a także nowy wiersz opisujący narzucone napięcie:
+
+\begin{equation}
+\label{eq:stamp-voltage-source}
+A_{a,s} \mathrel{+}= 1,\quad
+A_{b,s} \mathrel{-}= 1,\quad
+A_{s,a} \mathrel{+}= 1,\quad
+A_{s,b} \mathrel{-}= 1,\quad
+b_s \mathrel{+}= V_s.
+\end{equation}
+
+Indeks \(s\) oznacza dodatkowy wiersz i kolumnę związane z prądem źródła. Ten mechanizm jest jednym z najważniejszych powodów stosowania ZMPW.
+
+\section{Stemple źródeł sterowanych}
+\label{sec:stemple-zrodel-sterowanych}
+
+Źródła sterowane opisują zależność jednej wielkości elektrycznej od innej wielkości w obwodzie. W metodzie ZMPW można je wprowadzać w sposób zbliżony do źródeł niezależnych, ale z dodatkowymi współczynnikami zależnymi od sygnału sterującego.
+
+Źródło prądowe sterowane napięciem, czyli VCCS, nie wymaga dodatkowej niewiadomej. Jeżeli prąd wyjściowy zależy od napięcia sterującego \(v_c - v_d\), to:
+
+\begin{equation}
+\label{eq:vccs}
+i = g_m(v_c - v_d),
+\end{equation}
+
+gdzie \(g_m\) oznacza transkonduktancję. Wkład takiego źródła trafia do równań KCL węzłów wyjściowych, a współczynniki przy napięciach sterujących są dodawane do odpowiednich kolumn macierzy.
+
+Źródło napięciowe sterowane napięciem, czyli VCVS, narzuca równanie napięciowe:
+
+\begin{equation}
+\label{eq:vcvs}
+v_a - v_b = \mu(v_c - v_d),
+\end{equation}
+
+gdzie \(\mu\) jest wzmocnieniem napięciowym. Ponieważ źródło narzuca napięcie między węzłami wyjściowymi, wymaga dodatkowej niewiadomej prądowej podobnie jak niezależne źródło napięciowe. Różnica polega na tym, że w dodatkowym równaniu pojawiają się również współczynniki przy węzłach sterujących.
+
+Źródło prądowe sterowane prądem, czyli CCCS, wymaga informacji o prądzie sterującym. Jeżeli prąd sterujący jest jedną z dodatkowych niewiadomych ZMPW, źródło może dodać odpowiednie współczynniki do równań KCL węzłów wyjściowych. Źródło napięciowe sterowane prądem, czyli CCVS, dodatkowo narzuca napięcie wyjściowe zależne od prądu sterującego:
+
+\begin{equation}
+\label{eq:ccvs}
+v_a - v_b = r_m j_c,
+\end{equation}
+
+gdzie \(r_m\) oznacza transrezystancję, a \(j_c\) prąd sterujący. Taki element również wprowadza dodatkowy wiersz związany z napięciem wyjściowym.
+
+\section{Wypełnianie macierzy globalnej}
+\label{sec:wypelnianie-macierzy-globalnej}
+
+Globalna macierz układu powstaje przez zsumowanie wkładów wszystkich elementów. Każdy stempel modyfikuje tylko wybrane pozycje macierzy i wektora prawej strony. Pozostałe pozycje pozostają niezmienione. Proces ten można przedstawić jako dodawanie lokalnych równań do jednej wspólnej struktury macierzowej.
+
+Najpierw ustalany jest rozmiar układu równań. Zależy on od liczby węzłów niebędących masą oraz od liczby dodatkowych niewiadomych wymaganych przez źródła napięciowe i wybrane źródła sterowane. Następnie dla każdego elementu dodawane są wpisy wynikające z jego stempla.
+
+Taki sposób budowania macierzy jest modularny. Dodanie nowego typu elementu nie wymaga zmiany całej metody rozwiązywania układu. Wystarczy zdefiniować jego lokalny wkład do macierzy i wektora wymuszeń. Jest to jedna z głównych zalet opisu opartego na stemplach.
+
+\section{Znaczenie dodatkowych wierszy}
+\label{sec:znaczenie-dodatkowych-wierszy}
+
+Dodatkowe wiersze i kolumny pojawiają się wtedy, gdy sam opis napięć węzłowych nie wystarcza do przedstawienia zachowania elementu. Typowym przykładem jest idealne źródło napięciowe. Prąd przez takie źródło nie wynika bezpośrednio z napięcia na jego zaciskach, dlatego musi zostać dodany jako nowa niewiadoma.
+
+Każda dodatkowa niewiadoma zwiększa rozmiar układu równań o jeden. Jednocześnie pojawia się nowe równanie opisujące zależność narzuconą przez element. W dobrze zbudowanym układzie liczba niewiadomych i liczba równań pozostają sobie równe.
+
+W praktyce poprawne zarządzanie dodatkowymi wierszami ma duże znaczenie dla stabilności całego algorytmu. Błędne przypisanie indeksu dodatkowej niewiadomej może prowadzić do nadpisywania równań, pustych wierszy lub macierzy osobliwej. Dlatego elementy wymagające dodatkowych niewiadomych muszą być opisywane konsekwentnie i z zachowaniem jednoznacznej numeracji.

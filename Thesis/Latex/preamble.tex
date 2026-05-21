@@ -7,6 +7,7 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{tabularx}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{amsmath}
@@ -33,6 +34,13 @@
 \onehalfspacing
 \graphicspath{{figures/}}
 \addbibresource{references.bib}
+\renewcommand{\listfigurename}{Spis rysunków}
+\renewcommand{\listtablename}{Spis tabel}
+\renewcommand{\lstlistingname}{Listing}
+\renewcommand{\lstlistlistingname}{Spis listingów}
+\makeatletter
+\providecommand*{\toclevel@lstlisting}{0}
+\makeatother
 
 \sisetup{
   locale = PL,
@@ -93,3 +101,5 @@
 \Crefname{table}{Tabela}{Tabele}
 \crefname{equation}{równanie}{równania}
 \Crefname{equation}{Równanie}{Równania}
+\crefname{lstlisting}{listing}{listingi}
+\Crefname{lstlisting}{Listing}{Listingi}

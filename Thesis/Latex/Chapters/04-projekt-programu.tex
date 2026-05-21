@@ -1,29 +1,118 @@
-\chapter{Projekt programu}
+\chapter{Założenia i architektura aplikacji}
 \label{chap:projekt-programu}
 
-\section{Architektura}
-\label{sec:architektura}
+\section{Założenia projektowe}
+\label{sec:zalozenia-projektowe}
 
-Program zostal podzielony na kilka odpowiedzialnosci: parser, typy elementow, stemple, macierze oraz solver. Taki podzial ulatwia rozszerzanie programu o kolejne elementy i kolejne rodzaje analizy.
+Celem części programistycznej pracy jest przygotowanie aplikacji, która pozwala przejść od prostego opisu tekstowego obwodu do wyniku analizy numerycznej. Program nie jest traktowany jako uniwersalny zamiennik rozbudowanych środowisk SPICE, lecz jako dedykowane narzędzie pokazujące, w jaki sposób metoda ZMPW może zostać zaimplementowana w natywnej aplikacji napisanej w języku Swift.
 
-\section{Format pliku wejsciowego}
+Najważniejsze założenie projektowe polega na oddzieleniu opisu obwodu od sposobu jego rozwiązania. Użytkownik zapisuje układ w pliku tekstowym, a aplikacja przekształca ten opis na obiekty reprezentujące stemple elementów. Dopiero tak przygotowana lista stempli jest przekazywana do solvera, który buduje macierz globalną i wyznacza wynik wybranej analizy.
+
+Takie podejście pozwala rozwijać program stopniowo. Dodanie nowego elementu wymaga zdefiniowania jego stempla oraz rozszerzenia warstwy parsera o regułę rozpoznawania nowego oznaczenia. Sam solver nie musi znać nazw elementów ani formatu pliku wejściowego, ponieważ operuje wyłącznie na macierzach zwracanych przez stemple.
+
+\section{Ogólna architektura}
+\label{sec:ogolna-architektura}
+
+Program został podzielony na kilka warstw odpowiedzialności. Pierwszą z nich jest parser pliku wejściowego. Jego zadaniem jest odczytanie kolejnych linii, rozpoznanie typu elementu, sprawdzenie liczby parametrów oraz utworzenie listy obiektów typu \texttt{Stamp}. Drugą warstwę tworzą klasy elementów obwodu, na przykład rezystor, źródła niezależne i źródła sterowane. Każdy z tych elementów zwraca lokalny wkład do macierzy przewodności oraz do wektora wymuszeń. Trzecią warstwą jest solver, który sumuje wszystkie stemple i rozwiązuje powstały układ równań.
+
+Na poziomie przepływu danych aplikacja wykonuje następujące kroki:
+
+\begin{enumerate}
+  \item odczytuje tekstowy opis obwodu z pliku,
+  \item dzieli plik na linie i tokeny,
+  \item rozpoznaje typy elementów oraz komendę analizy,
+  \item tworzy obiekty stempli i przypisuje dodatkowe indeksy równań,
+  \item przekazuje listę stempli oraz komendę do solvera,
+  \item buduje macierz globalną i oblicza wynik analizy.
+\end{enumerate}
+
+Wynikiem pracy parsera jest struktura zawierająca dwie informacje: tablicę stempli oraz komendę solvera. Dzięki temu parser nie rozpoczyna obliczeń samodzielnie. Jego odpowiedzialność kończy się na przygotowaniu danych wejściowych w formie zrozumiałej dla dalszych części programu.
+
+\section{Format pliku wejściowego}
 \label{sec:format-wejsciowy}
 
-Opis ukladu ma postac tekstowa. Kazda linia elementu zaczyna sie od nazwy typu, po ktorej wystepuja numery wezlow i parametry. Przykladowy opis moze wygladac nastepujaco:
+Opis obwodu ma postać tekstową zbliżoną do uproszczonej netlisty SPICE. Jedna linia opisuje jeden element albo jedną komendę analizy. W przypadku elementu pierwszy token określa jego typ, kolejne tokeny oznaczają numery węzłów, a ostatnie wartości są parametrami elementu. Węzeł o numerze \texttt{0} pełni rolę węzła odniesienia.
 
-\begin{lstlisting}[language=Netlist,caption={Przykladowy opis ukladu}]
-R 1 2 1000
-DCCS 1 0 0.001
+Aktualnie obsługiwane są: rezystor \texttt{R}, niezależne źródło prądowe \texttt{DCCS}, niezależne źródło napięciowe \texttt{DCVS}, źródła sterowane \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS}, \texttt{CCVS} oraz komendy analizy \texttt{.op} i \texttt{.tran}. Komenda \texttt{.op} oznacza analizę punktu pracy, natomiast \texttt{.tran} uruchamia analizę czasową.
+
+\begin{table}[H]
+\centering
+\caption{Format opisu obsługiwanych elementów}
+\label{tab:format-elementow}
+\begin{tabularx}{\textwidth}{@{}l>{\ttfamily\small}lX@{}}
+\toprule
+Oznaczenie & Postać linii & Znaczenie parametrów \\
+\midrule
+\texttt{R} & R n1 n2 R & rezystor między węzłami \texttt{n1} i \texttt{n2} \\
+\texttt{DCCS} & DCCS n+ n- I & niezależne źródło prądowe DC \\
+\texttt{DCVS} & DCVS n+ n- V & niezależne źródło napięciowe DC \\
+\texttt{VCCS} & VCCS in+ in- out+ out- gm & źródło prądowe sterowane napięciem \\
+\texttt{VCVS} & VCVS in+ in- out+ out- A & źródło napięciowe sterowane napięciem \\
+\texttt{CCCS} & CCCS in+ in- out+ out- beta Vx & źródło prądowe sterowane prądem \\
+\texttt{CCVS} & CCVS in+ in- out+ out- Rm Vx & źródło napięciowe sterowane prądem \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\Cref{lst:all-elements-netlist} przedstawia przykładową netlistę zawierającą wszystkie obsługiwane obecnie typy elementów. Sam układ nie musi mieć znaczenia praktycznego; jego zadaniem jest pokazanie składni wejściowej i kolejności parametrów.
+
+\begin{lstlisting}[language=Netlist,caption={Przykładowy opis obwodu z wszystkimi obsługiwanymi elementami},label={lst:all-elements-netlist}]
+R 1 0 1000
+DCCS 0 1 0.001
 DCVS 2 0 5
+VCCS 1 0 3 0 0.5
+VCVS 1 0 4 0 2
+CCCS 2 0 5 0 3 1
+CCVS 3 0 6 0 4 1
 .op
 \end{lstlisting}
 
-\section{Reprezentacja elementow}
+\section{Parser netlisty}
+\label{sec:parser-netlisty}
+
+Parser odczytuje plik linia po linii. Każda linia jest dzielona na tokeny rozdzielone białymi znakami. Linie puste oraz komentarze rozpoczynające się od znaku \texttt{*} są pomijane. Jeżeli pierwszy token jest komendą analizy, parser zapisuje ją jako polecenie dla solvera. W przeciwnym przypadku token jest interpretowany jako oznaczenie elementu.
+
+Rozpoznawanie elementów jest wydzielone do typu \texttt{ElementType}. Typ ten pełni rolę słownika wspieranych elementów: zamienia tekstowe oznaczenie z pliku na konkretny wariant programu, określa wymaganą liczbę tokenów oraz wskazuje, które tokeny są numerami węzłów. Dzięki temu podstawowe reguły składniowe są skupione w jednym miejscu.
+
+Parser wykonuje dwa przejścia po danych wejściowych. W pierwszym przejściu sprawdza strukturę linii, zapamiętuje poprawnie rozpoznane elementy i wyznacza największy numer węzła występujący w pliku. Drugie przejście służy do tworzenia stempli. Podział na dwa etapy jest potrzebny, ponieważ elementy zawierające dodatkowe równania, na przykład źródła napięciowe, wymagają indeksów większych od numerów zwykłych węzłów.
+
+\begin{lstlisting}[language=Swift,caption={Uproszczony schemat odpowiedzialności parsera},label={lst:parser-flow}]
+let parserResult = try Parser().parse(fileURL)
+let stamps = parserResult.stamps
+let command = parserResult.command
+let result = try Solver().solve(stamps, command)
+\end{lstlisting}
+
+\section{Przypisywanie dodatkowych równań}
+\label{sec:dodatkowe-rownania-program}
+
+W metodzie ZMPW część elementów wymaga wprowadzenia dodatkowej niewiadomej. Dotyczy to przede wszystkim źródeł napięciowych oraz źródeł sterowanych prądem. W implementacji taka niewiadoma jest reprezentowana przez dodatkowy indeks macierzy, nazywany w programie \texttt{newRow}.
+
+Parser najpierw zlicza węzły układu, a następnie nadaje kolejne indeksy elementom wymagającym dodatkowych równań. Jeżeli największy numer węzła w pliku wynosi \texttt{nodeCount}, pierwszy dodatkowy indeks ma wartość \texttt{nodeCount + 1}, drugi \texttt{nodeCount + 2} i tak dalej. Źródło \texttt{CCVS} potrzebuje dwóch takich indeksów, ponieważ oprócz równania wyjściowego źródła napięciowego wymaga również równania umożliwiającego reprezentację prądu sterującego.
+
+Ten mechanizm jest istotny, ponieważ użytkownik nie powinien ręcznie numerować równań pomocniczych. Numery w pliku wejściowym opisują wyłącznie węzły obwodu, natomiast wewnętrzna rozbudowa macierzy jest zadaniem programu.
+
+\section{Reprezentacja elementów i stempli}
 \label{sec:reprezentacja-elementow}
 
-Kazdy element jest reprezentowany przez typ, ktory tworzy odpowiedni stempel. Parser nie rozwiazuje ukladu samodzielnie, lecz przeksztalca opis tekstowy w dane wejsciowe dla solvera.
+Każdy element obwodu jest reprezentowany przez klasę albo strukturę zwracającą stempel. Stempel składa się z lokalnej macierzy przewodności oraz lokalnego wektora wymuszeń. Dla rezystora niezerowe wartości trafiają wyłącznie do macierzy przewodności. Dla niezależnego źródła prądowego wkład pojawia się w wektorze wymuszeń. Źródła napięciowe oraz część źródeł sterowanych wprowadzają dodatkowe wiersze i kolumny w macierzy globalnej.
 
-\section{Obsluga bledow}
+Istotne jest to, że obiekty elementów nie znają całej netlisty. Otrzymują jedynie numery węzłów, parametry elementu oraz ewentualne indeksy dodatkowych równań. Następnie zwracają macierze, które można dodać do macierzy globalnej. Dzięki temu kod odpowiedzialny za konkretny element pozostaje lokalny i łatwy do testowania.
+
+\section{Solver i komendy analizy}
+\label{sec:solver-komendy}
+
+Solver otrzymuje listę stempli oraz komendę analizy. Dla analizy punktu pracy \texttt{.op} tworzy macierz globalną, dodaje do niej wkład każdego stempla i rozwiązuje układ równań liniowych. Wynikiem jest macierz wartości niewiadomych, czyli napięć węzłowych oraz prądów związanych z dodatkowymi równaniami.
+
+Komenda \texttt{.tran} wykorzystuje tę samą ideę składania stempli, ale obliczenia są wykonywane w kolejnych chwilach czasu. Elementy dynamiczne są wtedy zastępowane równoważnymi modelami dyskretnymi zależnymi od kroku czasowego i historii poprzednich stanów. Dzięki wspólnej reprezentacji przez stemple analiza czasowa może korzystać z tej samej warstwy macierzy co punkt pracy.
+
+Rozdzielenie parsera i solvera upraszcza dalszy rozwój aplikacji. Parser odpowiada za przekształcenie tekstu na dane programu, natomiast solver odpowiada za interpretację komendy analizy. W przyszłości ta sama struktura może zostać rozszerzona o kolejne polecenia, na przykład analizę małosygnałową albo warianty analizy czasowej z dodatkowymi parametrami kroku i czasu końcowego.
+
+\section{Obsługa błędów}
 \label{sec:obsluga-bledow}
 
-Bledy parsera dotycza struktury pliku, na przyklad nieznanego elementu, zlej liczby parametrow albo braku komendy analizy. Bledy stempli dotycza niepoprawnych parametrow elementu. Dzieki temu miejsce wykrycia bledu jest oddzielone od miejsca jego opisania.
+Obsługa błędów została podzielona na błędy parsera i błędy stempli. Parser wykrywa problemy związane ze składnią pliku: nieznany element, złą liczbę parametrów, niepoprawny typ parametru, brak komendy analizy albo podanie więcej niż jednej komendy. Każdy taki błąd zawiera numer linii, w której wystąpił problem, co ułatwia poprawienie pliku wejściowego.
+
+Błędy stempli dotyczą wartości, które formalnie da się odczytać z pliku, ale które nie mają sensu z punktu widzenia elementu. Przykładem jest ujemny indeks węzła albo niepoprawna wartość parametru. Parser przechwytuje takie błędy i zamienia je na błąd związany z konkretną linią netlisty. Użytkownik nie musi znać wewnętrznej struktury klas elementów, aby dowiedzieć się, gdzie w pliku znajduje się problem.
+
+Takie rozdzielenie odpowiedzialności ułatwia utrzymanie programu. Parser nie musi znać szczegółowych warunków poprawności każdego elementu, a element nie musi wiedzieć, z której linii pliku pochodzi. Wspólnym punktem styku jest mechanizm wyjątków, który przenosi informację o niepowodzeniu do warstwy odpowiedzialnej za komunikat diagnostyczny.

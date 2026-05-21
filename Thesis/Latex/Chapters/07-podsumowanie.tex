@@ -4,9 +4,37 @@
 \section{Wnioski}
 \label{sec:wnioski}
 
-Zaimplementowany program pokazuje pelny przeplyw danych od tekstowego opisu ukladu do rozwiazania punktu pracy. Metoda Modified Nodal Analysis dobrze pasuje do takiej architektury, poniewaz pozwala kazdemu elementowi dodawac lokalny wklad do globalnego ukladu rownan.
+W pracy przedstawiono projekt i implementację dedykowanej aplikacji do analizy analogowych układów elektronicznych. Podstawą obliczeń jest zmodyfikowana metoda potencjałów węzłowych, która dobrze pasuje do programowej reprezentacji obwodu przez stemple elementów. Każdy element może zostać opisany lokalnie, a następnie jego wkład jest dodawany do globalnego układu równań.
 
-\section{Mozliwe kierunki rozwoju}
+Zrealizowana aplikacja pokazuje pełny przepływ danych od tekstowego opisu układu do wyniku analizy. Parser odczytuje netlistę, rozpoznaje obsługiwane elementy i komendę analizy, tworzy listę stempli oraz przekazuje ją do solvera. Solver składa macierz globalną i wyznacza wartości niewiadomych. Taki podział odpowiedzialności okazał się wygodny zarówno podczas implementacji, jak i podczas pisania testów.
+
+Istotnym rezultatem pracy jest również przygotowanie struktury programu do dalszego rozwoju. Obsługa elementów nie jest zaszyta bezpośrednio w solverze, lecz wynika z interfejsu stempla. Dzięki temu dodanie kolejnego elementu polega głównie na zdefiniowaniu jego wkładu macierzowego i rozszerzeniu parsera o nowy typ. Podobnie komendy analizy są przekazywane jako osobna informacja, co pozwala rozwijać kolejne tryby obliczeń bez przebudowy formatu danych wewnętrznych.
+
+Wybór języka Swift i platformy macOS pozwolił wykorzystać typowanie statyczne, mechanizmy obsługi błędów oraz biblioteki numeryczne dostępne w systemie. Jednocześnie implementacja pozostała czytelna, ponieważ podstawowe pojęcia programu odpowiadają pojęciom teoretycznym: element, stempel, macierz, wektor wymuszeń i solver.
+
+\section{Ocena przyjętego podejścia}
+\label{sec:ocena-podejscia}
+
+Największą zaletą przyjętego podejścia jest modularność. Parser, elementy, macierze i solver mogą być testowane osobno, a ich interfejsy są stosunkowo proste. Ogranicza to liczbę zależności między częściami programu i zmniejsza ryzyko, że zmiana jednego elementu wymusi przebudowę całej aplikacji.
+
+Drugą zaletą jest zgodność implementacji z metodą ZMPW. W metodzie tej globalny układ równań powstaje przez sumowanie lokalnych wkładów elementów. Tę samą zasadę wykorzystuje program: każdy stempel zwraca własną macierz i wektor, a solver dodaje je do macierzy globalnej. Dzięki temu kod nie wymaga osobnych algorytmów składania dla każdego typu obwodu.
+
+Ograniczeniem obecnego rozwiązania jest uproszczony format wejściowy. Netlista jest czytelna i wystarczająca dla obsługiwanych elementów, ale nie zawiera jeszcze bardziej rozbudowanych konstrukcji znanych z pełnych symulatorów SPICE, takich jak modele elementów, parametry nazwane, podukłady czy złożone źródła zależne od czasu. Jest to świadomy kompromis, ponieważ głównym celem pracy było pokazanie działania metody i architektury programu, a nie odtworzenie pełnego standardu SPICE.
+
+\section{Możliwe kierunki rozwoju}
 \label{sec:kierunki-rozwoju}
 
-Dalszy rozwoj programu moze obejmowac symulacje czasowa dla komendy \texttt{.tran}, elementy nieliniowe, iteracje Newtona-Raphsona, bardziej rozbudowany format plikow wejsciowych oraz eksport wynikow do plikow.
+Dalszy rozwój programu może obejmować kilka obszarów. Pierwszym z nich jest rozszerzenie biblioteki elementów. Naturalnym kolejnym krokiem są kondensatory, cewki, diody oraz tranzystory. Elementy dynamiczne wymagają modeli zależnych od czasu, natomiast elementy nieliniowe wymagają iteracyjnego wyznaczania punktu pracy, na przykład metodą Newtona-Raphsona.
+
+Drugim kierunkiem jest rozbudowa analizy czasowej. Obecna architektura pozwala używać tych samych mechanizmów składania macierzy, ale w kolejnych krokach czasowych. W przyszłości można dodać parametry kroku czasowego, czasu końcowego, warunków początkowych oraz różne metody całkowania numerycznego, na przykład metodę trapezów albo metodę Geara.
+
+Trzecim obszarem jest rozwój formatu wejściowego. Warto dodać obsługę komentarzy, jednostek z przedrostkami, parametrów nazwanych oraz bardziej opisowych komunikatów błędów. Przy większych projektach przydatne byłyby także podukłady i modele elementów definiowane w osobnych sekcjach pliku.
+
+Czwartym kierunkiem jest warstwa użytkownika. Program może zostać rozszerzony o graficzny interfejs do wczytywania plików, uruchamiania analizy i prezentowania wyników. Dla analizy czasowej szczególnie przydatne byłyby wykresy napięć i prądów, eksport danych do plików oraz możliwość porównania kilku przebiegów.
+
+\section{Zakończenie}
+\label{sec:zakonczenie}
+
+Praca potwierdza, że zmodyfikowana metoda potencjałów węzłowych jest dobrą podstawą do budowy symulatora układów analogowych. Metoda zapewnia przejrzyste przejście od schematu obwodu do układu równań, a reprezentacja przez stemple dobrze przekłada się na strukturę programu.
+
+Zaimplementowany projekt stanowi punkt wyjścia do dalszego rozwoju. Obsługuje podstawowe elementy liniowe, źródła niezależne i sterowane, parser tekstowego opisu obwodu, mechanizm błędów oraz solver. Najważniejsze jest jednak to, że architektura programu pozwala dodawać kolejne elementy i analizy bez porzucania przyjętego modelu obliczeń.

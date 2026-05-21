@@ -1,22 +1,81 @@
 \chapter{Testy}
 \label{chap:testy}
 
-\section{Zakres testow}
+\section{Cel testowania}
+\label{sec:cel-testowania}
+
+Testy pełnią w projekcie dwie funkcje. Pierwszą jest sprawdzenie poprawności obliczeń wykonywanych przez solver i stemple elementów. Drugą jest kontrola granic odpowiedzialności między częściami programu. Parser powinien wykrywać błędy składniowe i tworzyć poprawne stemple, elementy powinny sprawdzać własne parametry, a solver powinien rozwiązywać układ przygotowany z listy stempli.
+
+Ze względu na charakter aplikacji szczególnie ważne są testy małych układów. Prosty obwód można łatwo przeliczyć ręcznie, dzięki czemu oczekiwany wynik nie jest zależny od samego programu. Takie testy są też wygodne podczas rozwoju, ponieważ szybko wskazują, czy błąd dotyczy parsera, stempla, macierzy czy solvera.
+
+\section{Zakres testów}
 \label{sec:zakres-testow}
 
-Testy jednostkowe obejmuja parser, tworzenie stempli, obsluge bledow oraz solver. Osobne testy sprawdzaja poprawne dane wejsciowe i przypadki, w ktorych program powinien zglosic blad.
+Testy zostały podzielone zgodnie z warstwami implementacji. Osobno sprawdzany jest parser, osobno stemple elementów, osobno błędy parametrów, a osobno solver i operacje macierzowe. Dzięki temu pojedynczy test ma jasno określony cel.
+
+\begin{table}[H]
+\centering
+\caption{Główne grupy testów}
+\label{tab:grupy-testow}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Grupa testów & Sprawdzany zakres \\
+\midrule
+Parser & rozpoznawanie elementów, komend \texttt{.op}/\texttt{.tran}, liczby parametrów i błędów wejścia \\
+Stemple & poprawność wkładów elementów do macierzy i wektora wymuszeń \\
+Błędy stempli & reakcja na niepoprawne wartości parametrów elementów \\
+Solver & składanie macierzy globalnej i obliczanie punktu pracy \\
+Macierze & dodawanie wartości, dodawanie macierzy i rozwiązywanie układów liniowych \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Taki podział ogranicza ryzyko tworzenia testów zbyt szerokich. Jeżeli test parsera sprawdza jednocześnie wynik solvera, trudniej ustalić przyczynę niepowodzenia. W obecnym podejściu parser może być testowany przez typy utworzonych stempli i zgłaszane błędy, natomiast poprawność numeryczna jest sprawdzana w testach solvera.
 
 \section{Testy parsera}
 \label{sec:testy-parsera}
 
-Parser jest testowany na pojedynczych elementach oraz na pliku zawierajacym wszystkie obslugiwane typy elementow. Pozwala to sprawdzic, czy program poprawnie rozpoznaje elementy, parametry oraz komende analizy.
+Parser jest testowany zarówno na krótkich opisach zawierających pojedyncze elementy, jak i na pliku zawierającym wszystkie obsługiwane typy elementów. Test z pełnym zestawem elementów sprawdza, czy parser poprawnie rozpoznaje \texttt{R}, \texttt{DCCS}, \texttt{DCVS}, \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS} oraz \texttt{CCVS}. Dodatkowo sprawdzane jest przypisanie dodatkowych indeksów dla elementów wymagających nowych równań.
 
-\section{Testy solvera}
-\label{sec:testy-solvera}
+\begin{lstlisting}[language=Netlist,caption={Przykładowy plik używany do sprawdzenia parsera},label={lst:test-all-elements}]
+R 1 0 10
+DCCS 0 1 2
+DCVS 2 0 5
+VCCS 1 0 3 0 0.5
+VCVS 1 0 4 0 2
+CCCS 2 0 5 0 3 1
+CCVS 3 0 6 0 4 1
+.op
+\end{lstlisting}
 
-Testy solvera porownuja wynik rozwiazania ukladu z oczekiwanymi wartosciami dla prostych obwodow. Takie przypadki testowe sa latwe do zweryfikowania recznie i dobrze wykrywaja bledy w skladaniu macierzy.
+Testy błędów parsera obejmują między innymi nieznany element, złą liczbę parametrów, niepoprawny typ parametru, niepoprawne parametry stempla, brak komendy oraz więcej niż jedną komendę analizy. Każdy z tych przypadków jest istotny z punktu widzenia użytkownika, ponieważ parser powinien wskazać linię, w której znajduje się problem.
 
-\section{Testy bledow stempli}
+Osobno sprawdzana jest komenda \texttt{.tran}. Dzięki temu format wejściowy jest przygotowany nie tylko dla punktu pracy, ale również dla analizy czasowej. Test parsera nie musi w tym miejscu sprawdzać całej symulacji czasowej; wystarczy potwierdzić, że komenda jest rozpoznawana i przekazywana do dalszej warstwy programu.
+
+\section{Testy stempli i elementów}
+\label{sec:testy-stempli}
+
+Stemple są testowane przez proste obwody, w których wynik można przewidzieć. Dla rezystorów sprawdzane są układy dzielników i połączeń, dla źródeł niezależnych oraz sterowanych sprawdzane są wartości napięć i prądów po rozwiązaniu układu przez solver. Takie testy w praktyce sprawdzają jednocześnie lokalny stempel elementu i jego wpływ na macierz globalną.
+
+W testach elementów nie ma potrzeby sprawdzania szczegółów wewnętrznego numerowania wszystkich wierszy macierzy, jeśli ten mechanizm jest już testowany w parserze i solverze. Ważniejsze jest potwierdzenie, że gotowy układ daje oczekiwany wynik. Dzięki temu testy opisują zachowanie programu, a nie tylko szczegóły implementacji.
+
+\section{Testy błędów stempli}
 \label{sec:testy-bledow-stempli}
 
-Bledy parametrow stempli sa sprawdzane oddzielnie od testow parsera i solvera. Dzieki temu testy pozostaja czytelne i kazdy zestaw sprawdza jedna warstwe programu.
+Błędy parametrów stempli są testowane oddzielnie. Dotyczy to sytuacji, w których dane mają poprawny typ, ale nie mogą zostać użyte przez element. Przykładem jest ujemny numer węzła albo wartość nieskończona podana jako parametr.
+
+Oddzielenie tych testów od testów parsera jest korzystne. Parser odpowiada za strukturę pliku, natomiast element odpowiada za sensowność własnych parametrów. Parser może później przekształcić błąd stempla w komunikat zawierający numer linii. Sama decyzja o tym, czy parametr elementu jest poprawny, pozostaje w klasie elementu.
+
+\section{Testy solvera i macierzy}
+\label{sec:testy-solvera}
+
+Testy solvera sprawdzają, czy lista stempli jest poprawnie składana do jednej macierzy globalnej oraz czy wynik rozwiązania odpowiada wartościom oczekiwanym dla prostych obwodów. Przykładem jest obwód z idealnym źródłem napięcia i rezystorem, w którym napięcie węzła można odczytać bezpośrednio z wartości źródła.
+
+Testy macierzy sprawdzają operacje niższego poziomu: dodawanie pojedynczych wartości, dodawanie jednej macierzy do drugiej oraz rozwiązywanie układów równań. Jest to ważne, ponieważ błędy w indeksowaniu macierzy prowadziłyby do pozornie poprawnych, ale numerycznie błędnych wyników symulacji.
+
+\section{Znaczenie testów dla rozwoju programu}
+\label{sec:znaczenie-testow}
+
+Przyjęty zestaw testów ułatwia rozszerzanie aplikacji o nowe elementy i nowe rodzaje analizy. Dodanie kolejnego elementu powinno wiązać się z testem parsera, testem poprawnego stempla oraz testem przynajmniej jednego prostego obwodu z tym elementem. W przypadku nowych komend analizy potrzebne są testy rozpoznawania komendy i testy solvera.
+
+Testy stanowią również dokumentację zachowania programu. Pokazują, jakie elementy są obsługiwane, jaki format danych wejściowych jest poprawny i jakie błędy powinny zostać zgłoszone w niepoprawnych przypadkach. Jest to szczególnie przydatne w projekcie rozwijanym etapami, gdzie kolejne funkcje są dodawane bez zmiany podstawowej architektury.
