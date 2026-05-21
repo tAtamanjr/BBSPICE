@@ -17,7 +17,7 @@ class VCCS : ControlledSource {
         try super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
     }
     
-    override func getGMatrix() throws -> Matrix? {
+    override func getGMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
         let temp = GMatrix(max(nodeWeP, nodeWeM, nodeWyP, nodeWyM))
         
         try temp.add(nodeWyP, nodeWeP, transconductance)

@@ -20,42 +20,52 @@ final class BBSpiceParserTests: XCTestCase {
         let stamps = result.stamps
         
         XCTAssertEqual(result.command, .op)
-        XCTAssert(stamps.count == 7)
+        XCTAssert(stamps.count == 9)
         XCTAssert(stamps[0] is R)
-        XCTAssert(stamps[1] is DCCS)
-        XCTAssert(stamps[2] is DCVS)
-        XCTAssert(stamps[3] is VCCS)
-        XCTAssert(stamps[4] is VCVS)
-        XCTAssert(stamps[5] is CCCS)
-        XCTAssert(stamps[6] is CCVS)
+        XCTAssert(stamps[1] is C)
+        XCTAssert(stamps[2] is DCCS)
+        XCTAssert(stamps[3] is DCVS)
+        XCTAssert(stamps[4] is ACVS)
+        XCTAssert(stamps[5] is VCCS)
+        XCTAssert(stamps[6] is VCVS)
+        XCTAssert(stamps[7] is CCCS)
+        XCTAssert(stamps[8] is CCVS)
         
         let resistor = stamps[0] as? R
         XCTAssert(resistor?.resistance == 10)
         
-        let currentSource = stamps[1] as? DCCS
+        let capacitor = stamps[1] as? C
+        XCTAssert(capacitor?.capacitance == 0.001)
+        
+        let currentSource = stamps[2] as? DCCS
         XCTAssert(currentSource?.current == 2)
         
-        let voltageSource = stamps[2] as? DCVS
+        let voltageSource = stamps[3] as? DCVS
         XCTAssert(voltageSource?.amplitude == 5)
         XCTAssert(voltageSource?.newRow == 7)
         
-        let voltageControlledCurrentSource = stamps[3] as? VCCS
+        let ACVoltageSource = stamps[4] as? ACVS
+        XCTAssert(ACVoltageSource?.amplitude == 10)
+        XCTAssert(ACVoltageSource?.frequency == 50)
+        XCTAssert(ACVoltageSource?.newRow == 8)
+        
+        let voltageControlledCurrentSource = stamps[5] as? VCCS
         XCTAssert(voltageControlledCurrentSource?.transconductance == 0.5)
         
-        let voltageControlledVoltageSource = stamps[4] as? VCVS
+        let voltageControlledVoltageSource = stamps[6] as? VCVS
         XCTAssert(voltageControlledVoltageSource?.gain == 2)
-        XCTAssert(voltageControlledVoltageSource?.newRow == 8)
+        XCTAssert(voltageControlledVoltageSource?.newRow == 9)
         
-        let currentControlledCurrentSource = stamps[5] as? CCCS
+        let currentControlledCurrentSource = stamps[7] as? CCCS
         XCTAssert(currentControlledCurrentSource?.gain == 3)
         XCTAssert(currentControlledCurrentSource?.inputVoltage == 1)
-        XCTAssert(currentControlledCurrentSource?.newRow == 9)
+        XCTAssert(currentControlledCurrentSource?.newRow == 10)
         
-        let currentControlledVoltageSource = stamps[6] as? CCVS
+        let currentControlledVoltageSource = stamps[8] as? CCVS
         XCTAssert(currentControlledVoltageSource?.transresistance == 4)
         XCTAssert(currentControlledVoltageSource?.inputVoltage == 1)
-        XCTAssert(currentControlledVoltageSource?.newRow == 10)
-        XCTAssert(currentControlledVoltageSource?.newRow2 == 11)
+        XCTAssert(currentControlledVoltageSource?.newRow == 11)
+        XCTAssert(currentControlledVoltageSource?.newRow2 == 12)
     }
     
     func testParserErrors() throws {
@@ -70,6 +80,15 @@ final class BBSpiceParserTests: XCTestCase {
         }
         XCTAssertThrowsError(try Parser().parse(makeTestFile("R -1 2 5\n.op"))) { err in
             XCTAssertEqual(err as? ParserError, .wrongStampParameters(1))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("C 1 2 0\n.op"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongStampParameters(1))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("ACVS 1 0 5 0\n.op"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongStampParameters(1))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("ACVS 1 0 5\n.op"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongParametersCount(1))
         }
         XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5"))) { err in
             XCTAssertEqual(err as? ParserError, .missingCommand)

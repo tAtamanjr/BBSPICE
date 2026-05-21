@@ -45,11 +45,16 @@ class Parser {
             switch line.elementType {
             case .resistor:
                 stamps.append(try makeResistor(line.tokens, line.lineNumber))
+            case .capacitor:
+                stamps.append(try makeCapacitor(line.tokens, line.lineNumber))
             case .DCCS:
                 stamps.append(try makeDCCS(line.tokens, line.lineNumber))
             case .DCVS:
                 newRowAmount += 1
                 stamps.append(try makeDCVS(line.tokens, line.lineNumber, nodeCount + newRowAmount))
+            case .ACVS:
+                newRowAmount += 1
+                stamps.append(try makeACVS(line.tokens, line.lineNumber, nodeCount + newRowAmount))
             case .CCCS:
                 newRowAmount += 1
                 stamps.append(try makeCCCS(line.tokens, line.lineNumber, nodeCount + newRowAmount))
@@ -83,6 +88,18 @@ class Parser {
         }
     }
     
+    private func makeCapacitor(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
+        do {
+            return try C(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseDouble(tokens[3], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
     private func makeDCCS(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
         do {
             return try DCCS(
@@ -102,6 +119,20 @@ class Parser {
                 parseInt(tokens[2], lineNumber),
                 newRow,
                 parseDouble(tokens[3], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
+    private func makeACVS(_ tokens: [String], _ lineNumber: Int, _ newRow: Int) throws -> Stamp {
+        do {
+            return try ACVS(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                newRow,
+                parseDouble(tokens[3], lineNumber),
+                parseDouble(tokens[4], lineNumber)
             )
         } catch let error as StampParameterError {
             throw parserError(error, lineNumber)

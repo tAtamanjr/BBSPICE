@@ -13,18 +13,13 @@ class Stamp {
     
     init() {
         self.id = UUID()
-        print("Stamp created, id: \(self.id)")
     }
     
-    deinit {
-        print("Stamp deleted, id: \(self.id)")
-    }
-    
-    func getGMatrix() throws -> Matrix? {
+    func getGMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
         return nil
     }
     
-    func getIMatrix() throws -> Matrix? {
+    func getIMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
         return nil
     }
 }
