@@ -34,10 +34,10 @@ final class BBSpiceStampErrorTests: XCTestCase {
         XCTAssertThrowsError(try ACVS(1, 0, 2, 1, Double.infinity)) { err in
             XCTAssertEqual(err as? StampParameterError, .parameterError)
         }
-        XCTAssertThrowsError(try C(1, 2, 1).getGMatrix(0)) { err in
+        XCTAssertThrowsError(try C(1, 2, 1).getGMatrix(StampContext(timeStep: 0))) { err in
             XCTAssertEqual(err as? StampParameterError, .parameterError)
         }
-        XCTAssertThrowsError(try C(1, 2, 1).getIMatrix(0, 1)) { err in
+        XCTAssertThrowsError(try C(1, 2, 1).getIMatrix(StampContext(timeStep: 0, voltage: 1))) { err in
             XCTAssertEqual(err as? StampParameterError, .parameterError)
         }
     }

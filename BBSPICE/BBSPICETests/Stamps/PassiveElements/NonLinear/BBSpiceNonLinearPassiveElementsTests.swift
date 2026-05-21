@@ -18,7 +18,7 @@ final class BBSpiceNonLinearPassiveElementsTests: XCTestCase {
     func testCapacitorGMatrix() throws {
         let capacitor = try C(1, 2, 2)
         
-        let gMatrix = try capacitor.getGMatrix(0.5)
+        let gMatrix = try capacitor.getGMatrix(StampContext(timeStep: 0.5))
         
         XCTAssertNotNil(gMatrix)
         XCTAssertEqual(gMatrix?.rows, 2)
@@ -29,7 +29,7 @@ final class BBSpiceNonLinearPassiveElementsTests: XCTestCase {
     func testCapacitorIMatrix() throws {
         let capacitor = try C(1, 2, 2)
         
-        let iMatrix = try capacitor.getIMatrix(0.5, 3)
+        let iMatrix = try capacitor.getIMatrix(StampContext(timeStep: 0.5, voltage: 3))
         
         XCTAssertNotNil(iMatrix)
         XCTAssertEqual(iMatrix?.rows, 2)

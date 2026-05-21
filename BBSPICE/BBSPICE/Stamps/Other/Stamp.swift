@@ -15,11 +15,11 @@ class Stamp {
         self.id = UUID()
     }
     
-    func getGMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
+    func getGMatrix(_ context: StampContext) throws -> Matrix? {
         return nil
     }
     
-    func getIMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
+    func getIMatrix(_ context: StampContext) throws -> Matrix? {
         return nil
     }
 }

@@ -28,7 +28,7 @@ final class BBSpiceNonLinearSourceTests: XCTestCase {
     func testACVSGMatrix() throws {
         let source = try ACVS(1, 0, 2, 10, 50)
         
-        let gMatrix = try source.getGMatrix()
+        let gMatrix = try source.getGMatrix(StampContext())
         
         XCTAssertNotNil(gMatrix)
         XCTAssertEqual(gMatrix?.rows, 2)
@@ -40,7 +40,7 @@ final class BBSpiceNonLinearSourceTests: XCTestCase {
         let source = try ACVS(1, 0, 2, 10, 50)
         let period = 1 / source.frequency
         
-        let iMatrix = try source.getIMatrix(period / 4)
+        let iMatrix = try source.getIMatrix(StampContext(time: period / 4))
         
         XCTAssertNotNil(iMatrix)
         XCTAssertEqual(iMatrix?.rows, 2)

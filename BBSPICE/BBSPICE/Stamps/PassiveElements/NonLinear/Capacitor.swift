@@ -16,24 +16,28 @@ class C : TwoNodeStamp {
         try super.init(nodeS, nodeE)
     }
     
-    override func getGMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
-        if h <= 0 || !h.isFinite { throw StampParameterError.parameterError }
+    override func getGMatrix(_ context: StampContext) throws -> Matrix? {
+        if case .op = context.command { return nil }
+        if context.timeStep <= 0 || !context.timeStep.isFinite { throw StampParameterError.parameterError }
         let temp = GMatrix(max(nodeS, nodeE))
+        let conductance = 2 * self.capacitance / context.timeStep
         
-        try temp.add(nodeS, nodeS, 2 * self.capacitance / h)
-        try temp.add(nodeS, nodeE, -2 * self.capacitance / h)
-        try temp.add(nodeE, nodeS, -2 * self.capacitance / h)
-        try temp.add(nodeE, nodeE, 2 * self.capacitance / h)
+        try temp.add(nodeS, nodeS, conductance)
+        try temp.add(nodeS, nodeE, -conductance)
+        try temp.add(nodeE, nodeS, -conductance)
+        try temp.add(nodeE, nodeE, conductance)
         
         return temp
     }
     
-    override func getIMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
-        if h <= 0 || !h.isFinite { throw StampParameterError.parameterError }
+    override func getIMatrix(_ context: StampContext) throws -> Matrix? {
+        if case .op = context.command { return nil }
+        if context.timeStep <= 0 || !context.timeStep.isFinite { throw StampParameterError.parameterError }
         let temp = IMatrix(max(nodeS, nodeE))
+        let current = 2 * self.capacitance / context.timeStep * context.voltage
             
-        try temp.add(nodeS, 2 * self.capacitance / h * v)
-        try temp.add(nodeE, -2 * self.capacitance / h * v)
+        try temp.add(nodeS, current)
+        try temp.add(nodeE, -current)
             
         return temp
     }

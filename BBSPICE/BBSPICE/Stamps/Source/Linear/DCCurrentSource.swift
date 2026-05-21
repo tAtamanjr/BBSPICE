@@ -9,7 +9,7 @@ import Foundation
 
 
 class DCCS : CurrentSource {
-    override func getIMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
+    override func getIMatrix(_ context: StampContext) throws -> Matrix? {
         let temp = IMatrix(max(nodeS, nodeE))
         
         try temp.add(nodeS, -current)

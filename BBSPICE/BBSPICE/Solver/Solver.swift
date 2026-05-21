@@ -19,28 +19,29 @@ class Solver {
     }
     
     private func solveOperationPoint(_ stamps: [Stamp]) throws -> Matrix? {
-        let size = try matrixSize(stamps)
+        let context = StampContext(command: .op)
+        let size = try matrixSize(stamps, context)
         let gMatrix = GMatrix(size)
         let iMatrix = IMatrix(size)
         
         for stamp in stamps {
-            try gMatrix.add(stamp.getGMatrix())
-            try iMatrix.add(stamp.getIMatrix())
+            try gMatrix.add(stamp.getGMatrix(context))
+            try iMatrix.add(stamp.getIMatrix(context))
         }
         
         return try gMatrix.devide(iMatrix)
     }
     
-    private func matrixSize(_ stamps: [Stamp]) throws -> Int {
+    private func matrixSize(_ stamps: [Stamp], _ context: StampContext) throws -> Int {
         if stamps.isEmpty { throw SolverError.emptyStamps }
         
         var size = 0
         
         for stamp in stamps {
-            if let gMatrix = try stamp.getGMatrix() {
+            if let gMatrix = try stamp.getGMatrix(context) {
                 size = max(size, gMatrix.rows)
             }
-            if let iMatrix = try stamp.getIMatrix() {
+            if let iMatrix = try stamp.getIMatrix(context) {
                 size = max(size, iMatrix.rows)
             }
         }

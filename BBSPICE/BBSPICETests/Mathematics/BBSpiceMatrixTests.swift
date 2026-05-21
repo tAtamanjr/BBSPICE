@@ -93,35 +93,36 @@ final class BBSpiceMatrixTests: XCTestCase {
         var matrix1: Matrix?
         var resistor: Stamp?
         var source: Stamp?
+        let context = StampContext()
         
         matrix = GMatrix(2)
         resistor = try R(0, 1, 1)
-        try matrix!.add(resistor!.getGMatrix())
+        try matrix!.add(resistor!.getGMatrix(context))
         matrix!.show()
         
         matrix = GMatrix(2)
         resistor = try R(1, 2, 1)
-        try matrix!.add(resistor!.getGMatrix())
+        try matrix!.add(resistor!.getGMatrix(context))
         matrix!.show()
         
         resistor = try R(2, 3, 1)
-        try matrix1 = resistor!.getGMatrix()
+        try matrix1 = resistor!.getGMatrix(context)
         XCTAssertThrowsError(try matrix!.add(matrix1)) { err in
             XCTAssertEqual(err as? MatrixError, .biggerMatrixToAdd(matrix!.id, matrix1!.id))
         }
         
         matrix = IMatrix(2)
         source = try DCCS(0, 1, 1)
-        try matrix!.add(source!.getIMatrix())
+        try matrix!.add(source!.getIMatrix(context))
         matrix!.show()
         
         matrix = IMatrix(2)
         source = try DCCS(1, 2, 1)
-        try matrix!.add(source!.getIMatrix())
+        try matrix!.add(source!.getIMatrix(context))
         matrix!.show()
         
         source = try DCCS(2, 3, 1)
-        try matrix1 = source!.getIMatrix()
+        try matrix1 = source!.getIMatrix(context)
         XCTAssertThrowsError(try matrix!.add(matrix1)) { err in
             XCTAssertEqual(err as? MatrixError, .biggerMatrixToAdd(matrix!.id, matrix1!.id))
         }

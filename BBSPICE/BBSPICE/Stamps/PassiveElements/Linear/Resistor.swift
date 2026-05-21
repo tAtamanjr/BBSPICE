@@ -17,7 +17,7 @@ class R : TwoNodeStamp {
         try super.init(nodeS, nodeE)
     }
     
-    override func getGMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
+    override func getGMatrix(_ context: StampContext) throws -> Matrix? {
         let temp = GMatrix(max(nodeS, nodeE))
         
         try temp.add(nodeS, nodeS, 1 / resistance)

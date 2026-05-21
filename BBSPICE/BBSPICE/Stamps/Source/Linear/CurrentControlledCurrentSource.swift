@@ -22,7 +22,7 @@ class CCCS : ControlledSource {
         try super.init(nodeWeP, nodeWeM, nodeWyP, nodeWyM)
     }
     
-    override func getGMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
+    override func getGMatrix(_ context: StampContext) throws -> Matrix? {
         let temp: Matrix? = GMatrix(newRow)
         
         try temp!.add(nodeWyP, newRow, gain)
@@ -35,7 +35,7 @@ class CCCS : ControlledSource {
         return temp
     }
     
-    override func getIMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
+    override func getIMatrix(_ context: StampContext) throws -> Matrix? {
         let temp: Matrix? = IMatrix(newRow)
         
         try temp!.add(newRow, inputVoltage)

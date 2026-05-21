@@ -9,7 +9,7 @@ import Foundation
 
 
 class DCVS : VoltageSource {
-    override func getGMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix?  {
+    override func getGMatrix(_ context: StampContext) throws -> Matrix?  {
         let temp = GMatrix(newRow)
         
         try temp.add(nodeS, newRow, 1)
@@ -20,7 +20,7 @@ class DCVS : VoltageSource {
         return temp
     }
     
-    override func getIMatrix(_ h: Double = 0.0, _ v: Double = 0.0) throws -> Matrix? {
+    override func getIMatrix(_ context: StampContext) throws -> Matrix? {
         let temp = IMatrix(newRow)
         
         try temp.add(newRow, amplitude)
