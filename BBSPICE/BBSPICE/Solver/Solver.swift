@@ -9,7 +9,7 @@ import Foundation
 
 
 class Solver {
-    private let maxNewtonRaphsonIterations = 50
+    private let maxNewtonRaphsonIterations = 150
     private let allCloseTolerance = 1e-9
     private let divergenceLimit = 1e4
     
