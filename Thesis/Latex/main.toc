@@ -27,29 +27,31 @@
 \contentsline {section}{\numberline {4.2}Ogólna architektura}{15}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Format pliku wejściowego}{16}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Parser netlisty}{17}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Przypisywanie dodatkowych równań}{17}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Przypisywanie dodatkowych równań}{18}{section.4.5}%
 \contentsline {section}{\numberline {4.6}Reprezentacja elementów i stempli}{18}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Solver i komendy analizy}{18}{section.4.7}%
-\contentsline {section}{\numberline {4.8}Obsługa błędów}{19}{section.4.8}%
-\contentsline {chapter}{\numberline {5}Implementacja}{20}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Struktura kodu}{20}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Parser i wynik parsowania}{20}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Tworzenie stempli}{21}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Macierze}{22}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Solver}{22}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Obsługa błędów w implementacji}{23}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Uwagi implementacyjne}{23}{section.5.7}%
-\contentsline {chapter}{\numberline {6}Testy}{25}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Cel testowania}{25}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Zakres testów}{25}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Testy parsera}{26}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Testy stempli i elementów}{26}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Testy błędów stempli}{27}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Testy solvera i macierzy}{27}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Znaczenie testów dla rozwoju programu}{27}{section.6.7}%
-\contentsline {chapter}{\numberline {7}Podsumowanie}{28}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Wnioski}{28}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Ocena przyjętego podejścia}{28}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Możliwe kierunki rozwoju}{29}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Zakończenie}{29}{section.7.4}%
-\contentsline {chapter}{Bibliografia}{31}{chapter*.9}%
+\contentsline {section}{\numberline {4.7}Solver i komendy analizy}{19}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Obsługa błędów}{20}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Implementacja}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Struktura kodu}{21}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Parser i wynik parsowania}{21}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Tworzenie stempli}{22}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Macierze}{23}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Solver}{24}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Wizualizacja wyników}{24}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Obsługa błędów w implementacji}{25}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Uwagi implementacyjne}{25}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Testy}{26}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Cel testowania}{26}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Zakres testów}{26}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Testy parsera}{27}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Testy stempli i elementów}{28}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Testy błędów stempli}{28}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Testy solvera i macierzy}{29}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Testy wizualizacji}{29}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Znaczenie testów dla rozwoju programu}{29}{section.6.8}%
+\contentsline {chapter}{\numberline {7}Podsumowanie}{30}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Wnioski}{30}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Ocena przyjętego podejścia}{31}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Możliwe kierunki rozwoju}{31}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Zakończenie}{32}{section.7.4}%
+\contentsline {chapter}{Bibliografia}{33}{chapter*.11}%

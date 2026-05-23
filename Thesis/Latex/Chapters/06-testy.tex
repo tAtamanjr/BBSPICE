@@ -21,10 +21,11 @@ Testy zostały podzielone zgodnie z warstwami implementacji. Osobno sprawdzany j
 \toprule
 Grupa testów & Sprawdzany zakres \\
 \midrule
-Parser & rozpoznawanie elementów, komend \texttt{.op}/\texttt{.tran}, liczby parametrów i błędów wejścia \\
-Stemple & poprawność wkładów elementów do macierzy i wektora wymuszeń \\
+Parser & rozpoznawanie elementów, komend analizy, parametrów oraz błędów wejścia \\
+Stemple & poprawność wkładów elementów liniowych, dynamicznych, źródeł i tranzystora BJT \\
 Błędy stempli & reakcja na niepoprawne wartości parametrów elementów \\
-Solver & składanie macierzy globalnej i obliczanie punktu pracy \\
+Solver & składanie macierzy globalnej, obliczanie punktu pracy i analiza czasowa \\
+Plotter & przygotowanie serii punktów napięć węzłowych do wykresu \\
 Macierze & dodawanie wartości, dodawanie macierzy i rozwiązywanie układów liniowych \\
 \bottomrule
 \end{tabularx}
@@ -35,7 +36,7 @@ Taki podział ogranicza ryzyko tworzenia testów zbyt szerokich. Jeżeli test pa
 \section{Testy parsera}
 \label{sec:testy-parsera}
 
-Parser jest testowany zarówno na krótkich opisach zawierających pojedyncze elementy, jak i na pliku zawierającym wszystkie obsługiwane typy elementów. Test z pełnym zestawem elementów sprawdza, czy parser poprawnie rozpoznaje \texttt{R}, \texttt{DCCS}, \texttt{DCVS}, \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS} oraz \texttt{CCVS}. Dodatkowo sprawdzane jest przypisanie dodatkowych indeksów dla elementów wymagających nowych równań.
+Parser jest testowany zarówno na krótkich opisach zawierających pojedyncze elementy, jak i na pliku zawierającym wszystkie obsługiwane typy elementów. Test z pełnym zestawem elementów sprawdza, czy parser poprawnie rozpoznaje \texttt{R}, \texttt{C}, \texttt{DCCS}, \texttt{DCVS}, \texttt{ACVS}, \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS}, \texttt{CCVS} oraz \texttt{BJT}. Dodatkowo sprawdzane jest przypisanie dodatkowych indeksów dla elementów wymagających nowych równań.
 
 \begin{lstlisting}[language=Netlist,caption={Przykładowy plik używany do sprawdzenia parsera},label={lst:test-all-elements}]
 R 1 0 10
@@ -45,17 +46,22 @@ VCCS 1 0 3 0 0.5
 VCVS 1 0 4 0 2
 CCCS 2 0 5 0 3 1
 CCVS 3 0 6 0 4 1
+C 1 2 0.0000001
+ACVS 7 0 2 1000
+BJT 2 3 4 0.000000000001 100 1
 .op
 \end{lstlisting}
 
-Testy błędów parsera obejmują między innymi nieznany element, złą liczbę parametrów, niepoprawny typ parametru, niepoprawne parametry stempla, brak komendy oraz więcej niż jedną komendę analizy. Każdy z tych przypadków jest istotny z punktu widzenia użytkownika, ponieważ parser powinien wskazać linię, w której znajduje się problem.
+Testy błędów parsera obejmują między innymi nieznany element, złą liczbę parametrów, niepoprawny typ parametru, niepoprawne parametry stempla, brak komendy, więcej niż jedną komendę analizy, więcej niż jedną komendę \texttt{.show} oraz użycie \texttt{.show} bez komendy \texttt{.tran}. Każdy z tych przypadków jest istotny z punktu widzenia użytkownika, ponieważ parser powinien wskazać linię, w której znajduje się problem.
 
-Osobno sprawdzana jest komenda \texttt{.tran}. Dzięki temu format wejściowy jest przygotowany nie tylko dla punktu pracy, ale również dla analizy czasowej. Test parsera nie musi w tym miejscu sprawdzać całej symulacji czasowej; wystarczy potwierdzić, że komenda jest rozpoznawana i przekazywana do dalszej warstwy programu.
+Osobno sprawdzana jest komenda \texttt{.tran}, w tym poprawność czasu końcowego i kroku czasowego. Dzięki temu format wejściowy jest przygotowany nie tylko dla punktu pracy, ale również dla analizy czasowej. Test parsera nie musi w tym miejscu sprawdzać całej symulacji czasowej; wystarczy potwierdzić, że komenda jest rozpoznawana i przekazywana do dalszej warstwy programu.
 
 \section{Testy stempli i elementów}
 \label{sec:testy-stempli}
 
 Stemple są testowane przez proste obwody, w których wynik można przewidzieć. Dla rezystorów sprawdzane są układy dzielników i połączeń, dla źródeł niezależnych oraz sterowanych sprawdzane są wartości napięć i prądów po rozwiązaniu układu przez solver. Takie testy w praktyce sprawdzają jednocześnie lokalny stempel elementu i jego wpływ na macierz globalną.
+
+Osobne testy dotyczą elementów dodanych dla analizy czasowej i nieliniowej. Dla źródła \texttt{ACVS} sprawdzana jest wartość wymuszenia sinusoidalnego oraz jego wkład do macierzy. Dla kondensatora testowana jest zależność od kroku czasowego i poprzedniego napięcia. Dla tranzystora \texttt{BJT} sprawdzane są macierze tworzone dla danego kontekstu oraz stabilność obliczeń dla typowego punktu pracy.
 
 W testach elementów nie ma potrzeby sprawdzania szczegółów wewnętrznego numerowania wszystkich wierszy macierzy, jeśli ten mechanizm jest już testowany w parserze i solverze. Ważniejsze jest potwierdzenie, że gotowy układ daje oczekiwany wynik. Dzięki temu testy opisują zachowanie programu, a nie tylko szczegóły implementacji.
 
@@ -64,12 +70,23 @@ W testach elementów nie ma potrzeby sprawdzania szczegółów wewnętrznego num
 
 Błędy parametrów stempli są testowane oddzielnie. Dotyczy to sytuacji, w których dane mają poprawny typ, ale nie mogą zostać użyte przez element. Przykładem jest ujemny numer węzła albo wartość nieskończona podana jako parametr.
 
+Wspólny typ \texttt{StampParameterError} obejmuje trzy sytuacje: ujemny indeks węzła, niepoprawny parametr elementu oraz błąd programistyczny związany z niepoprawnym wewnętrznym indeksem. Testy obejmują między innymi zerową lub nieskończoną wartość parametrów elementów, niepoprawne parametry źródła sinusoidalnego, kondensatora oraz tranzystora.
+
 Oddzielenie tych testów od testów parsera jest korzystne. Parser odpowiada za strukturę pliku, natomiast element odpowiada za sensowność własnych parametrów. Parser może później przekształcić błąd stempla w komunikat zawierający numer linii. Sama decyzja o tym, czy parametr elementu jest poprawny, pozostaje w klasie elementu.
 
 \section{Testy solvera i macierzy}
 \label{sec:testy-solvera}
 
 Testy solvera sprawdzają, czy lista stempli jest poprawnie składana do jednej macierzy globalnej oraz czy wynik rozwiązania odpowiada wartościom oczekiwanym dla prostych obwodów. Przykładem jest obwód z idealnym źródłem napięcia i rezystorem, w którym napięcie węzła można odczytać bezpośrednio z wartości źródła.
+
+Dla analizy czasowej sprawdzany jest wynik \texttt{TransientResult}: liczba próbek, wartości czasu oraz napięcie w prostym układzie ze źródłem sinusoidalnym i rezystorem. Testy błędów solvera obejmują pustą listę stempli, nieobsługiwaną komendę, błędne parametry analizy czasowej, dywergencję numeryczną oraz brak zbieżności metody Newtona-Raphsona.
+
+\section{Testy wizualizacji}
+\label{sec:testy-wizualizacji}
+
+Moduł \texttt{Plotter} jest testowany bez uruchamiania interfejsu użytkownika. Test otrzymuje przygotowany wynik analizy czasowej i sprawdza, czy dla wskazanych węzłów powstają poprawne serie punktów. Osobno sprawdzane są sytuacje błędne, na przykład odwołanie do nieistniejącego węzła albo niespójna liczba próbek czasu i rozwiązań.
+
+Takie podejście pozwala testować logikę przygotowania danych do wykresu bez kosztownego uruchamiania testów interfejsu. Warstwa graficzna pozostaje prosta, ponieważ otrzymuje już gotowe serie punktów.
 
 Testy macierzy sprawdzają operacje niższego poziomu: dodawanie pojedynczych wartości, dodawanie jednej macierzy do drugiej oraz rozwiązywanie układów równań. Jest to ważne, ponieważ błędy w indeksowaniu macierzy prowadziłyby do pozornie poprawnych, ale numerycznie błędnych wyników symulacji.
 

@@ -26,14 +26,14 @@ Na poziomie przepływu danych aplikacja wykonuje następujące kroki:
   \item buduje macierz globalną i oblicza wynik analizy.
 \end{enumerate}
 
-Wynikiem pracy parsera jest struktura zawierająca dwie informacje: tablicę stempli oraz komendę solvera. Dzięki temu parser nie rozpoczyna obliczeń samodzielnie. Jego odpowiedzialność kończy się na przygotowaniu danych wejściowych w formie zrozumiałej dla dalszych części programu.
+Wynikiem pracy parsera jest struktura zawierająca tablicę stempli, komendę solvera oraz listę węzłów, których przebiegi mają zostać pokazane na wykresie. Dzięki temu parser nie rozpoczyna obliczeń samodzielnie. Jego odpowiedzialność kończy się na przygotowaniu danych wejściowych w formie zrozumiałej dla dalszych części programu.
 
 \section{Format pliku wejściowego}
 \label{sec:format-wejsciowy}
 
 Opis obwodu ma postać tekstową zbliżoną do uproszczonej netlisty SPICE. Jedna linia opisuje jeden element albo jedną komendę analizy. W przypadku elementu pierwszy token określa jego typ, kolejne tokeny oznaczają numery węzłów, a ostatnie wartości są parametrami elementu. Węzeł o numerze \texttt{0} pełni rolę węzła odniesienia.
 
-Aktualnie obsługiwane są: rezystor \texttt{R}, niezależne źródło prądowe \texttt{DCCS}, niezależne źródło napięciowe \texttt{DCVS}, źródła sterowane \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS}, \texttt{CCVS} oraz komendy analizy \texttt{.op} i \texttt{.tran}. Komenda \texttt{.op} oznacza analizę punktu pracy, natomiast \texttt{.tran} uruchamia analizę czasową.
+Aktualnie obsługiwane są: rezystor \texttt{R}, kondensator \texttt{C}, niezależne źródło prądowe \texttt{DCCS}, niezależne źródła napięciowe \texttt{DCVS} i \texttt{ACVS}, źródła sterowane \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS}, \texttt{CCVS} oraz tranzystor bipolarny \texttt{BJT}. Komenda \texttt{.op} oznacza analizę punktu pracy, natomiast \texttt{.tran} uruchamia analizę czasową. W przypadku analizy czasowej można dodatkowo użyć komendy \texttt{.show}, która wskazuje węzły przeznaczone do wizualizacji.
 
 \begin{table}[H]
 \centering
@@ -44,12 +44,15 @@ Aktualnie obsługiwane są: rezystor \texttt{R}, niezależne źródło prądowe 
 Oznaczenie & Postać linii & Znaczenie parametrów \\
 \midrule
 \texttt{R} & R n1 n2 R & rezystor między węzłami \texttt{n1} i \texttt{n2} \\
+\texttt{C} & C n1 n2 C & kondensator między węzłami \texttt{n1} i \texttt{n2} \\
 \texttt{DCCS} & DCCS n+ n- I & niezależne źródło prądowe DC \\
 \texttt{DCVS} & DCVS n+ n- V & niezależne źródło napięciowe DC \\
+\texttt{ACVS} & ACVS n+ n- A f & sinusoidalne źródło napięciowe o amplitudzie \texttt{A} i częstotliwości \texttt{f} \\
 \texttt{VCCS} & VCCS in+ in- out+ out- gm & źródło prądowe sterowane napięciem \\
 \texttt{VCVS} & VCVS in+ in- out+ out- A & źródło napięciowe sterowane napięciem \\
 \texttt{CCCS} & CCCS in+ in- out+ out- beta Vx & źródło prądowe sterowane prądem \\
 \texttt{CCVS} & CCVS in+ in- out+ out- Rm Vx & źródło napięciowe sterowane prądem \\
+\texttt{BJT} & BJT b c e Is beta m & tranzystor bipolarny opisany węzłami bazy, kolektora i emitera \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -64,7 +67,25 @@ VCCS 1 0 3 0 0.5
 VCVS 1 0 4 0 2
 CCCS 2 0 5 0 3 1
 CCVS 3 0 6 0 4 1
+C 1 2 0.0000001
+ACVS 7 0 2 1000
+BJT 2 3 4 0.000000000001 100 1
 .op
+\end{lstlisting}
+
+Dla źródeł napięciowych przyjęto konwencję zgodną z równaniami ZMPW: zapis \texttt{DCVS n+ n- V} oznacza warunek \(V_{n+} - V_{n-} = V\). Analogicznie \texttt{ACVS n+ n- A f} oznacza wymuszenie sinusoidalne \(V_{n+} - V_{n-} = A\sin(2\pi f t)\). Konwencja ta jest istotna, ponieważ od kolejności węzłów zależy znak wymuszenia.
+
+\Cref{lst:emitter-follower-netlist} pokazuje netlistę układu wtórnika emiterowego użytego do sprawdzenia analizy czasowej. Węzeł \texttt{1} jest wyjściem źródła sinusoidalnego, węzeł \texttt{2} odpowiada bazie tranzystora, węzeł \texttt{3} kolektorowi, a węzeł \texttt{4} emiterowi. Komenda \texttt{.show 2 4} oznacza, że na wykresie mają zostać pokazane napięcia bazy i emitera.
+
+\begin{lstlisting}[language=Netlist,caption={Opis układu wtórnika emiterowego},label={lst:emitter-follower-netlist}]
+R 3 2 27000
+R 0 4 1000
+ACVS 1 0 2 1000
+DCVS 3 0 5
+C 1 2 0.0000001
+BJT 2 3 4 0.000000000001 100 1
+.tran 0.004 0.00001
+.show 2 4
 \end{lstlisting}
 
 \section{Parser netlisty}
@@ -104,7 +125,21 @@ Istotne jest to, że obiekty elementów nie znają całej netlisty. Otrzymują j
 
 Solver otrzymuje listę stempli oraz komendę analizy. Dla analizy punktu pracy \texttt{.op} tworzy macierz globalną, dodaje do niej wkład każdego stempla i rozwiązuje układ równań liniowych. Wynikiem jest macierz wartości niewiadomych, czyli napięć węzłowych oraz prądów związanych z dodatkowymi równaniami.
 
-Komenda \texttt{.tran} wykorzystuje tę samą ideę składania stempli, ale obliczenia są wykonywane w kolejnych chwilach czasu. Elementy dynamiczne są wtedy zastępowane równoważnymi modelami dyskretnymi zależnymi od kroku czasowego i historii poprzednich stanów. Dzięki wspólnej reprezentacji przez stemple analiza czasowa może korzystać z tej samej warstwy macierzy co punkt pracy.
+Komenda \texttt{.tran} wykorzystuje tę samą ideę składania stempli, ale obliczenia są wykonywane w kolejnych chwilach czasu. Elementy dynamiczne są wtedy zastępowane równoważnymi modelami dyskretnymi zależnymi od kroku czasowego i historii poprzednich stanów. Dzięki wspólnej reprezentacji przez stemple analiza czasowa może korzystać z tej samej warstwy macierzy co punkt pracy. Wynik analizy czasowej może zostać przekazany do modułu wizualizacji, który tworzy serie punktów dla wskazanych węzłów.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{ACVSPlusR.png}
+\caption{Wynik analizy czasowej prostego układu ze źródłem sinusoidalnym i rezystorem}
+\label{fig:acvs-plus-r}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{EmitterFollowerResult.png}
+\caption{Wynik symulacji czasowej wtórnika emiterowego}
+\label{fig:emitter-follower-result}
+\end{figure}
 
 Rozdzielenie parsera i solvera upraszcza dalszy rozwój aplikacji. Parser odpowiada za przekształcenie tekstu na dane programu, natomiast solver odpowiada za interpretację komendy analizy. W przyszłości ta sama struktura może zostać rozszerzona o kolejne polecenia, na przykład analizę małosygnałową albo warianty analizy czasowej z dodatkowymi parametrami kroku i czasu końcowego.
 

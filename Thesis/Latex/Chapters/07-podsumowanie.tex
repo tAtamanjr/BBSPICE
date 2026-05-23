@@ -6,7 +6,7 @@
 
 W pracy przedstawiono projekt i implementację dedykowanej aplikacji do analizy analogowych układów elektronicznych. Podstawą obliczeń jest zmodyfikowana metoda potencjałów węzłowych, która dobrze pasuje do programowej reprezentacji obwodu przez stemple elementów. Każdy element może zostać opisany lokalnie, a następnie jego wkład jest dodawany do globalnego układu równań.
 
-Zrealizowana aplikacja pokazuje pełny przepływ danych od tekstowego opisu układu do wyniku analizy. Parser odczytuje netlistę, rozpoznaje obsługiwane elementy i komendę analizy, tworzy listę stempli oraz przekazuje ją do solvera. Solver składa macierz globalną i wyznacza wartości niewiadomych. Taki podział odpowiedzialności okazał się wygodny zarówno podczas implementacji, jak i podczas pisania testów.
+Zrealizowana aplikacja pokazuje pełny przepływ danych od tekstowego opisu układu do wyniku analizy. Parser odczytuje netlistę, rozpoznaje obsługiwane elementy i komendę analizy, tworzy listę stempli oraz przekazuje ją do solvera. Solver składa macierz globalną i wyznacza wartości niewiadomych, a dla analizy czasowej przygotowuje kolejne próbki rozwiązania. Wyniki mogą zostać następnie przedstawione w postaci wykresu napięć wybranych węzłów. Taki podział odpowiedzialności okazał się wygodny zarówno podczas implementacji, jak i podczas pisania testów.
 
 Istotnym rezultatem pracy jest również przygotowanie struktury programu do dalszego rozwoju. Obsługa elementów nie jest zaszyta bezpośrednio w solverze, lecz wynika z interfejsu stempla. Dzięki temu dodanie kolejnego elementu polega głównie na zdefiniowaniu jego wkładu macierzowego i rozszerzeniu parsera o nowy typ. Podobnie komendy analizy są przekazywane jako osobna informacja, co pozwala rozwijać kolejne tryby obliczeń bez przebudowy formatu danych wewnętrznych.
 
@@ -24,17 +24,17 @@ Ograniczeniem obecnego rozwiązania jest uproszczony format wejściowy. Netlista
 \section{Możliwe kierunki rozwoju}
 \label{sec:kierunki-rozwoju}
 
-Dalszy rozwój programu może obejmować kilka obszarów. Pierwszym z nich jest rozszerzenie biblioteki elementów. Naturalnym kolejnym krokiem są kondensatory, cewki, diody oraz tranzystory. Elementy dynamiczne wymagają modeli zależnych od czasu, natomiast elementy nieliniowe wymagają iteracyjnego wyznaczania punktu pracy, na przykład metodą Newtona-Raphsona.
+Dalszy rozwój programu może obejmować kilka obszarów. Pierwszym z nich jest rozszerzenie biblioteki elementów. Program obsługuje już rezystory, kondensatory, wybrane źródła niezależne i sterowane oraz uproszczony model tranzystora bipolarnego. Naturalnym kolejnym krokiem są cewki, diody, dokładniejsze modele tranzystorów oraz parametry modeli definiowane w pliku wejściowym.
 
-Drugim kierunkiem jest rozbudowa analizy czasowej. Obecna architektura pozwala używać tych samych mechanizmów składania macierzy, ale w kolejnych krokach czasowych. W przyszłości można dodać parametry kroku czasowego, czasu końcowego, warunków początkowych oraz różne metody całkowania numerycznego, na przykład metodę trapezów albo metodę Geara.
+Drugim kierunkiem jest rozbudowa analizy czasowej. Obecna architektura pozwala używać tych samych mechanizmów składania macierzy w kolejnych krokach czasowych, a komenda \texttt{.tran} przyjmuje czas końcowy i krok czasowy. W przyszłości można dodać warunki początkowe, adaptacyjny dobór kroku oraz różne metody całkowania numerycznego, na przykład metodę Geara. Warto również rozwinąć stabilizację metody Newtona-Raphsona przez tłumienie iteracji i bardziej rozbudowane kryteria zbieżności.
 
 Trzecim obszarem jest rozwój formatu wejściowego. Warto dodać obsługę komentarzy, jednostek z przedrostkami, parametrów nazwanych oraz bardziej opisowych komunikatów błędów. Przy większych projektach przydatne byłyby także podukłady i modele elementów definiowane w osobnych sekcjach pliku.
 
-Czwartym kierunkiem jest warstwa użytkownika. Program może zostać rozszerzony o graficzny interfejs do wczytywania plików, uruchamiania analizy i prezentowania wyników. Dla analizy czasowej szczególnie przydatne byłyby wykresy napięć i prądów, eksport danych do plików oraz możliwość porównania kilku przebiegów.
+Czwartym kierunkiem jest warstwa użytkownika. Program zawiera już podstawową prezentację wykresu napięć węzłowych dla analizy czasowej, ale może zostać rozszerzony o graficzny interfejs do wyboru pliku, uruchamiania analizy i zarządzania wynikami. Dla analizy czasowej szczególnie przydatne byłyby eksport danych do plików, możliwość porównania kilku przebiegów oraz wybór obserwowanych wielkości bez ręcznej edycji netlisty.
 
 \section{Zakończenie}
 \label{sec:zakonczenie}
 
 Praca potwierdza, że zmodyfikowana metoda potencjałów węzłowych jest dobrą podstawą do budowy symulatora układów analogowych. Metoda zapewnia przejrzyste przejście od schematu obwodu do układu równań, a reprezentacja przez stemple dobrze przekłada się na strukturę programu.
 
-Zaimplementowany projekt stanowi punkt wyjścia do dalszego rozwoju. Obsługuje podstawowe elementy liniowe, źródła niezależne i sterowane, parser tekstowego opisu obwodu, mechanizm błędów oraz solver. Najważniejsze jest jednak to, że architektura programu pozwala dodawać kolejne elementy i analizy bez porzucania przyjętego modelu obliczeń.
+Zaimplementowany projekt stanowi punkt wyjścia do dalszego rozwoju. Obsługuje podstawowe elementy liniowe, element dynamiczny, wybrane źródła niezależne i sterowane, uproszczony model tranzystora BJT, parser tekstowego opisu obwodu, mechanizm błędów, solver punktu pracy, analizę czasową oraz podstawową wizualizację wyników. Najważniejsze jest jednak to, że architektura programu pozwala dodawać kolejne elementy i analizy bez porzucania przyjętego modelu obliczeń.

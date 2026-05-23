@@ -32,6 +32,7 @@
 \setmainlanguage{polish}
 \setotherlanguage{english}
 \onehalfspacing
+\raggedbottom
 \graphicspath{{figures/}}
 \addbibresource{references.bib}
 \renewcommand{\listfigurename}{Spis rysunków}
@@ -70,7 +71,7 @@
 }
 
 \lstdefinelanguage{Netlist}{
-  morekeywords={R,DCCS,DCVS,CCCS,VCCS,CCVS,VCVS,.op,.tran},
+  morekeywords={R,C,DCCS,DCVS,ACVS,CCCS,VCCS,CCVS,VCVS,BJT,.op,.tran,.show},
   sensitive=true,
   morecomment=[l]{;}
 }
@@ -80,7 +81,7 @@
   backgroundcolor=\color{CodeBackground},
   frame=single,
   rulecolor=\color{CodeFrame},
-  keywordstyle=\color{CodeKeyword}\bfseries,
+  keywordstyle=\color{CodeKeyword},
   stringstyle=\color{CodeString},
   commentstyle=\color{CodeComment},
   columns=fullflexible,

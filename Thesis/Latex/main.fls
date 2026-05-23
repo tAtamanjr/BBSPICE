@@ -2,7 +2,7 @@ PWD /Users/tataman/Documents/Xcode/BBSPICE/Thesis/Latex
 INPUT /usr/local/texlive/2026/texmf.cnf
 INPUT /usr/local/texlive/2026/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2026/texmf-var/web2c/xetex/xelatex.fmt
-INPUT main.tex
+INPUT /Users/tataman/Documents/Xcode/BBSPICE/Thesis/Latex/main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/report.cls
@@ -335,6 +335,10 @@ INPUT ./chapters/04-projekt-programu.tex
 INPUT ./chapters/04-projekt-programu.tex
 INPUT ./chapters/04-projekt-programu.tex
 INPUT chapters/04-projekt-programu.tex
+INPUT ./figures/ACVSPlusR.png
+INPUT ./figures/ACVSPlusR.png
+INPUT ./figures/EmitterFollowerResult.png
+INPUT ./figures/EmitterFollowerResult.png
 INPUT ./chapters/05-implementacja.tex
 INPUT ./chapters/05-implementacja.tex
 INPUT ./chapters/05-implementacja.tex

@@ -21,6 +21,7 @@ Rezultatem parsowania jest struktura zawierająca listę stempli oraz komendę a
 struct ParserResult {
     let stamps: [Stamp]
     let command: SolverCommand
+    let showNodes: [Int]
 }
 \end{lstlisting}
 
@@ -29,12 +30,15 @@ Ważnym elementem parsera jest typ \texttt{ElementType}. Odpowiada on za powiąz
 \begin{lstlisting}[language=Swift,caption={Uproszczona rola typu ElementType},label={lst:element-type}]
 enum ElementType {
     case resistor
+    case capacitor
     case DCCS
     case DCVS
+    case ACVS
     case CCCS
     case VCCS
     case CCVS
     case VCVS
+    case BJT
 }
 \end{lstlisting}
 
@@ -47,15 +51,17 @@ Podstawowym typem wspólnym dla elementów jest \texttt{Stamp}. Udostępnia on m
 
 \begin{lstlisting}[language=Swift,caption={Wspólny interfejs stempla},label={lst:stamp-interface}]
 class Stamp {
-    func getGMatrix() throws -> Matrix? {
+    func getGMatrix(_ context: StampContext) throws -> Matrix? {
         return nil
     }
 
-    func getIMatrix() throws -> Matrix? {
+    func getIMatrix(_ context: StampContext) throws -> Matrix? {
         return nil
     }
 }
 \end{lstlisting}
+
+Argument \texttt{StampContext} przekazuje do elementu informacje potrzebne w danym rodzaju analizy. Dla analizy czasowej zawiera między innymi aktualny czas, krok czasowy, bieżące przybliżenie rozwiązania oraz rozwiązanie z poprzedniego kroku. Dzięki temu ten sam interfejs stempla może obsłużyć elementy liniowe, elementy dynamiczne i elementy nieliniowe.
 
 Dla elementów pasywnych, takich jak rezystor, najważniejsza jest macierz \texttt{G}. Dla niezależnego źródła prądowego zasadniczy wkład trafia do wektora \texttt{I}. Źródła napięciowe i wybrane źródła sterowane wymagają dodatkowego równania, dlatego ich stemple są większe i obejmują dodatkowe wiersze oraz kolumny.
 
@@ -84,8 +90,8 @@ Solver rozpoczyna pracę od wyznaczenia wymaganego rozmiaru macierzy globalnej. 
 
 \begin{lstlisting}[language=Swift,caption={Schemat składania macierzy globalnej},label={lst:solver-assembly}]
 for stamp in stamps {
-    try gMatrix.add(stamp.getGMatrix())
-    try iMatrix.add(stamp.getIMatrix())
+    try gMatrix.add(stamp.getGMatrix(context))
+    try iMatrix.add(stamp.getIMatrix(context))
 }
 \end{lstlisting}
 
@@ -95,16 +101,25 @@ Dla analizy punktu pracy układ ma postać
 \end{equation}
 Po złożeniu macierzy solver rozwiązuje ten układ i zwraca wektor niewiadomych. Wektor zawiera napięcia węzłowe oraz dodatkowe niewiadome wprowadzone przez źródła napięciowe i źródła sterowane prądem.
 
-Analiza czasowa korzysta z tej samej struktury organizacyjnej. Różnica polega na tym, że macierze dla elementów dynamicznych zależą od kroku czasowego i poprzednich stanów układu. Dzięki temu implementacja \texttt{.tran} może wykorzystywać ten sam mechanizm składania macierzy, który jest używany w analizie punktu pracy.
+Analiza czasowa korzysta z tej samej struktury organizacyjnej. Różnica polega na tym, że macierze dla elementów dynamicznych zależą od kroku czasowego i poprzednich stanów układu. Przed rozpoczęciem analizy \texttt{.tran} solver wyznacza punkt pracy, a następnie traktuje go jako warunek początkowy dla pierwszego kroku czasowego.
+
+W przypadku elementów nieliniowych, takich jak tranzystor bipolarny, solver używa iteracji Newtona-Raphsona. W każdej iteracji stemple są obliczane dla aktualnego przybliżenia rozwiązania, a następnie rozwiązywany jest zlinearyzowany układ równań. Proces kończy się po osiągnięciu zadanej tolerancji albo po przekroczeniu maksymalnej liczby iteracji. W aktualnej implementacji limit ustawiono na 150 iteracji, co pozwala stabilnie policzyć testowy układ wtórnika emiterowego.
+
+\section{Wizualizacja wyników}
+\label{sec:implementacja-wizualizacja}
+
+Do prezentacji wyników analizy czasowej dodano prosty moduł \texttt{Plotter}. Nie wykonuje on obliczeń obwodowych, lecz przekształca wynik solvera na serie punktów opisane czasem i napięciem wybranego węzła. Lista węzłów pochodzi z komendy \texttt{.show}, dzięki czemu opis wejściowy decyduje o tym, które przebiegi zostaną pokazane.
+
+Warstwa widoku korzysta z przygotowanych serii i rysuje wykres napięcia w funkcji czasu. Takie rozdzielenie ułatwia dalszy rozwój programu: solver pozostaje odpowiedzialny wyłącznie za obliczenia, a wizualizacja może zostać rozbudowana niezależnie, na przykład o wybór pliku, eksport danych albo porównywanie kilku symulacji.
 
 \section{Obsługa błędów w implementacji}
 \label{sec:implementacja-bledy}
 
-Błędy zostały podzielone na kilka grup. \texttt{ParserError} opisuje problemy z plikiem wejściowym, takie jak nieznany element, zła liczba parametrów, niepoprawny typ parametru, brak komendy albo więcej niż jedna komenda analizy. Każdy błąd parsera związany z konkretną linią zawiera jej numer.
+Błędy zostały podzielone na kilka grup. \texttt{ParserError} opisuje problemy z plikiem wejściowym, takie jak nieznany element, zła liczba parametrów, niepoprawny typ parametru, brak komendy, więcej niż jedna komenda analizy, więcej niż jedna komenda \texttt{.show} albo użycie \texttt{.show} bez analizy czasowej. Każdy błąd parsera związany z konkretną linią zawiera jej numer.
 
 \texttt{StampParameterError} opisuje problemy wykryte przez elementy. Przykładem jest ujemny indeks węzła albo wartość parametru, której nie można użyć w obliczeniach. Parser przechwytuje takie błędy i zamienia je na informację diagnostyczną odnoszącą się do linii pliku. Dzięki temu użytkownik otrzymuje komunikat związany z wejściem, a kod elementów nie musi znać kontekstu tekstowego.
 
-Osobną grupę tworzą błędy macierzy, na przykład przekroczenie rozmiaru macierzy, niezgodne wymiary albo błąd rozwiązania układu. Są to błędy niższego poziomu, które nie wynikają bezpośrednio ze składni netlisty, lecz z niepoprawnego albo osobliwego układu równań.
+Osobną grupę tworzą błędy solvera i macierzy. Solver zgłasza między innymi pustą listę stempli, nieobsługiwaną komendę, niepoprawne parametry analizy czasowej, dywergencję numeryczną oraz brak zbieżności Newtona-Raphsona. Błędy macierzy obejmują na przykład przekroczenie rozmiaru macierzy, niezgodne wymiary albo błąd rozwiązania układu.
 
 \section{Uwagi implementacyjne}
 \label{sec:uwagi-implementacyjne}
