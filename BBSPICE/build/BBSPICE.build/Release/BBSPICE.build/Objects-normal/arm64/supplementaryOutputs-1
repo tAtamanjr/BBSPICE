@@ -1,0 +1,12 @@
+{
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Mathematics/Matrix/LU.swift" : {
+    "abi-baseline-json" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE.abi.json",
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE-primary.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE-primary.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE-primary.dia",
+    "objc-header" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE-Swift.h",
+    "swiftdoc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE.swiftdoc",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE.swiftmodule",
+    "swiftsourceinfo" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/arm64/BBSPICE.swiftsourceinfo"
+  }
+}

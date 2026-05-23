@@ -1,0 +1,30 @@
+{
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Mathematics/Matrix.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Matrix.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Matrix.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Matrix.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Matrix.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Matrix.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Mathematics/Matrix/LU.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/LU-2afa414d92578c6cb93a363effc3859f.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/LU-2afa414d92578c6cb93a363effc3859f.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/LU-2afa414d92578c6cb93a363effc3859f.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/LU-2afa414d92578c6cb93a363effc3859f.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/LU-2afa414d92578c6cb93a363effc3859f.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Parser/ElementType.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ElementType.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ElementType.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ElementType.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ElementType.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ElementType.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Parser/Parser.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Parser.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Parser.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Parser.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Parser.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Parser.swiftdeps"
+  }
+}

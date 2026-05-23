@@ -8,7 +8,7 @@
 import Foundation
 
 
-nonisolated enum SolverCommand {
+nonisolated enum SolverCommand: Equatable {
     case op
-    case tran
+    case tran(time: Double, timeStep: Double)
 }

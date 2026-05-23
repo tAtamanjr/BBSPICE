@@ -93,15 +93,34 @@ final class BBSpiceParserTests: XCTestCase {
         XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5"))) { err in
             XCTAssertEqual(err as? ParserError, .missingCommand)
         }
-        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.op\n.tran"))) { err in
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.op\n.tran 1 0.1"))) { err in
             XCTAssertEqual(err as? ParserError, .multipleCommands(3))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.tran 1"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongParametersCount(2))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.tran 1 0"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongStampParameters(2))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.tran one 0.1"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongParameterType(2))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.op\n.show 1"))) { err in
+            XCTAssertEqual(err as? ParserError, .showWithoutTransient(3))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.tran 1 0.1\n.show 1\n.show 2"))) { err in
+            XCTAssertEqual(err as? ParserError, .multipleShowCommands(4))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 2 5\n.tran 1 0.1\n.show two"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongParameterType(3))
         }
     }
     
     func testTransientCommand() throws {
-        let result = try Parser().parse(makeTestFile("R 1 2 5\n.tran"))
+        let result = try Parser().parse(makeTestFile("R 1 2 5\n.tran 1 0.1\n.show 1 2"))
         
-        XCTAssertEqual(result.command, .tran)
+        XCTAssertEqual(result.command, .tran(time: 1, timeStep: 0.1))
+        XCTAssertEqual(result.showNodes, [1, 2])
         XCTAssert(result.stamps.count == 1)
         XCTAssert(result.stamps[0] is R)
     }

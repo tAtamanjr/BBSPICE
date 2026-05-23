@@ -1,0 +1,23 @@
+{
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/VoltageControlledCurrentSource.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/VoltageControlledVoltageSource.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/NonLinear/ACVoltageSource.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.swiftdeps"
+  }
+}

@@ -14,6 +14,8 @@ class Parser {
         var lines: [ParserLine] = []
         var stamps: [Stamp] = []
         var command: SolverCommand?
+        var showNodes: [Int] = []
+        var showLineNumber: Int?
         var nodeCount = 0
         
         for (index, line) in text.components(separatedBy: .newlines).enumerated() {
@@ -22,6 +24,12 @@ class Parser {
             guard let firstToken = tokens.first else { continue }
             
             if firstToken.hasPrefix("*") { continue }
+            if firstToken == ".show" {
+                if showLineNumber != nil { throw ParserError.multipleShowCommands(lineNumber) }
+                showNodes = try parseShow(tokens, lineNumber)
+                showLineNumber = lineNumber
+                continue
+            }
             if let parsedCommand = try parseCommand(tokens, lineNumber) {
                 if command != nil { throw ParserError.multipleCommands(lineNumber) }
                 command = parsedCommand
@@ -68,12 +76,19 @@ class Parser {
             case .VCVS:
                 newRowAmount += 1
                 stamps.append(try makeVCVS(line.tokens, line.lineNumber, nodeCount + newRowAmount))
+            case .BJT:
+                stamps.append(try makeBJT(line.tokens, line.lineNumber))
             }
         }
         
         guard let command else { throw ParserError.missingCommand }
+        if showLineNumber != nil {
+            if case .tran = command {} else {
+                throw ParserError.showWithoutTransient(showLineNumber!)
+            }
+        }
         
-        return ParserResult(stamps, command)
+        return ParserResult(stamps, command, showNodes)
     }
     
     private func makeResistor(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
@@ -201,6 +216,21 @@ class Parser {
         }
     }
     
+    private func makeBJT(_ tokens: [String], _ lineNumber: Int) throws -> Stamp {
+        do {
+            return try BJT(
+                parseInt(tokens[1], lineNumber),
+                parseInt(tokens[2], lineNumber),
+                parseInt(tokens[3], lineNumber),
+                parseDouble(tokens[4], lineNumber),
+                parseDouble(tokens[5], lineNumber),
+                parseDouble(tokens[6], lineNumber)
+            )
+        } catch let error as StampParameterError {
+            throw parserError(error, lineNumber)
+        }
+    }
+    
     private func parseInt(_ token: String, _ lineNumber: Int) throws -> Int {
         guard let value = Int(token) else { throw ParserError.wrongParameterType(lineNumber) }
         return value
@@ -217,11 +247,30 @@ class Parser {
             if tokens.count != 1 { throw ParserError.wrongParametersCount(lineNumber) }
             return .op
         case ".tran":
-            if tokens.count != 1 { throw ParserError.wrongParametersCount(lineNumber) }
-            return .tran
+            if tokens.count != 3 { throw ParserError.wrongParametersCount(lineNumber) }
+            let time = try parseDouble(tokens[1], lineNumber)
+            let timeStep = try parseDouble(tokens[2], lineNumber)
+            if time <= 0 || timeStep <= 0 || timeStep > time || !time.isFinite || !timeStep.isFinite {
+                throw ParserError.wrongStampParameters(lineNumber)
+            }
+            return .tran(time: time, timeStep: timeStep)
         default:
             return nil
         }
+    }
+    
+    private func parseShow(_ tokens: [String], _ lineNumber: Int) throws -> [Int] {
+        if tokens.count < 2 { throw ParserError.wrongParametersCount(lineNumber) }
+        
+        var nodes: [Int] = []
+        
+        for token in tokens.dropFirst() {
+            let node = try parseInt(token, lineNumber)
+            if node < 0 { throw ParserError.wrongStampParameters(lineNumber) }
+            nodes.append(node)
+        }
+        
+        return nodes
     }
     
     private func parserError(_ error: StampParameterError, _ lineNumber: Int) -> ParserError {
@@ -237,10 +286,12 @@ class Parser {
 struct ParserResult {
     let stamps: [Stamp]
     let command: SolverCommand
+    let showNodes: [Int]
     
-    init(_ stamps: [Stamp], _ command: SolverCommand) {
+    init(_ stamps: [Stamp], _ command: SolverCommand, _ showNodes: [Int] = []) {
         self.stamps = stamps
         self.command = command
+        self.showNodes = showNodes
     }
 }
 

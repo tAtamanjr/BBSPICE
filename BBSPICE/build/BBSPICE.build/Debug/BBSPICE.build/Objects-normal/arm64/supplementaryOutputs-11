@@ -1,0 +1,30 @@
+{
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/ActiveElements/BJT.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/BJT.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/BJT.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/BJT.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/BJT.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/BJT.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/Context.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Context.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Context.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Context.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Context.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Context.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/Stamp.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Stamp.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Stamp.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Stamp.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Stamp.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Stamp.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/ThreeNodeStamp.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.swiftdeps"
+  }
+}

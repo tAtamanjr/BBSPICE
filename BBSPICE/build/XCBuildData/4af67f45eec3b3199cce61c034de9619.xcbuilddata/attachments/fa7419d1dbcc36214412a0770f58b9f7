@@ -1,0 +1,109 @@
+{
+  "" : {
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.dia",
+    "emit-module-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary-emit-module.dia",
+    "pch" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Mathematics/BBSpiceLUDivisionTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Mathematics/BBSpiceMatrixTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Parser/BBSpiceParserTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Solver/BBSpiceSolverTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/AcriveElements/BBSpiceActiveElementsTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/BBSpiceStampErrorTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/PassiveElements/Linear/BBSpiceLinearPassiveElementsTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/PassiveElements/NonLinear/BBSpiceNonLinearPassiveElementsTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/Source/Linear/BBSpiceLinearSourceTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/Source/NonLinear/BBSpiceNonLinearSourceTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Debug/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests~partial.swiftmodule"
+  }
+}

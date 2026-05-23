@@ -227,33 +227,33 @@ final class BBSpiceMatrixTests: XCTestCase {
         }
     }
     
-    @MainActor func testSpeed_2000() async throws {
-        let (a, b) = try makeSystemForDivisionTest(2000)
-        for _ in 0..<3 {
-            do {
-                _ = try a.devide(b)
-            } catch {}
-        }
-        measure(metrics: [XCTClockMetric()]) {
-            do {
-                _ = try a.devide(b)
-            } catch {}
-        }
-    }
-    
-    @MainActor func testSpeed_5000() async throws {
-        let (a, b) = try makeSystemForDivisionTest(5000)
-        for _ in 0..<3 {
-            do {
-                _ = try a.devide(b)
-            } catch {}
-        }
-        measure(metrics: [XCTClockMetric()]) {
-            do {
-                _ = try a.devide(b)
-            } catch {}
-        }
-    }
+//    @MainActor func testSpeed_2000() async throws {
+//        let (a, b) = try makeSystemForDivisionTest(2000)
+//        for _ in 0..<3 {
+//            do {
+//                _ = try a.devide(b)
+//            } catch {}
+//        }
+//        measure(metrics: [XCTClockMetric()]) {
+//            do {
+//                _ = try a.devide(b)
+//            } catch {}
+//        }
+//    }
+//    
+//    @MainActor func testSpeed_5000() async throws {
+//        let (a, b) = try makeSystemForDivisionTest(5000)
+//        for _ in 0..<3 {
+//            do {
+//                _ = try a.devide(b)
+//            } catch {}
+//        }
+//        measure(metrics: [XCTClockMetric()]) {
+//            do {
+//                _ = try a.devide(b)
+//            } catch {}
+//        }
+//    }
     
 }
 

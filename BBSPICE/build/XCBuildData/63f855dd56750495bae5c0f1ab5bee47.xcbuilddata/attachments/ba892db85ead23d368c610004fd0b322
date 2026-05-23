@@ -1,0 +1,61 @@
+{
+  "" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.dia",
+    "emit-module-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary-emit-module.dia",
+    "pch" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Mathematics/BBSpiceLUDivisionTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLUDivisionTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Mathematics/BBSpiceMatrixTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceMatrixTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Parser/BBSpiceParserTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceParserTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Solver/BBSpiceSolverTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceSolverTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/AcriveElements/BBSpiceActiveElementsTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceActiveElementsTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/BBSpiceStampErrorTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceStampErrorTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/PassiveElements/Linear/BBSpiceLinearPassiveElementsTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearPassiveElementsTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/PassiveElements/NonLinear/BBSpiceNonLinearPassiveElementsTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearPassiveElementsTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/Source/Linear/BBSpiceLinearSourceTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceLinearSourceTests.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/Source/NonLinear/BBSpiceNonLinearSourceTests.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSpiceNonLinearSourceTests.o"
+  }
+}

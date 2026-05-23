@@ -34,7 +34,8 @@ class C : TwoNodeStamp {
         if case .op = context.command { return nil }
         if context.timeStep <= 0 || !context.timeStep.isFinite { throw StampParameterError.parameterError }
         let temp = IMatrix(max(nodeS, nodeE))
-        let current = 2 * self.capacitance / context.timeStep * context.voltage
+        let voltage = context.previousSolution == nil ? context.voltage : context.previousVoltage(nodeS) - context.previousVoltage(nodeE)
+        let current = 2 * self.capacitance / context.timeStep * voltage
             
         try temp.add(nodeS, current)
         try temp.add(nodeE, -current)

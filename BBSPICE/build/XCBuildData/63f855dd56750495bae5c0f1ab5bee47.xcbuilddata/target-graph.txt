@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'BBSPICETests' in project 'BBSPICE'
+➜ Explicit dependency on target 'BBSPICE' in project 'BBSPICE'
+Target 'BBSPICE' in project 'BBSPICE' (no dependencies)

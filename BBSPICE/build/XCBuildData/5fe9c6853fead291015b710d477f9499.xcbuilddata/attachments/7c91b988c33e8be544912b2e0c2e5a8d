@@ -1,0 +1,151 @@
+{
+  "" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICE-primary.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICE-primary.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICE-primary.dia",
+    "emit-module-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICE-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICE-primary-emit-module.dia",
+    "pch" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICE-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICE-primary.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/BBSPICEApp.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICEApp.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICEApp.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BBSPICEApp.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/ContentView.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ContentView.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ContentView.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ContentView.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Mathematics/Matrix.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Matrix.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Matrix.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Matrix.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Mathematics/Matrix/LU.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/LU-2afa414d92578c6cb93a363effc3859f.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/LU-2afa414d92578c6cb93a363effc3859f.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/LU-2afa414d92578c6cb93a363effc3859f.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Parser/ElementType.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ElementType.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ElementType.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ElementType.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Parser/Parser.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Parser.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Parser.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Parser.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Parser/ParserError.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ParserError.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ParserError.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ParserError.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Solver/Solver.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Solver.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Solver.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Solver.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Solver/SolverCommand.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/SolverCommand.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/SolverCommand.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/SolverCommand.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Solver/SolverError.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/SolverError.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/SolverError.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/SolverError.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/ActiveElements/BJT.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BJT.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BJT.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/BJT.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/Context.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Context.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Context.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Context.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/Stamp.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Stamp.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Stamp.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Stamp.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/ThreeNodeStamp.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ThreeNodeStamp.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ThreeNodeStamp.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ThreeNodeStamp.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/TwoNodeStamp.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/TwoNodeStamp.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/TwoNodeStamp.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/TwoNodeStamp.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/PassiveElements/Linear/Resistor.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Resistor.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Resistor.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Resistor.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/PassiveElements/NonLinear/Capacitor.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Capacitor.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Capacitor.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/Capacitor.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/CurrentControlledCurrentSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentControlledCurrentSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentControlledCurrentSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentControlledCurrentSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/CurrentControlledVoltageSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentControlledVoltageSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentControlledVoltageSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentControlledVoltageSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/DCCurrentSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/DCCurrentSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/DCCurrentSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/DCCurrentSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/DCVoltageSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/DCVoltageSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/DCVoltageSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/DCVoltageSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/VoltageControlledCurrentSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageControlledCurrentSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Linear/VoltageControlledVoltageSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageControlledVoltageSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/NonLinear/ACVoltageSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ACVoltageSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Other/ControlledSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ControlledSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ControlledSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/ControlledSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Other/CurrentSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/CurrentSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Source/Other/VoltageSource.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageSource.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageSource.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/VoltageSource.o"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICE.build/Objects-normal/x86_64/GeneratedAssetSymbols.o"
+  }
+}

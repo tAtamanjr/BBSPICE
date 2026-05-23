@@ -34,6 +34,18 @@ final class BBSpiceStampErrorTests: XCTestCase {
         XCTAssertThrowsError(try ACVS(1, 0, 2, 1, Double.infinity)) { err in
             XCTAssertEqual(err as? StampParameterError, .parameterError)
         }
+        XCTAssertThrowsError(try BJT(1, 2, 3, 0, 100, 1)) { err in
+            XCTAssertEqual(err as? StampParameterError, .parameterError)
+        }
+        XCTAssertThrowsError(try BJT(1, 2, 3, 1e-12, 0, 1)) { err in
+            XCTAssertEqual(err as? StampParameterError, .parameterError)
+        }
+        XCTAssertThrowsError(try BJT(1, 2, 3, 1e-12, 100, 0)) { err in
+            XCTAssertEqual(err as? StampParameterError, .parameterError)
+        }
+        XCTAssertThrowsError(try BJT(1, 2, 3, Double.infinity, 100, 1)) { err in
+            XCTAssertEqual(err as? StampParameterError, .parameterError)
+        }
         XCTAssertThrowsError(try C(1, 2, 1).getGMatrix(StampContext(timeStep: 0))) { err in
             XCTAssertEqual(err as? StampParameterError, .parameterError)
         }
@@ -50,6 +62,9 @@ final class BBSpiceStampErrorTests: XCTestCase {
             XCTAssertEqual(err as? StampParameterError, .negativeNodeIndex)
         }
         XCTAssertThrowsError(try C(-1, 2, 1)) { err in
+            XCTAssertEqual(err as? StampParameterError, .negativeNodeIndex)
+        }
+        XCTAssertThrowsError(try BJT(-1, 2, 3, 1e-12, 100, 1)) { err in
             XCTAssertEqual(err as? StampParameterError, .negativeNodeIndex)
         }
     }

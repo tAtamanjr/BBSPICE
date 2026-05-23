@@ -14,6 +14,8 @@ enum ParserError : Error, Equatable, CustomStringConvertible {
     case wrongStampParameters(_ line: Int)
     case missingCommand
     case multipleCommands(_ line: Int)
+    case multipleShowCommands(_ line: Int)
+    case showWithoutTransient(_ line: Int)
     case programFail(_ line: Int)
     
     var description: String {
@@ -30,6 +32,10 @@ enum ParserError : Error, Equatable, CustomStringConvertible {
             return "Parser: Missing command"
         case let .multipleCommands(line):
             return "Parser: Multiple commands at line \(line)"
+        case let .multipleShowCommands(line):
+            return "Parser: Multiple show commands at line \(line)"
+        case let .showWithoutTransient(line):
+            return "Parser: Show command without transient simulation at line \(line)"
         case let .programFail(line):
             return "Parser: Program failed at line \(line)"
         }

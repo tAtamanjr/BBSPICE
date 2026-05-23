@@ -17,6 +17,7 @@ enum ElementType {
     case VCCS
     case CCVS
     case VCVS
+    case BJT
     
     init(_ rawValue: String, _ lineNumber: Int) throws {
         switch rawValue {
@@ -38,6 +39,8 @@ enum ElementType {
             self = .CCVS
         case "VCVS":
             self = .VCVS
+        case "BJT":
+            self = .BJT
         default:
             throw ParserError.unknownElement(lineNumber)
         }
@@ -53,6 +56,8 @@ enum ElementType {
             return 6
         case .CCCS, .CCVS:
             return 7
+        case .BJT:
+            return 7
         }
     }
     
@@ -62,6 +67,8 @@ enum ElementType {
             return [1, 2]
         case .CCCS, .VCCS, .CCVS, .VCVS:
             return [1, 2, 3, 4]
+        case .BJT:
+            return [1, 2, 3]
         }
     }
 }

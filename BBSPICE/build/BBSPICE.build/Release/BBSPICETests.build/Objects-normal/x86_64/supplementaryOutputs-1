@@ -1,0 +1,12 @@
+{
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Mathematics/BBSpiceLUDivisionTests.swift" : {
+    "abi-baseline-json" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests.abi.json",
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-primary.dia",
+    "objc-header" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests-Swift.h",
+    "swiftdoc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests.swiftdoc",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests.swiftmodule",
+    "swiftsourceinfo" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/BBSPICE.build/Release/BBSPICETests.build/Objects-normal/x86_64/BBSPICETests.swiftsourceinfo"
+  }
+}

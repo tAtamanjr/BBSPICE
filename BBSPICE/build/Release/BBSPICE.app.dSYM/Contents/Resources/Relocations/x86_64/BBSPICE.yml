@@ -1,0 +1,5 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Release/BBSPICE.app/Contents/MacOS/BBSPICE'
+relocations:     []
+...
