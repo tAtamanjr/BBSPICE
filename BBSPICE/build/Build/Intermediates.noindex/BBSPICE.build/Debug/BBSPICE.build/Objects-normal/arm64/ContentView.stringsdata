@@ -1,0 +1,96 @@
+{
+  "source": "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "BBSPICE",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "Circuit description",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 126
+        }
+      },
+      {
+        "comment": "",
+        "key": "Run Simulation",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 134
+        }
+      },
+      {
+        "comment": "",
+        "key": "R 1 0 1000\nDCVS 1 0 5\n.op",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 150
+        }
+      },
+      {
+        "comment": "",
+        "key": "Drop .txt file",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 189
+        }
+      },
+      {
+        "comment": "",
+        "key": "File content will replace the circuit description.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 192
+        }
+      },
+      {
+        "comment": "",
+        "key": "BBSPICE",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 216
+        }
+      },
+      {
+        "comment": "",
+        "key": "Back",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 228
+        }
+      },
+      {
+        "comment": "",
+        "key": "x%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 254
+        }
+      },
+      {
+        "comment": "",
+        "key": "time",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 374
+        }
+      },
+      {
+        "comment": "",
+        "key": "Node %lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 312
+        }
+      }
+    ]
+  },
+  "version": 1
+}

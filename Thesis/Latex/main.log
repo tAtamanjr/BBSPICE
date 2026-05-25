@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.19)  23 MAY 2026 19:51
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.19)  25 MAY 2026 20:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1116,24 +1116,29 @@ Rozdział 3.
 Rozdział 4.
 [15
 
-] [16] [17] [18]
+]
+File: figures/MainView.png Graphic file (type bmp)
+<figures/MainView.png>
+ [16] [17] [18] [19]
+File: figures/OPResultView.png Graphic file (type bmp)
+<figures/OPResultView.png>
 File: figures/ACVSPlusR.png Graphic file (type bmp)
 <figures/ACVSPlusR.png>
 File: figures/EmitterFollowerResult.png Graphic file (type bmp)
 <figures/EmitterFollowerResult.png>
- [19]) (./chapters/05-implementacja.tex [20]
+ [20]) (./chapters/05-implementacja.tex [21]
 Rozdział 5.
-[21
+[22
 
-] [22] [23] [24]) (./chapters/06-testy.tex [25]
+] [23] [24] [25]) (./chapters/06-testy.tex [26]
 Rozdział 6.
-[26
+[27
 
-] [27] [28]) (./chapters/07-podsumowanie.tex [29]
+] [28] [29]) (./chapters/07-podsumowanie.tex [30]
 Rozdział 7.
-[30
+[31
 
-] [31]) [32] [33
+] [32]) [33] [34
 
 ] (./main.aux)
  ***********
@@ -1145,12 +1150,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31003 strings out of 468168
- 661755 string characters out of 5432815
- 1730132 words of memory out of 5000000
- 59347 multiletter control sequences out of 15000+600000
+ 31031 strings out of 468168
+ 662444 string characters out of 5432815
+ 1721555 words of memory out of 5000000
+ 59373 multiletter control sequences out of 15000+600000
  633054 words of font info for 100 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  78i,10n,96p,1249b,4953s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (38 pages, 698548 bytes).
+Output written on main.xdv (39 pages, 728444 bytes).

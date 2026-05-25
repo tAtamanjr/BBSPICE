@@ -1,0 +1,30 @@
+{
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/ThreeNodeStamp.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/ThreeNodeStamp.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/Other/TwoNodeStamp.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/TwoNodeStamp.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/TwoNodeStamp.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/TwoNodeStamp.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/TwoNodeStamp.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/TwoNodeStamp.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/PassiveElements/Linear/Resistor.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Resistor.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Resistor.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Resistor.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Resistor.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Resistor.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICE/Stamps/PassiveElements/NonLinear/Capacitor.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Capacitor.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Capacitor.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Capacitor.dia",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Capacitor.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICE.build/Objects-normal/arm64/Capacitor.swiftdeps"
+  }
+}

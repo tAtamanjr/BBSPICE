@@ -25,33 +25,33 @@
 \contentsline {chapter}{\numberline {4}Założenia i architektura aplikacji}{15}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Założenia projektowe}{15}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Ogólna architektura}{15}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Format pliku wejściowego}{16}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Parser netlisty}{17}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Przypisywanie dodatkowych równań}{18}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Reprezentacja elementów i stempli}{18}{section.4.6}%
+\contentsline {section}{\numberline {4.3}Format pliku wejściowego}{17}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Parser netlisty}{18}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Przypisywanie dodatkowych równań}{19}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Reprezentacja elementów i stempli}{19}{section.4.6}%
 \contentsline {section}{\numberline {4.7}Solver i komendy analizy}{19}{section.4.7}%
-\contentsline {section}{\numberline {4.8}Obsługa błędów}{20}{section.4.8}%
-\contentsline {chapter}{\numberline {5}Implementacja}{21}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Struktura kodu}{21}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Parser i wynik parsowania}{21}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Tworzenie stempli}{22}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Macierze}{23}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Solver}{24}{section.5.5}%
-\contentsline {section}{\numberline {5.6}Wizualizacja wyników}{24}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Obsługa błędów w implementacji}{25}{section.5.7}%
-\contentsline {section}{\numberline {5.8}Uwagi implementacyjne}{25}{section.5.8}%
-\contentsline {chapter}{\numberline {6}Testy}{26}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Cel testowania}{26}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Zakres testów}{26}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Testy parsera}{27}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Testy stempli i elementów}{28}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Testy błędów stempli}{28}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Testy solvera i macierzy}{29}{section.6.6}%
-\contentsline {section}{\numberline {6.7}Testy wizualizacji}{29}{section.6.7}%
-\contentsline {section}{\numberline {6.8}Znaczenie testów dla rozwoju programu}{29}{section.6.8}%
-\contentsline {chapter}{\numberline {7}Podsumowanie}{30}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Wnioski}{30}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Ocena przyjętego podejścia}{31}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Możliwe kierunki rozwoju}{31}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Zakończenie}{32}{section.7.4}%
-\contentsline {chapter}{Bibliografia}{33}{chapter*.11}%
+\contentsline {section}{\numberline {4.8}Obsługa błędów}{21}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Implementacja}{22}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Struktura kodu}{22}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Parser i wynik parsowania}{22}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Tworzenie stempli}{23}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Macierze}{24}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Solver}{25}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Interfejs użytkownika i wizualizacja wyników}{25}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Obsługa błędów w implementacji}{26}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Uwagi implementacyjne}{26}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Testy}{27}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Cel testowania}{27}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Zakres testów}{27}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Testy parsera}{28}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Testy stempli i elementów}{29}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Testy błędów stempli}{29}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Testy solvera i macierzy}{30}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Testy wizualizacji}{30}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Znaczenie testów dla rozwoju programu}{30}{section.6.8}%
+\contentsline {chapter}{\numberline {7}Podsumowanie}{31}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Wnioski}{31}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Ocena przyjętego podejścia}{32}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Możliwe kierunki rozwoju}{32}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Zakończenie}{33}{section.7.4}%
+\contentsline {chapter}{Bibliografia}{34}{chapter*.13}%

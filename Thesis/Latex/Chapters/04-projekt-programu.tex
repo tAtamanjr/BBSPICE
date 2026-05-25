@@ -6,27 +6,37 @@
 
 Celem części programistycznej pracy jest przygotowanie aplikacji, która pozwala przejść od prostego opisu tekstowego obwodu do wyniku analizy numerycznej. Program nie jest traktowany jako uniwersalny zamiennik rozbudowanych środowisk SPICE, lecz jako dedykowane narzędzie pokazujące, w jaki sposób metoda ZMPW może zostać zaimplementowana w natywnej aplikacji napisanej w języku Swift.
 
-Najważniejsze założenie projektowe polega na oddzieleniu opisu obwodu od sposobu jego rozwiązania. Użytkownik zapisuje układ w pliku tekstowym, a aplikacja przekształca ten opis na obiekty reprezentujące stemple elementów. Dopiero tak przygotowana lista stempli jest przekazywana do solvera, który buduje macierz globalną i wyznacza wynik wybranej analizy.
+Najważniejsze założenie projektowe polega na oddzieleniu opisu obwodu od sposobu jego rozwiązania. Użytkownik może wpisać układ bezpośrednio w głównym oknie programu albo przeciągnąć do niego plik tekstowy z netlistą. Aplikacja przekształca ten opis na obiekty reprezentujące stemple elementów. Dopiero tak przygotowana lista stempli jest przekazywana do solvera, który buduje macierz globalną i wyznacza wynik wybranej analizy.
 
 Takie podejście pozwala rozwijać program stopniowo. Dodanie nowego elementu wymaga zdefiniowania jego stempla oraz rozszerzenia warstwy parsera o regułę rozpoznawania nowego oznaczenia. Sam solver nie musi znać nazw elementów ani formatu pliku wejściowego, ponieważ operuje wyłącznie na macierzach zwracanych przez stemple.
 
 \section{Ogólna architektura}
 \label{sec:ogolna-architektura}
 
-Program został podzielony na kilka warstw odpowiedzialności. Pierwszą z nich jest parser pliku wejściowego. Jego zadaniem jest odczytanie kolejnych linii, rozpoznanie typu elementu, sprawdzenie liczby parametrów oraz utworzenie listy obiektów typu \texttt{Stamp}. Drugą warstwę tworzą klasy elementów obwodu, na przykład rezystor, źródła niezależne i źródła sterowane. Każdy z tych elementów zwraca lokalny wkład do macierzy przewodności oraz do wektora wymuszeń. Trzecią warstwą jest solver, który sumuje wszystkie stemple i rozwiązuje powstały układ równań.
+Program został podzielony na kilka warstw odpowiedzialności. Pierwszą z nich jest interfejs użytkownika, który udostępnia edytor opisu obwodu, obsługę przeciągania plików \texttt{.txt} oraz przycisk uruchamiający symulację. Drugą warstwą jest parser tekstu wejściowego. Jego zadaniem jest odczytanie kolejnych linii, rozpoznanie typu elementu, sprawdzenie liczby parametrów oraz utworzenie listy obiektów typu \texttt{Stamp}. Trzecią warstwę tworzą klasy elementów obwodu, na przykład rezystor, źródła niezależne i źródła sterowane. Każdy z tych elementów zwraca lokalny wkład do macierzy przewodności oraz do wektora wymuszeń. Czwartą warstwą jest solver, który sumuje wszystkie stemple i rozwiązuje powstały układ równań.
 
 Na poziomie przepływu danych aplikacja wykonuje następujące kroki:
 
 \begin{enumerate}
-  \item odczytuje tekstowy opis obwodu z pliku,
-  \item dzieli plik na linie i tokeny,
+  \item pobiera tekstowy opis obwodu z edytora albo z przeciągniętego pliku,
+  \item dzieli opis na linie i tokeny,
   \item rozpoznaje typy elementów oraz komendę analizy,
   \item tworzy obiekty stempli i przypisuje dodatkowe indeksy równań,
   \item przekazuje listę stempli oraz komendę do solvera,
-  \item buduje macierz globalną i oblicza wynik analizy.
+  \item buduje macierz globalną i oblicza wynik analizy,
+  \item prezentuje wynik punktu pracy albo wykres przebiegów czasowych.
 \end{enumerate}
 
 Wynikiem pracy parsera jest struktura zawierająca tablicę stempli, komendę solvera oraz listę węzłów, których przebiegi mają zostać pokazane na wykresie. Dzięki temu parser nie rozpoczyna obliczeń samodzielnie. Jego odpowiedzialność kończy się na przygotowaniu danych wejściowych w formie zrozumiałej dla dalszych części programu.
+
+\Cref{fig:main-view} pokazuje główne okno aplikacji. Centralną część zajmuje edytor netlisty, a po prawej stronie znajduje się obszar do przeciągania plików tekstowych. Po uruchomieniu symulacji program wybiera sposób prezentacji wyniku na podstawie komendy analizy: dla \texttt{.op} pokazuje wartości niewiadomych, a dla \texttt{.tran} rysuje wykres napięć wskazanych komendą \texttt{.show}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{MainView.png}
+\caption{Główne okno aplikacji z edytorem opisu układu}
+\label{fig:main-view}
+\end{figure}
 
 \section{Format pliku wejściowego}
 \label{sec:format-wejsciowy}
@@ -126,6 +136,22 @@ Istotne jest to, że obiekty elementów nie znają całej netlisty. Otrzymują j
 Solver otrzymuje listę stempli oraz komendę analizy. Dla analizy punktu pracy \texttt{.op} tworzy macierz globalną, dodaje do niej wkład każdego stempla i rozwiązuje układ równań liniowych. Wynikiem jest macierz wartości niewiadomych, czyli napięć węzłowych oraz prądów związanych z dodatkowymi równaniami.
 
 Komenda \texttt{.tran} wykorzystuje tę samą ideę składania stempli, ale obliczenia są wykonywane w kolejnych chwilach czasu. Elementy dynamiczne są wtedy zastępowane równoważnymi modelami dyskretnymi zależnymi od kroku czasowego i historii poprzednich stanów. Dzięki wspólnej reprezentacji przez stemple analiza czasowa może korzystać z tej samej warstwy macierzy co punkt pracy. Wynik analizy czasowej może zostać przekazany do modułu wizualizacji, który tworzy serie punktów dla wskazanych węzłów.
+
+\Cref{fig:op-result-view} pokazuje wynik analizy punktu pracy dla prostego dzielnika napięcia. Opis układu zawiera dwa rezystory \SI{1}{\kilo\ohm} oraz źródło napięciowe \SI{5}{\volt}. Ponieważ rezystory mają takie same wartości, napięcie w węźle pośrednim wynosi połowę napięcia zasilania, czyli około \SI{2.5}{\volt}. Wynik programu pokazuje również \SI{5}{\volt} w węźle połączonym z dodatnim zaciskiem źródła.
+
+\begin{lstlisting}[language=Netlist,caption={Netlista dzielnika napięcia użytego do analizy punktu pracy},label={lst:op-divider-netlist}]
+R 1 2 1000
+R 2 0 1000
+DCVS 1 0 5
+.op
+\end{lstlisting}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{OPResultView.png}
+\caption{Wynik analizy punktu pracy dla dzielnika napięcia}
+\label{fig:op-result-view}
+\end{figure}
 
 \begin{figure}[H]
 \centering

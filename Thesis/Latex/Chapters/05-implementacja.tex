@@ -4,18 +4,18 @@
 \section{Struktura kodu}
 \label{sec:struktura-kodu}
 
-Implementacja aplikacji została podzielona zgodnie z podziałem odpowiedzialności opisanym w \cref{chap:projekt-programu}. Kod źródłowy obejmuje moduły związane z parserem, stemplami elementów, macierzami oraz solverem. Taki układ odpowiada naturalnemu przepływowi danych: od tekstowego opisu obwodu, przez reprezentację elementów, aż do układu równań rozwiązywanego numerycznie.
+Implementacja aplikacji została podzielona zgodnie z podziałem odpowiedzialności opisanym w \cref{chap:projekt-programu}. Kod źródłowy obejmuje moduły związane z interfejsem użytkownika, parserem, stemplami elementów, macierzami oraz solverem. Taki układ odpowiada naturalnemu przepływowi danych: od tekstowego opisu obwodu, przez reprezentację elementów, aż do układu równań rozwiązywanego numerycznie i prezentacji wyniku.
 
-Warstwa parsera zawiera typy odpowiedzialne za rozpoznawanie elementów i komend analizy. Warstwa stempli zawiera klasy opisujące konkretne elementy obwodu. Warstwa matematyczna udostępnia macierze oraz operacje potrzebne do ich składania i rozwiązywania. Solver łączy te części, ponieważ otrzymuje gotową listę stempli i wykonuje analizę wskazaną przez komendę.
+Warstwa widoku odpowiada za przyjmowanie netlisty od użytkownika i wybór formy prezentacji wyniku. Warstwa parsera zawiera typy odpowiedzialne za rozpoznawanie elementów i komend analizy. Warstwa stempli zawiera klasy opisujące konkretne elementy obwodu. Warstwa matematyczna udostępnia macierze oraz operacje potrzebne do ich składania i rozwiązywania. Solver łączy część obliczeniową, ponieważ otrzymuje gotową listę stempli i wykonuje analizę wskazaną przez komendę.
 
 W implementacji przyjęto założenie, że elementy nie powinny samodzielnie interpretować tekstu wejściowego. Każdy konstruktor elementu otrzymuje już przetworzone wartości liczbowe: numery węzłów, parametry oraz ewentualne indeksy dodatkowych równań. Dzięki temu błędy składniowe pozostają w parserze, a błędy fizycznie lub numerycznie niepoprawnych parametrów pozostają w warstwie stempli.
 
 \section{Parser i wynik parsowania}
 \label{sec:implementacja-parser}
 
-Parser pracuje na pliku tekstowym zakodowanym jako UTF-8. Każda linia jest dzielona na tokeny, a pierwszy token decyduje o dalszej interpretacji. Jeżeli token odpowiada komendzie analizy, parser zapisuje ją jako polecenie dla solvera. Jeżeli token odpowiada elementowi, parser sprawdza liczbę parametrów oraz zapamiętuje linię do późniejszego utworzenia stempla.
+Parser pracuje na tekście zakodowanym jako UTF-8. Tekst może pochodzić z pliku albo bezpośrednio z pola edycji w interfejsie użytkownika. Każda linia jest dzielona na tokeny, a pierwszy token decyduje o dalszej interpretacji. Jeżeli token odpowiada komendzie analizy, parser zapisuje ją jako polecenie dla solvera. Jeżeli token odpowiada elementowi, parser sprawdza liczbę parametrów oraz zapamiętuje linię do późniejszego utworzenia stempla.
 
-Rezultatem parsowania jest struktura zawierająca listę stempli oraz komendę analizy. Taki wynik jest wygodny, ponieważ stanowi pełne wejście dla solvera, ale nie wiąże parsera z konkretną metodą obliczeń.
+Rezultatem parsowania jest struktura zawierająca listę stempli, komendę analizy oraz listę węzłów przeznaczonych do wizualizacji. Taki wynik jest wygodny, ponieważ stanowi pełne wejście dla solvera i widoku wyniku, ale nie wiąże parsera z konkretną metodą obliczeń.
 
 \begin{lstlisting}[language=Swift,caption={Model wyniku parsowania},label={lst:parser-result}]
 struct ParserResult {
@@ -105,12 +105,16 @@ Analiza czasowa korzysta z tej samej struktury organizacyjnej. Różnica polega 
 
 W przypadku elementów nieliniowych, takich jak tranzystor bipolarny, solver używa iteracji Newtona-Raphsona. W każdej iteracji stemple są obliczane dla aktualnego przybliżenia rozwiązania, a następnie rozwiązywany jest zlinearyzowany układ równań. Proces kończy się po osiągnięciu zadanej tolerancji albo po przekroczeniu maksymalnej liczby iteracji. W aktualnej implementacji limit ustawiono na 150 iteracji, co pozwala stabilnie policzyć testowy układ wtórnika emiterowego.
 
-\section{Wizualizacja wyników}
+\section{Interfejs użytkownika i wizualizacja wyników}
 \label{sec:implementacja-wizualizacja}
 
-Do prezentacji wyników analizy czasowej dodano prosty moduł \texttt{Plotter}. Nie wykonuje on obliczeń obwodowych, lecz przekształca wynik solvera na serie punktów opisane czasem i napięciem wybranego węzła. Lista węzłów pochodzi z komendy \texttt{.show}, dzięki czemu opis wejściowy decyduje o tym, które przebiegi zostaną pokazane.
+Interfejs użytkownika został zaimplementowany w SwiftUI. Główny widok ma trzy podstawowe stany: edycję opisu układu, prezentację wyniku punktu pracy oraz prezentację wyniku analizy czasowej. W stanie edycji użytkownik może wpisać netlistę ręcznie albo przeciągnąć plik \texttt{.txt}; po upuszczeniu pliku jego zawartość zastępuje tekst w edytorze.
 
-Warstwa widoku korzysta z przygotowanych serii i rysuje wykres napięcia w funkcji czasu. Takie rozdzielenie ułatwia dalszy rozwój programu: solver pozostaje odpowiedzialny wyłącznie za obliczenia, a wizualizacja może zostać rozbudowana niezależnie, na przykład o wybór pliku, eksport danych albo porównywanie kilku symulacji.
+Po naciśnięciu przycisku uruchomienia program przekazuje tekst do parsera. Jeżeli komendą analizy jest \texttt{.op}, widok pokazuje wartości kolejnych niewiadomych wektora rozwiązania. Jeżeli komendą jest \texttt{.tran}, solver zwraca kolejne próbki czasowe, a widok przechodzi do wykresu. W obu przypadkach użytkownik może wrócić do edytora bez utraty wpisanego opisu układu.
+
+Do prezentacji wyników analizy czasowej dodano moduł \texttt{Plotter}. Nie wykonuje on obliczeń obwodowych, lecz przekształca wynik solvera na serie punktów opisane czasem i napięciem wybranego węzła. Lista węzłów pochodzi z komendy \texttt{.show}, dzięki czemu opis wejściowy decyduje o tym, które przebiegi zostaną pokazane.
+
+Warstwa widoku korzysta z przygotowanych serii i rysuje wykres napięcia w funkcji czasu. Takie rozdzielenie ułatwia dalszy rozwój programu: solver pozostaje odpowiedzialny wyłącznie za obliczenia, a wizualizacja może zostać rozbudowana niezależnie, na przykład o eksport danych albo porównywanie kilku symulacji.
 
 \section{Obsługa błędów w implementacji}
 \label{sec:implementacja-bledy}

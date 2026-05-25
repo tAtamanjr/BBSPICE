@@ -11,6 +11,10 @@ import Foundation
 class Parser {
     func parse(_ url: URL) throws -> ParserResult {
         let text = try String(contentsOf: url, encoding: .utf8)
+        return try parseText(text)
+    }
+    
+    func parseText(_ text: String) throws -> ParserResult {
         var lines: [ParserLine] = []
         var stamps: [Stamp] = []
         var command: SolverCommand?

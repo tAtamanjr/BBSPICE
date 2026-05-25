@@ -1,55 +1,288 @@
 import Foundation
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ContentView: View {
-    private let series: [PlotSeries]
-    private let title: String
-    private let errorText: String?
+    @State private var circuitText = ""
+    @State private var errorText: String?
+    @State private var output: SimulationOutput?
+    @State private var isDropTargeted = false
     
-    init() {
+    var body: some View {
+        Group {
+            if let output {
+                ResultView(output: output, backAction: backToEditor)
+            } else {
+                EditorView(
+                    circuitText: $circuitText,
+                    errorText: errorText,
+                    isDropTargeted: isDropTargeted,
+                    runAction: runSimulation
+                )
+                .onDrop(of: [UTType.fileURL.identifier], isTargeted: $isDropTargeted, perform: loadDroppedFile)
+            }
+        }
+        .frame(minWidth: 820, minHeight: 560)
+        .background(Color(nsColor: .textBackgroundColor))
+    }
+    
+    private func runSimulation() {
         do {
-            let url = try Self.emitterFollowerURL()
-            let parsed = try Parser().parse(url)
-            let result = try Solver().solveTransient(parsed.stamps, parsed.command)
-            self.series = try Plotter().voltageSeries(result, parsed.showNodes)
-            self.title = "Emitter follower transient voltage"
-            self.errorText = nil
+            let parsed = try Parser().parseText(circuitText)
+            let solver = Solver()
+            
+            switch parsed.command {
+            case .op:
+                guard let result = try solver.solve(parsed.stamps, parsed.command) else {
+                    throw SolverError.numericalDivergence
+                }
+                output = .operationPoint(result.values)
+            case .tran:
+                if parsed.showNodes.isEmpty {
+                    errorText = "Parser: .tran simulation requires .show nodes"
+                    return
+                }
+                
+                let result = try solver.solveTransient(parsed.stamps, parsed.command)
+                let series = try Plotter().voltageSeries(result, parsed.showNodes)
+                output = .transient(series)
+            }
+            
+            errorText = nil
         } catch {
-            self.series = []
-            self.title = "Emitter follower transient voltage"
-            self.errorText = String(describing: error)
+            output = nil
+            errorText = String(describing: error)
         }
     }
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("BBSPICE")
-                .font(.title)
-                .fontWeight(.semibold)
+    private func backToEditor() {
+        output = nil
+        errorText = nil
+    }
+    
+    private func loadDroppedFile(_ providers: [NSItemProvider]) -> Bool {
+        guard let provider = providers.first(where: { $0.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) }) else {
+            return false
+        }
+        
+        provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier, options: nil) { item, _ in
+            guard let url = fileURL(item), url.pathExtension.lowercased() == "txt" else {
+                DispatchQueue.main.async {
+                    errorText = "File loading error: drop a UTF-8 .txt file"
+                }
+                return
+            }
             
-            Text(title)
-                .font(.headline)
+            let hasAccess = url.startAccessingSecurityScopedResource()
+            let text = try? String(contentsOf: url, encoding: .utf8)
+            if hasAccess {
+                url.stopAccessingSecurityScopedResource()
+            }
+            
+            guard let text else {
+                DispatchQueue.main.async {
+                    errorText = "File loading error: drop a UTF-8 .txt file"
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                circuitText = text
+                output = nil
+                errorText = nil
+            }
+        }
+        
+        return true
+    }
+    
+    private func fileURL(_ item: NSSecureCoding?) -> URL? {
+        if let url = item as? URL {
+            return url
+        }
+        
+        if let data = item as? Data {
+            return URL(dataRepresentation: data, relativeTo: nil)
+        }
+        
+        return nil
+    }
+}
+
+private struct EditorView: View {
+    @Binding var circuitText: String
+    let errorText: String?
+    let isDropTargeted: Bool
+    let runAction: () -> Void
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("BBSPICE")
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                    
+                    Text("Circuit description")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Spacer()
+                
+                Button(action: runAction) {
+                    Label("Run Simulation", systemImage: "play.fill")
+                        .frame(minWidth: 150)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+                .disabled(circuitText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+            
+            HStack(alignment: .top, spacing: 16) {
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $circuitText)
+                        .font(.system(.body, design: .monospaced))
+                        .scrollContentBackground(.hidden)
+                        .padding(10)
+                    
+                    if circuitText.isEmpty {
+                        Text("R 1 0 1000\nDCVS 1 0 5\n.op")
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundStyle(.tertiary)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 18)
+                            .allowsHitTesting(false)
+                    }
+                }
+                .background(Color(nsColor: .textBackgroundColor))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.secondary.opacity(0.28), lineWidth: 1)
+                }
+                
+                DropPanel(isDropTargeted: isDropTargeted)
+                    .frame(width: 220)
+            }
             
             if let errorText {
                 Text(errorText)
-                    .foregroundStyle(.red)
                     .font(.body)
-            } else {
+                    .foregroundStyle(.red)
+                    .textSelection(.enabled)
+            }
+        }
+        .padding(24)
+    }
+}
+
+private struct DropPanel: View {
+    let isDropTargeted: Bool
+    
+    var body: some View {
+        VStack(spacing: 14) {
+            Image(systemName: "doc.text")
+                .font(.system(size: 40))
+                .foregroundStyle(isDropTargeted ? .blue : .secondary)
+            
+            Text("Drop .txt file")
+                .font(.headline)
+            
+            Text("File content will replace the circuit description.")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity, minHeight: 220)
+        .padding(18)
+        .background(isDropTargeted ? Color.blue.opacity(0.08) : Color(nsColor: .controlBackgroundColor))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(isDropTargeted ? Color.blue : Color.secondary.opacity(0.28), style: StrokeStyle(lineWidth: 1.5, dash: [7, 5]))
+        }
+    }
+}
+
+private struct ResultView: View {
+    let output: SimulationOutput
+    let backAction: () -> Void
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("BBSPICE")
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                    
+                    Text(output.title)
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Spacer()
+                
+                Button(action: backAction) {
+                    Label("Back", systemImage: "chevron.left")
+                        .frame(minWidth: 90)
+                }
+                .controlSize(.large)
+            }
+            
+            switch output {
+            case let .operationPoint(values):
+                OperationPointResultView(values: values)
+            case let .transient(series):
                 VoltagePlotView(series: series)
                     .frame(minWidth: 720, minHeight: 420)
             }
         }
         .padding(24)
     }
+}
+
+private struct OperationPointResultView: View {
+    let values: [Double]
     
-    private static func emitterFollowerURL() throws -> URL {
-        if let url = Bundle.main.url(forResource: "EmitterFollowerCircuit", withExtension: "txt") {
-            return url
+    var body: some View {
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 180), spacing: 12)], spacing: 12) {
+                ForEach(values.indices, id: \.self) { index in
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("x\(index + 1)")
+                            .font(.headline)
+                            .foregroundStyle(.secondary)
+                        
+                        Text(formatValue(values[index]))
+                            .font(.system(.title3, design: .monospaced))
+                            .textSelection(.enabled)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(14)
+                    .background(Color(nsColor: .controlBackgroundColor))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.secondary.opacity(0.18), lineWidth: 1)
+                    }
+                }
+            }
+            .padding(.vertical, 4)
+        }
+    }
+    
+    private func formatValue(_ value: Double) -> String {
+        if value == 0 {
+            return "0"
         }
         
-        return URL(fileURLWithPath: #filePath)
-            .deletingLastPathComponent()
-            .appendingPathComponent("EmitterFollowerCircuit.txt")
+        if abs(value) >= 1000 || abs(value) < 0.001 {
+            return String(format: "%.6e", value)
+        }
+        
+        return String(format: "%.6f", value)
     }
 }
 
@@ -86,6 +319,10 @@ struct VoltagePlotView: View {
         }
         .background(Color(nsColor: .textBackgroundColor))
         .clipShape(RoundedRectangle(cornerRadius: 8))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.secondary.opacity(0.18), lineWidth: 1)
+        }
     }
     
     private func plotRange() -> PlotRange {
@@ -169,13 +406,23 @@ struct VoltagePlotView: View {
     }
 }
 
+private enum SimulationOutput {
+    case operationPoint([Double])
+    case transient([PlotSeries])
+    
+    var title: String {
+        switch self {
+        case .operationPoint:
+            return "Operation point result"
+        case .transient:
+            return "Transient voltage result"
+        }
+    }
+}
+
 private struct PlotRange {
     let minTime: Double
     let maxTime: Double
     let minValue: Double
     let maxValue: Double
-}
-
-#Preview {
-    ContentView()
 }
