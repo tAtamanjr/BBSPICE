@@ -16,11 +16,20 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \input{chapters/00-wykaz-symboli}
-\listoffigures
+\chapter*{Spis rysunków}
 \addcontentsline{toc}{chapter}{Spis rysunków}
-\clearpage
-\listoftables
+\makeatletter
+\@starttoc{lof}
+\makeatother
+
+\vspace{8mm}
+
+\noindent{\huge\bfseries Spis tabel\par}
+\vspace{4mm}
 \addcontentsline{toc}{chapter}{Spis tabel}
+\makeatletter
+\@starttoc{lot}
+\makeatother
 \clearpage
 
 \input{chapters/01-wstep}
@@ -31,6 +40,9 @@
 \input{chapters/06-testy}
 \input{chapters/07-podsumowanie}
 
+\begingroup
+\emergencystretch=2em
 \printbibliography[heading=bibintoc,title={Bibliografia}]
+\endgroup
 
 \end{document}

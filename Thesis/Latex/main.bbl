@@ -19,6 +19,108 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
+    \entry{nagel1973spice}{report}{}{}
+      \name{author}{2}{}{%
+        {{hash=a5555ca058ff9b6f5b36cfe697e81cff}{%
+           family={Nagel},
+           familyi={N\bibinitperiod},
+           given={Laurence\bibnamedelima W.},
+           giveni={L\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=df9942118bd4e6087453eb92c4f6ec38}{%
+           family={Pederson},
+           familyi={P\bibinitperiod},
+           given={Donald\bibnamedelima O.},
+           giveni={D\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of California, Berkeley}%
+      }
+      \strng{namehash}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \strng{fullhash}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \strng{fullhashraw}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \strng{bibnamehash}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \strng{authorbibnamehash}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \strng{authornamehash}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \strng{authorfullhash}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \strng{authorfullhashraw}{a9113c23b7bc01fa8eaf69e19ac06f53}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{UCB/ERL M382}
+      \field{title}{{SPICE}: Simulation Program with Integrated Circuit Emphasis}
+      \field{type}{techreport}
+      \field{year}{1973}
+      \verb{urlraw}
+      \verb https://www2.eecs.berkeley.edu/Pubs/TechRpts/1973/22871.html
+      \endverb
+      \verb{url}
+      \verb https://www2.eecs.berkeley.edu/Pubs/TechRpts/1973/22871.html
+      \endverb
+    \endentry
+    \entry{nagel1975spice2}{thesis}{}{}
+      \name{author}{1}{}{%
+        {{hash=a5555ca058ff9b6f5b36cfe697e81cff}{%
+           family={Nagel},
+           familyi={N\bibinitperiod},
+           given={Laurence\bibnamedelima W.},
+           giveni={L\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {University of California, Berkeley}%
+      }
+      \strng{namehash}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \strng{fullhash}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \strng{fullhashraw}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \strng{bibnamehash}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \strng{authorbibnamehash}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \strng{authornamehash}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \strng{authorfullhash}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \strng{authorfullhashraw}{a5555ca058ff9b6f5b36cfe697e81cff}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{number}{UCB/ERL M520}
+      \field{title}{{SPICE2}: A Computer Program to Simulate Semiconductor Circuits}
+      \field{type}{PhD thesis}
+      \field{year}{1975}
+      \verb{urlraw}
+      \verb https://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html
+      \endverb
+      \verb{url}
+      \verb https://www2.eecs.berkeley.edu/Pubs/TechRpts/1975/9602.html
+      \endverb
+    \endentry
+    \entry{kundert1995designer}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=5cebabd491ccbf668cb92feb55e8a22b}{%
+           family={Kundert},
+           familyi={K\bibinitperiod},
+           given={Kenneth\bibnamedelima S.},
+           giveni={K\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{5cebabd491ccbf668cb92feb55e8a22b}
+      \strng{fullhash}{5cebabd491ccbf668cb92feb55e8a22b}
+      \strng{fullhashraw}{5cebabd491ccbf668cb92feb55e8a22b}
+      \strng{bibnamehash}{5cebabd491ccbf668cb92feb55e8a22b}
+      \strng{authorbibnamehash}{5cebabd491ccbf668cb92feb55e8a22b}
+      \strng{authornamehash}{5cebabd491ccbf668cb92feb55e8a22b}
+      \strng{authorfullhash}{5cebabd491ccbf668cb92feb55e8a22b}
+      \strng{authorfullhashraw}{5cebabd491ccbf668cb92feb55e8a22b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Designer's Guide to {SPICE} and {Spectre}}
+      \field{year}{1995}
+      \verb{doi}
+      \verb 10.1007/b101824
+      \endverb
+    \endentry
     \entry{ho1975mna}{article}{}{}
       \name{author}{3}{}{%
         {{hash=de255eee521e49aed4c2d9295d277bd2}{%
@@ -45,8 +147,8 @@
       \strng{authornamehash}{08ae6b991016b343f2c8282a4ae9bb17}
       \strng{authorfullhash}{0550206fec521c043f0a99073029ee50}
       \strng{authorfullhashraw}{0550206fec521c043f0a99073029ee50}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Circuits and Systems}
@@ -58,6 +160,69 @@
       \range{pages}{6}
       \verb{doi}
       \verb 10.1109/TCS.1975.1084079
+      \endverb
+    \endentry
+    \entry{vlach1994computer}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=63d92f2584f88258b16ea80ef795290d}{%
+           family={Vlach},
+           familyi={V\bibinitperiod},
+           given={Jiri},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ea5a1d86a7a41f384ddc1a2f7e3b499f}{%
+           family={Singhal},
+           familyi={S\bibinitperiod},
+           given={Kishore},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Van Nostrand Reinhold}%
+      }
+      \strng{namehash}{a845525e128f291b7a147486e2eb07ef}
+      \strng{fullhash}{a845525e128f291b7a147486e2eb07ef}
+      \strng{fullhashraw}{a845525e128f291b7a147486e2eb07ef}
+      \strng{bibnamehash}{a845525e128f291b7a147486e2eb07ef}
+      \strng{authorbibnamehash}{a845525e128f291b7a147486e2eb07ef}
+      \strng{authornamehash}{a845525e128f291b7a147486e2eb07ef}
+      \strng{authorfullhash}{a845525e128f291b7a147486e2eb07ef}
+      \strng{authorfullhashraw}{a845525e128f291b7a147486e2eb07ef}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-442-01194-6}
+      \field{title}{Computer Methods for Circuit Analysis and Design}
+      \field{year}{1994}
+    \endentry
+    \entry{swiftlanguage}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=3325b015fbae57ba74629a53f1ead961}{%
+           family={{Apple Inc.}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhashraw}{3325b015fbae57ba74629a53f1ead961}
+      \strng{bibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorbibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authornamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhashraw}{3325b015fbae57ba74629a53f1ead961}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Swift Programming Language}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://docs.swift.org/swift-book/documentation/the-swift-programming-language/
+      \endverb
+      \verb{url}
+      \verb https://docs.swift.org/swift-book/documentation/the-swift-programming-language/
       \endverb
     \endentry
     \entry{chua1975computer}{book}{}{}
@@ -84,8 +249,8 @@
       \strng{authornamehash}{3b9f33bfed24d08da3d17bd9045f2882}
       \strng{authorfullhash}{3b9f33bfed24d08da3d17bd9045f2882}
       \strng{authorfullhashraw}{3b9f33bfed24d08da3d17bd9045f2882}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Computer-Aided Analysis of Electronic Circuits: Algorithms and Computational Techniques}
@@ -120,13 +285,69 @@
       \strng{authornamehash}{825a5952fa41aa2ed94566ff144a5a35}
       \strng{authorfullhash}{46b31da10e371161887bb9341aa2f24e}
       \strng{authorfullhashraw}{46b31da10e371161887bb9341aa2f24e}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{2}
       \field{title}{Numerical Mathematics}
       \field{year}{2007}
+    \endentry
+    \entry{swiftui}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=3325b015fbae57ba74629a53f1ead961}{%
+           family={{Apple Inc.}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhashraw}{3325b015fbae57ba74629a53f1ead961}
+      \strng{bibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorbibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authornamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhashraw}{3325b015fbae57ba74629a53f1ead961}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{SwiftUI}}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://developer.apple.com/documentation/swiftui
+      \endverb
+      \verb{url}
+      \verb https://developer.apple.com/documentation/swiftui
+      \endverb
+    \endentry
+    \entry{uniformtypeidentifiers}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=3325b015fbae57ba74629a53f1ead961}{%
+           family={{Apple Inc.}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{fullhashraw}{3325b015fbae57ba74629a53f1ead961}
+      \strng{bibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorbibnamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authornamehash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhash}{3325b015fbae57ba74629a53f1ead961}
+      \strng{authorfullhashraw}{3325b015fbae57ba74629a53f1ead961}
+      \field{extraname}{3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Uniform Type Identifiers}}
+      \field{year}{2026}
+      \verb{urlraw}
+      \verb https://developer.apple.com/documentation/uniformtypeidentifiers
+      \endverb
+      \verb{url}
+      \verb https://developer.apple.com/documentation/uniformtypeidentifiers
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

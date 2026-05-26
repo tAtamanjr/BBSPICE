@@ -29,6 +29,8 @@ Na poziomie przepływu danych aplikacja wykonuje następujące kroki:
 
 Wynikiem pracy parsera jest struktura zawierająca tablicę stempli, komendę solvera oraz listę węzłów, których przebiegi mają zostać pokazane na wykresie. Dzięki temu parser nie rozpoczyna obliczeń samodzielnie. Jego odpowiedzialność kończy się na przygotowaniu danych wejściowych w formie zrozumiałej dla dalszych części programu.
 
+Cały przepływ danych można przedstawić jako przejście od interfejsu użytkownika albo pliku tekstowego do struktury \texttt{ParserResult}, a następnie do solvera i modułu wizualizacji. Dla komendy \texttt{.op} solver zwraca pojedynczy wektor rozwiązania. Dla komendy \texttt{.tran} zwraca sekwencję próbek czasowych, które moduł \texttt{Plotter} zamienia na serie punktów dla węzłów wskazanych przez \texttt{.show}. Interfejs użytkownika nie interpretuje samodzielnie składni netlisty, lecz przekazuje tekst do parsera i wybiera odpowiedni widok wyniku na podstawie zwróconej komendy.
+
 \Cref{fig:main-view} pokazuje główne okno aplikacji. Centralną część zajmuje edytor netlisty, a po prawej stronie znajduje się obszar do przeciągania plików tekstowych. Po uruchomieniu symulacji program wybiera sposób prezentacji wyniku na podstawie komendy analizy: dla \texttt{.op} pokazuje wartości niewiadomych, a dla \texttt{.tran} rysuje wykres napięć wskazanych komendą \texttt{.show}.
 
 \begin{figure}[H]
@@ -41,7 +43,7 @@ Wynikiem pracy parsera jest struktura zawierająca tablicę stempli, komendę so
 \section{Format pliku wejściowego}
 \label{sec:format-wejsciowy}
 
-Opis obwodu ma postać tekstową zbliżoną do uproszczonej netlisty SPICE. Jedna linia opisuje jeden element albo jedną komendę analizy. W przypadku elementu pierwszy token określa jego typ, kolejne tokeny oznaczają numery węzłów, a ostatnie wartości są parametrami elementu. Węzeł o numerze \texttt{0} pełni rolę węzła odniesienia.
+Opis obwodu ma postać tekstową zbliżoną do uproszczonej netlisty SPICE. Jedna linia opisuje jeden element albo jedną komendę analizy. W przypadku elementu pierwszy token określa jego typ, kolejne tokeny oznaczają numery węzłów, a ostatnie wartości są parametrami elementu. Węzeł o numerze \texttt{0} pełni rolę węzła odniesienia. Taki format jest prosty do edycji ręcznej i dobrze pasuje do programowego parsowania opisu obwodu \cite{nagel1975spice2,kundert1995designer}.
 
 Aktualnie obsługiwane są: rezystor \texttt{R}, kondensator \texttt{C}, niezależne źródło prądowe \texttt{DCCS}, niezależne źródła napięciowe \texttt{DCVS} i \texttt{ACVS}, źródła sterowane \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS}, \texttt{CCVS} oraz tranzystor bipolarny \texttt{BJT}. Komenda \texttt{.op} oznacza analizę punktu pracy, natomiast \texttt{.tran} uruchamia analizę czasową. W przypadku analizy czasowej można dodatkowo użyć komendy \texttt{.show}, która wskazuje węzły przeznaczone do wizualizacji.
 
@@ -60,8 +62,8 @@ Oznaczenie & Postać linii & Znaczenie parametrów \\
 \texttt{ACVS} & ACVS n+ n- A f & sinusoidalne źródło napięciowe o amplitudzie \texttt{A} i częstotliwości \texttt{f} \\
 \texttt{VCCS} & VCCS in+ in- out+ out- gm & źródło prądowe sterowane napięciem \\
 \texttt{VCVS} & VCVS in+ in- out+ out- A & źródło napięciowe sterowane napięciem \\
-\texttt{CCCS} & CCCS in+ in- out+ out- beta Vx & źródło prądowe sterowane prądem \\
-\texttt{CCVS} & CCVS in+ in- out+ out- Rm Vx & źródło napięciowe sterowane prądem \\
+\texttt{CCCS} & CCCS in+ in- out+ out- beta Vx & źródło prądowe sterowane prądem pomocniczego źródła napięciowego \\
+\texttt{CCVS} & CCVS in+ in- out+ out- Rm Vx & źródło napięciowe sterowane prądem pomocniczego źródła napięciowego \\
 \texttt{BJT} & BJT b c e Is beta m & tranzystor bipolarny opisany węzłami bazy, kolektora i emitera \\
 \bottomrule
 \end{tabularx}
@@ -135,7 +137,7 @@ Istotne jest to, że obiekty elementów nie znają całej netlisty. Otrzymują j
 
 Solver otrzymuje listę stempli oraz komendę analizy. Dla analizy punktu pracy \texttt{.op} tworzy macierz globalną, dodaje do niej wkład każdego stempla i rozwiązuje układ równań liniowych. Wynikiem jest macierz wartości niewiadomych, czyli napięć węzłowych oraz prądów związanych z dodatkowymi równaniami.
 
-Komenda \texttt{.tran} wykorzystuje tę samą ideę składania stempli, ale obliczenia są wykonywane w kolejnych chwilach czasu. Elementy dynamiczne są wtedy zastępowane równoważnymi modelami dyskretnymi zależnymi od kroku czasowego i historii poprzednich stanów. Dzięki wspólnej reprezentacji przez stemple analiza czasowa może korzystać z tej samej warstwy macierzy co punkt pracy. Wynik analizy czasowej może zostać przekazany do modułu wizualizacji, który tworzy serie punktów dla wskazanych węzłów.
+Komenda \texttt{.tran} wykorzystuje tę samą ideę składania stempli, ale obliczenia są wykonywane w kolejnych chwilach czasu. Elementy dynamiczne są wtedy zastępowane równoważnymi modelami dyskretnymi zależnymi od kroku czasowego i historii poprzednich stanów. Dzięki wspólnej reprezentacji przez stemple analiza czasowa może korzystać z tej samej warstwy macierzy co punkt pracy \cite{nagel1975spice2,vlach1994computer}. Wynik analizy czasowej może zostać przekazany do modułu wizualizacji, który tworzy serie punktów dla wskazanych węzłów.
 
 \Cref{fig:op-result-view} pokazuje wynik analizy punktu pracy dla prostego dzielnika napięcia. Opis układu zawiera dwa rezystory \SI{1}{\kilo\ohm} oraz źródło napięciowe \SI{5}{\volt}. Ponieważ rezystory mają takie same wartości, napięcie w węźle pośrednim wynosi połowę napięcia zasilania, czyli około \SI{2.5}{\volt}. Wynik programu pokazuje również \SI{5}{\volt} w węźle połączonym z dodatnim zaciskiem źródła.
 
@@ -166,6 +168,8 @@ DCVS 1 0 5
 \caption{Wynik symulacji czasowej wtórnika emiterowego}
 \label{fig:emitter-follower-result}
 \end{figure}
+
+Na wykresie wtórnika emiterowego widoczne są przebiegi napięcia bazy i emitera. Napięcie emitera podąża za napięciem bazy, ale jest przesunięte o spadek napięcia baza-emiter tranzystora. Taki wynik odpowiada oczekiwanej pracy wtórnika napięciowego: układ nie odwraca fazy sygnału i przenosi jego kształt na wyjście, ale poziom napięcia wyjściowego jest ograniczony przez właściwości złącza tranzystora. Przykład ten jest ważniejszy niż prosty układ liniowy, ponieważ jednocześnie wykorzystuje źródło sinusoidalne, kondensator, analizę czasową oraz nieliniowy model BJT.
 
 Rozdzielenie parsera i solvera upraszcza dalszy rozwój aplikacji. Parser odpowiada za przekształcenie tekstu na dane programu, natomiast solver odpowiada za interpretację komendy analizy. W przyszłości ta sama struktura może zostać rozszerzona o kolejne polecenia, na przykład analizę małosygnałową albo warianty analizy czasowej z dodatkowymi parametrami kroku i czasu końcowego.
 

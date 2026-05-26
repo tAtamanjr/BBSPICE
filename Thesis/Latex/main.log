@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.19)  25 MAY 2026 20:44
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.19)  26 MAY 2026 16:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -385,6 +385,13 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 )
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+))
 (/usr/local/texlive/2026/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count346
 \lst@gtempboxa=\box72
@@ -437,10 +444,6 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
-)
-(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip18
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 \c@tabx@nest=\count355
 \c@listtotal=\count356
@@ -1089,56 +1092,54 @@ Package hyperref Info: Option `pageanchor' set `true' on input line 15.
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
- [2
-
-] (./main.lot)
+ (./main.lot)
 \tf@lot=\write6
 \openout6 = `main.lot'.
 
- [3
-
+ [2
 
 ]
 (./chapters/01-wstep.tex
 Rozdział 1.
-[4
+[3
 
 
-]) (./chapters/02-podstawy-teoretyczne.tex [5]
+]) (./chapters/02-podstawy-teoretyczne.tex [4]
 Rozdział 2.
-[6
+[5
 
-] [7] [8] [9]) (./chapters/03-modified-nodal-analysis.tex [10]
+] [6] [7] [8]) (./chapters/03-modified-nodal-analysis.tex [9]
 Rozdział 3.
-[11
+[10
 
-] [12] [13]) (./chapters/04-projekt-programu.tex [14]
+] [11] [12] [13]) (./chapters/04-projekt-programu.tex [14]
 Rozdział 4.
 [15
 
 ]
 File: figures/MainView.png Graphic file (type bmp)
 <figures/MainView.png>
- [16] [17] [18] [19]
+ [16] [17] [18] [19] [20]
 File: figures/OPResultView.png Graphic file (type bmp)
 <figures/OPResultView.png>
 File: figures/ACVSPlusR.png Graphic file (type bmp)
 <figures/ACVSPlusR.png>
 File: figures/EmitterFollowerResult.png Graphic file (type bmp)
 <figures/EmitterFollowerResult.png>
- [20]) (./chapters/05-implementacja.tex [21]
+ [21] [22]) (./chapters/05-implementacja.tex
+[23]
 Rozdział 5.
-[22
+[24
 
-] [23] [24] [25]) (./chapters/06-testy.tex [26]
+] [25] [26] [27] [28]) (./chapters/06-testy.tex [29]
 Rozdział 6.
-[27
+[30
 
-] [28] [29]) (./chapters/07-podsumowanie.tex [30]
+] [31] [32]) (./chapters/07-podsumowanie.tex [33]
 Rozdział 7.
-[31
+[34
 
-] [32]) [33] [34
+] [35]) [36] [37
 
 ] (./main.aux)
  ***********
@@ -1150,12 +1151,12 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31031 strings out of 468168
- 662444 string characters out of 5432815
- 1721555 words of memory out of 5000000
- 59373 multiletter control sequences out of 15000+600000
+ 31085 strings out of 468168
+ 664268 string characters out of 5432815
+ 1717418 words of memory out of 5000000
+ 59423 multiletter control sequences out of 15000+600000
  633054 words of font info for 100 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 78i,10n,96p,1249b,4953s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 78i,10n,96p,1249b,4959s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.xdv (39 pages, 728444 bytes).
+Output written on main.xdv (42 pages, 800492 bytes).

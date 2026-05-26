@@ -6,7 +6,7 @@
 
 Podstawą komputerowej analizy obwodów jest zapis zależności pomiędzy prądami i napięciami w postaci równań matematycznych. Obwód można przedstawić jako zbiór elementów połączonych węzłami. Węzeł jest punktem o wspólnym potencjale elektrycznym, natomiast element narzuca zależność między prądem płynącym przez jego zaciski a napięciem na tych zaciskach.
 
-Najważniejszymi prawami wykorzystywanymi do tworzenia równań obwodowych są prawa Kirchhoffa. Wynikają one z zasad zachowania ładunku i energii, dlatego stanowią podstawę zarówno ręcznej analizy obwodów, jak i algorytmów stosowanych w symulatorach typu SPICE \cite{chua1975computer}.
+Najważniejszymi prawami wykorzystywanymi do tworzenia równań obwodowych są prawa Kirchhoffa. Wynikają one z zasad zachowania ładunku i energii, dlatego stanowią podstawę zarówno ręcznej analizy obwodów, jak i algorytmów stosowanych w symulatorach typu SPICE \cite{chua1975computer,vlach1994computer}.
 
 Pierwsze prawo Kirchhoffa, nazywane prądowym prawem Kirchhoffa lub KCL, mówi, że algebraiczna suma prądów wpływających do dowolnego węzła jest równa zeru:
 
@@ -58,7 +58,7 @@ gdzie \(A\) jest macierzą współczynników, \(x\) jest wektorem niewiadomych, 
 
 Podejście macierzowe jest szczególnie wygodne w programie komputerowym, ponieważ pozwala oddzielić etap tworzenia równań od etapu ich rozwiązywania. Elementy obwodu dodają swoje lokalne wkłady do globalnej macierzy i wektora wymuszeń, a następnie solver rozwiązuje gotowy układ. W przypadku większych układów ten podział ma także znaczenie organizacyjne, ponieważ każdy typ elementu może być opisany osobnym zestawem reguł.
 
-Do rozwiązania układu \cref{eq:linear-system} można wykorzystać standardowe metody algebry liniowej, na przykład eliminację Gaussa albo rozkład LU. W analizie czasowej lub w obecności elementów dynamicznych równania różniczkowe są najpierw dyskretyzowane, a następnie w każdym kroku czasu również sprowadzane do układu liniowego \cite{quarteroni2007numerical}.
+Do rozwiązania układu \cref{eq:linear-system} można wykorzystać standardowe metody algebry liniowej, na przykład eliminację Gaussa albo rozkład LU. W analizie czasowej lub w obecności elementów dynamicznych równania różniczkowe są najpierw dyskretyzowane, a następnie w każdym kroku czasu również sprowadzane do układu liniowego \cite{quarteroni2007numerical,vlach1994computer}.
 
 \section{Klasyczna metoda potencjałów węzłowych}
 \label{sec:klasyczna-mpw}
@@ -91,7 +91,7 @@ Ograniczenie klasycznej metody potencjałów węzłowych pojawia się przy eleme
 \section{Zmodyfikowana metoda potencjałów węzłowych}
 \label{sec:zmodyfikowana-mpw}
 
-Zmodyfikowana metoda potencjałów węzłowych, czyli Modified Nodal Analysis, rozszerza klasyczną metodę potencjałów węzłowych o dodatkowe niewiadome prądowe \cite{ho1975mna}. Najczęściej są to prądy płynące przez idealne źródła napięciowe oraz przez elementy sterowane, które narzucają zależności napięciowe.
+Zmodyfikowana metoda potencjałów węzłowych, czyli Modified Nodal Analysis, rozszerza klasyczną metodę potencjałów węzłowych o dodatkowe niewiadome prądowe \cite{ho1975mna,vlach1994computer}. Najczęściej są to prądy płynące przez idealne źródła napięciowe oraz przez elementy sterowane, które narzucają zależności napięciowe. Dzięki temu elementy niewygodne dla klasycznej analizy węzłowej mogą być opisane bez ręcznego tworzenia superwęzłów i bez zastępowania idealnych źródeł elementami pomocniczymi.
 
 Ogólną postać układu równań ZMPW można zapisać blokowo:
 
@@ -121,9 +121,7 @@ Dla idealnego źródła napięciowego między węzłami \(a\) i \(b\) wprowadzan
 v_a - v_b = V_s.
 \end{equation}
 
-Jednocześnie prąd \(j_s\) pojawia się w równaniach KCL dla węzłów \(a\) i \(b\). W ten sposób źródło napięciowe może być opisane bez zastępowania go sztuczną rezystancją i bez ręcznego tworzenia superwęzłów.
-
-Zaletą ZMPW jest jednolity sposób budowania macierzy dla wielu typów elementów. Rezystory dodają wkłady do bloku \(G\), źródła prądowe modyfikują wektor \(i\), a źródła napięciowe oraz część źródeł sterowanych dodają dodatkowe wiersze i kolumny. Taki zapis dobrze odpowiada implementacji opartej na stemplach elementów, ponieważ każdy element może samodzielnie określić, które pozycje macierzy i wektora należy zmodyfikować.
+Jednocześnie prąd \(j_s\) pojawia się w równaniach KCL dla węzłów \(a\) i \(b\). W ten sposób źródło napięciowe może być opisane bez zastępowania go sztuczną rezystancją. Szczegółowy sposób zapisywania lokalnych wkładów elementów do macierzy ZMPW został opisany w następnym rozdziale.
 
 \section{Punkt pracy DC}
 \label{sec:punkt-pracy-dc}
@@ -132,12 +130,12 @@ Punkt pracy DC opisuje stan ustalony obwodu przy wymuszeniach stałych. Dla ukł
 
 W analizie punktu pracy wielkości nie zależą od czasu, dlatego pochodne czasowe są równe zeru. W idealnym modelu kondensator w stanie ustalonym zachowuje się jak przerwa, ponieważ prąd stały przez kondensator nie płynie. Cewka zachowuje się jak zwarcie, ponieważ napięcie na idealnej cewce w stanie ustalonym jest równe zeru.
 
-Dla obwodów nieliniowych punkt pracy wymaga zwykle metody iteracyjnej, na przykład metody Newtona-Raphsona. Wtedy element nieliniowy jest w każdej iteracji zastępowany lokalnym modelem liniowym, a układ równań jest rozwiązywany wielokrotnie do osiągnięcia zbieżności. W pracy punkt pracy stanowi podstawową analizę potrzebną do sprawdzenia poprawności zbudowanego układu równań oraz do wyznaczenia warunków początkowych dla analizy czasowej.
+Dla obwodów nieliniowych punkt pracy wymaga zwykle metody iteracyjnej, na przykład metody Newtona-Raphsona. Wtedy element nieliniowy jest w każdej iteracji zastępowany lokalnym modelem liniowym, a układ równań jest rozwiązywany wielokrotnie do osiągnięcia zbieżności \cite{nagel1975spice2,quarteroni2007numerical}. W pracy punkt pracy stanowi podstawową analizę potrzebną do sprawdzenia poprawności zbudowanego układu równań oraz do wyznaczenia warunków początkowych dla analizy czasowej.
 
 \section{Analiza czasowa}
 \label{sec:analiza-czasowa}
 
-Analiza czasowa opisuje odpowiedź układu w funkcji czasu. Jest potrzebna wtedy, gdy wymuszenia zmieniają się w czasie albo gdy w układzie występują elementy magazynujące energię, takie jak kondensatory i cewki. W takim przypadku równania obwodu zawierają pochodne czasowe.
+Analiza czasowa opisuje odpowiedź układu w funkcji czasu. Jest potrzebna wtedy, gdy wymuszenia zmieniają się w czasie albo gdy w układzie występują elementy magazynujące energię, takie jak kondensatory i cewki. W takim przypadku równania obwodu zawierają pochodne czasowe, które w symulatorach obwodowych są zastępowane równaniami dyskretnymi rozwiązywanymi w kolejnych chwilach czasu \cite{nagel1975spice2,kundert1995designer}.
 
 Dla liniowego układu dynamicznego równania można zapisać w postaci:
 
@@ -165,4 +163,4 @@ b_k + \frac{C}{\Delta t}x_{k-1}.
 
 Oznacza to, że analiza czasowa może być zrealizowana jako sekwencja obliczeń podobnych do punktu pracy, wykonywanych dla kolejnych chwil czasu. W każdym kroku aktualizowane są wkłady elementów dynamicznych oraz wymuszenia zależne od czasu. Stabilność i dokładność wyniku zależą od zastosowanej metody całkowania, wartości kroku czasowego oraz właściwego przygotowania warunków początkowych.
 
-Alternatywnym podejściem jest metoda trapezów, która zwykle daje większą dokładność, ale w niektórych przypadkach może prowadzić do oscylacji numerycznych. Z tego powodu wybór metody całkowania jest kompromisem między dokładnością, stabilnością i kosztem obliczeniowym.
+Alternatywnym podejściem jest metoda trapezów, która zwykle daje większą dokładność, ale w niektórych przypadkach może prowadzić do oscylacji numerycznych. Z tego powodu wybór metody całkowania jest kompromisem między dokładnością, stabilnością i kosztem obliczeniowym \cite{nagel1975spice2,kundert1995designer}.

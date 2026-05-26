@@ -120,6 +120,10 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/xurl/xurl.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/xurl/xurl.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/listings/listings.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/listings/listings.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstpatch.sty
@@ -144,8 +148,6 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/logreq/logreq.def
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/logreq/logreq.def
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty
-INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
-INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/blx-dm.def
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/blx-dm.def
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/biblatex/blx-dm.def

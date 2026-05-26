@@ -4,7 +4,7 @@
 \section{Struktura kodu}
 \label{sec:struktura-kodu}
 
-Implementacja aplikacji została podzielona zgodnie z podziałem odpowiedzialności opisanym w \cref{chap:projekt-programu}. Kod źródłowy obejmuje moduły związane z interfejsem użytkownika, parserem, stemplami elementów, macierzami oraz solverem. Taki układ odpowiada naturalnemu przepływowi danych: od tekstowego opisu obwodu, przez reprezentację elementów, aż do układu równań rozwiązywanego numerycznie i prezentacji wyniku.
+Implementacja aplikacji została podzielona zgodnie z podziałem odpowiedzialności opisanym w \cref{chap:projekt-programu}. Kod źródłowy obejmuje moduły związane z interfejsem użytkownika, parserem, stemplami elementów, macierzami oraz solverem. Taki układ odpowiada naturalnemu przepływowi danych: od tekstowego opisu obwodu, przez reprezentację elementów, aż do układu równań rozwiązywanego numerycznie i prezentacji wyniku. Język Swift został wykorzystany ze względu na typowanie statyczne, obsługę błędów i dobre wsparcie dla aplikacji macOS \cite{swiftlanguage}.
 
 Warstwa widoku odpowiada za przyjmowanie netlisty od użytkownika i wybór formy prezentacji wyniku. Warstwa parsera zawiera typy odpowiedzialne za rozpoznawanie elementów i komend analizy. Warstwa stempli zawiera klasy opisujące konkretne elementy obwodu. Warstwa matematyczna udostępnia macierze oraz operacje potrzebne do ich składania i rozwiązywania. Solver łączy część obliczeniową, ponieważ otrzymuje gotową listę stempli i wykonuje analizę wskazaną przez komendę.
 
@@ -63,6 +63,8 @@ class Stamp {
 
 Argument \texttt{StampContext} przekazuje do elementu informacje potrzebne w danym rodzaju analizy. Dla analizy czasowej zawiera między innymi aktualny czas, krok czasowy, bieżące przybliżenie rozwiązania oraz rozwiązanie z poprzedniego kroku. Dzięki temu ten sam interfejs stempla może obsłużyć elementy liniowe, elementy dynamiczne i elementy nieliniowe.
 
+Wprowadzenie kontekstu upraszcza rozwój programu, ponieważ element nie musi posiadać wielu wersji metod dla różnych analiz. Źródło \texttt{ACVS} odczytuje z kontekstu aktualny czas i na tej podstawie oblicza chwilową wartość sinusoidy. Kondensator wykorzystuje krok czasowy oraz poprzednie napięcie, aby utworzyć model zastępczy dla analizy \texttt{.tran}. Tranzystor BJT korzysta z bieżącego przybliżenia rozwiązania, ponieważ jego zlinearyzowany stempel zależy od aktualnych napięć bazy, kolektora i emitera.
+
 Dla elementów pasywnych, takich jak rezystor, najważniejsza jest macierz \texttt{G}. Dla niezależnego źródła prądowego zasadniczy wkład trafia do wektora \texttt{I}. Źródła napięciowe i wybrane źródła sterowane wymagają dodatkowego równania, dlatego ich stemple są większe i obejmują dodatkowe wiersze oraz kolumny.
 
 Z punktu widzenia implementacji istotne jest to, że stempel nie musi znać pełnego rozmiaru układu. Zwraca macierz o takim rozmiarze, który jest potrzebny do zapisania jego największego indeksu. Dopiero solver tworzy macierz globalną o rozmiarze dopasowanym do największego stempla w całej liście.
@@ -103,12 +105,14 @@ Po złożeniu macierzy solver rozwiązuje ten układ i zwraca wektor niewiadomyc
 
 Analiza czasowa korzysta z tej samej struktury organizacyjnej. Różnica polega na tym, że macierze dla elementów dynamicznych zależą od kroku czasowego i poprzednich stanów układu. Przed rozpoczęciem analizy \texttt{.tran} solver wyznacza punkt pracy, a następnie traktuje go jako warunek początkowy dla pierwszego kroku czasowego.
 
-W przypadku elementów nieliniowych, takich jak tranzystor bipolarny, solver używa iteracji Newtona-Raphsona. W każdej iteracji stemple są obliczane dla aktualnego przybliżenia rozwiązania, a następnie rozwiązywany jest zlinearyzowany układ równań. Proces kończy się po osiągnięciu zadanej tolerancji albo po przekroczeniu maksymalnej liczby iteracji. W aktualnej implementacji limit ustawiono na 150 iteracji, co pozwala stabilnie policzyć testowy układ wtórnika emiterowego.
+W kolejnych krokach czasowych solver tworzy nowy kontekst zawierający aktualny czas, krok czasowy i rozwiązanie z poprzedniego kroku. Następnie składa macierz globalną z tych samych stempli, ale ich wartości mogą być inne niż w poprzednim kroku. Dla źródła sinusoidalnego zmienia się wartość wymuszenia, dla kondensatora zmienia się wkład zależny od historii, a dla elementów nieliniowych zmienia się lokalna linearyzacja.
+
+W przypadku elementów nieliniowych, takich jak tranzystor bipolarny, solver używa iteracji Newtona-Raphsona. W każdej iteracji stemple są obliczane dla aktualnego przybliżenia rozwiązania, a następnie rozwiązywany jest zlinearyzowany układ równań. Proces kończy się po osiągnięciu zadanej tolerancji albo po przekroczeniu maksymalnej liczby iteracji. W aktualnej implementacji limit ustawiono na 150 iteracji, co pozwala stabilnie policzyć układ wtórnika emiterowego wykorzystany jako przykład analizy czasowej.
 
 \section{Interfejs użytkownika i wizualizacja wyników}
 \label{sec:implementacja-wizualizacja}
 
-Interfejs użytkownika został zaimplementowany w SwiftUI. Główny widok ma trzy podstawowe stany: edycję opisu układu, prezentację wyniku punktu pracy oraz prezentację wyniku analizy czasowej. W stanie edycji użytkownik może wpisać netlistę ręcznie albo przeciągnąć plik \texttt{.txt}; po upuszczeniu pliku jego zawartość zastępuje tekst w edytorze.
+Interfejs użytkownika został zaimplementowany w SwiftUI. Główny widok ma trzy podstawowe stany: edycję opisu układu, prezentację wyniku punktu pracy oraz prezentację wyniku analizy czasowej. W stanie edycji użytkownik może wpisać netlistę ręcznie albo przeciągnąć plik \texttt{.txt}; po upuszczeniu pliku jego zawartość zastępuje tekst w edytorze. Do rozpoznawania przeciąganego typu pliku wykorzystano mechanizm Uniform Type Identifiers dostępny w systemowych bibliotekach Apple \cite{swiftui,uniformtypeidentifiers}.
 
 Po naciśnięciu przycisku uruchomienia program przekazuje tekst do parsera. Jeżeli komendą analizy jest \texttt{.op}, widok pokazuje wartości kolejnych niewiadomych wektora rozwiązania. Jeżeli komendą jest \texttt{.tran}, solver zwraca kolejne próbki czasowe, a widok przechodzi do wykresu. W obu przypadkach użytkownik może wrócić do edytora bez utraty wpisanego opisu układu.
 

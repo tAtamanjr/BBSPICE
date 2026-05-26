@@ -4,16 +4,16 @@
 \section{Motywacja}
 \label{sec:motywacja}
 
-Analiza układów elektronicznych przez wiele lat była wykonywana ręcznie, na podstawie równań obwodowych i obliczeń prowadzonych przez projektantów. Taki sposób pracy był czasochłonny, podatny na błędy i trudny do stosowania w przypadku bardziej rozbudowanych układów. Rozwój komputerów doprowadził do powstania programów wspomagających analizę obwodów, takich jak ECAP oraz SPICE, które stały się podstawą współczesnych symulatorów układów analogowych.
+Analiza układów elektronicznych przez wiele lat była wykonywana ręcznie, na podstawie równań obwodowych i obliczeń prowadzonych przez projektantów. Taki sposób pracy był czasochłonny, podatny na błędy i trudny do stosowania w przypadku bardziej rozbudowanych układów. Rozwój komputerów doprowadził do powstania programów wspomagających analizę obwodów, takich jak ECAP oraz SPICE, które stały się podstawą współczesnych symulatorów układów analogowych \cite{nagel1973spice,nagel1975spice2,kundert1995designer}.
 
 Wraz z rozwojem narzędzi symulacyjnych wzrosła także ich złożoność oraz zależność od określonych platform systemowych. Wiele popularnych programów inżynierskich jest projektowanych przede wszystkim z myślą o systemie Windows albo wymaga na macOS rozwiązań pośrednich, takich jak wirtualizacja. Jednocześnie komputery Apple, szczególnie oparte na układach Apple Silicon, stanowią wydajną platformę do obliczeń numerycznych i tworzenia natywnych aplikacji inżynierskich.
 
-Z tego powodu w pracy podjęto próbę zaprojektowania i zaimplementowania aplikacji do analizy analogowych układów elektronicznych dla systemu macOS. Program opiera się na tekstowym opisie układu, metodzie Modified Nodal Analysis oraz mechanizmie stempli elementów, które pozwalają budować globalny układ równań w sposób modularny \cite{ho1975mna}.
+Z tego powodu w pracy podjęto próbę zaprojektowania i zaimplementowania aplikacji do analizy analogowych układów elektronicznych dla systemu macOS. Program opiera się na tekstowym opisie układu, metodzie Modified Nodal Analysis oraz mechanizmie stempli elementów, które pozwalają budować globalny układ równań w sposób modularny \cite{ho1975mna,vlach1994computer}.
 
 \section{Cel pracy}
 \label{sec:cel-pracy}
 
-Celem pracy jest zaprojektowanie i zaimplementowanie programu, który wczytuje tekstowy opis układu, przekształca elementy obwodu na stemple macierzowe oraz wykonuje podstawowe analizy numeryczne układu. Istotnym założeniem projektu jest zachowanie przejrzystej architektury, w której parser, modele elementów, macierze, solver punktu pracy oraz moduł analizy czasowej stanowią oddzielne bloki programu.
+Celem pracy jest zaprojektowanie i zaimplementowanie programu, który wczytuje tekstowy opis układu, przekształca elementy obwodu na stemple macierzowe oraz wykonuje podstawowe analizy numeryczne układu. Istotnym założeniem projektu jest zachowanie przejrzystej architektury, w której parser, modele elementów, macierze, solver punktu pracy oraz moduł analizy czasowej stanowią oddzielne bloki programu. Implementacja została wykonana w języku Swift, który udostępnia statyczne typowanie, mechanizmy obsługi błędów oraz narzędzia do budowy natywnych aplikacji dla systemu macOS \cite{swiftlanguage}.
 
 \section{Zakres pracy}
 \label{sec:zakres-pracy}
