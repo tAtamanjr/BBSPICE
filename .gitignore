@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# Xcode user data
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+
+# Xcode build output
+DerivedData/
+build/
+Build/
+*.build/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# Test and coverage output
+*.xcresult
+*.profraw
+*.profdata
+
+# App packaging
+*.dSYM/
+*.ipa
+*.app
+
+# LaTeX generated files
+Thesis/Latex/*.aux
+Thesis/Latex/*.bbl
+Thesis/Latex/*.bcf
+Thesis/Latex/*.blg
+Thesis/Latex/*.fdb_latexmk
+Thesis/Latex/*.fls
+Thesis/Latex/*.lof
+Thesis/Latex/*.log
+Thesis/Latex/*.lot
+Thesis/Latex/*.out
+Thesis/Latex/*.run.xml
+Thesis/Latex/*.synctex.gz
+Thesis/Latex/*.toc
