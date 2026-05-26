@@ -124,6 +124,47 @@ final class BBSpiceParserTests: XCTestCase {
         XCTAssert(result.stamps.count == 1)
         XCTAssert(result.stamps[0] is R)
     }
+    
+    func testParserMultipliers() throws {
+        let result = try Parser().parse(makeTestFile("""
+        R 1 0 1G
+        R 2 0 1M
+        R 3 0 1k
+        R 4 0 1m
+        R 5 0 1u
+        R 6 0 1n
+        R 7 0 1p
+        .op
+        """))
+        
+        let resistors = result.stamps.compactMap { $0 as? R }
+        
+        XCTAssertEqual(resistors.map(\.resistance), [1e9, 1e6, 1e3, 1e-3, 1e-6, 1e-9, 1e-12])
+    }
+    
+    func testTransientCommandMultipliers() throws {
+        let result = try Parser().parse(makeTestFile("R 1 2 5\n.tran 4m 10u\n.show 1 2"))
+        
+        guard case let .tran(time, timeStep) = result.command else {
+            XCTFail("Wrong command")
+            return
+        }
+        
+        XCTAssertEqual(time, 0.004, accuracy: 1e-12)
+        XCTAssertEqual(timeStep, 0.00001, accuracy: 1e-12)
+    }
+    
+    func testWrongMultiplierCase() throws {
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 0 1g\n.op"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongParameterType(1))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 0 1K\n.op"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongParameterType(1))
+        }
+        XCTAssertThrowsError(try Parser().parse(makeTestFile("R 1 0 1U\n.op"))) { err in
+            XCTAssertEqual(err as? ParserError, .wrongParameterType(1))
+        }
+    }
 
 }
 

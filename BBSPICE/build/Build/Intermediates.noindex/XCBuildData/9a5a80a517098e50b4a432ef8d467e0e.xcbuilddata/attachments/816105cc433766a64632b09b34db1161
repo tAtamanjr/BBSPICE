@@ -1,0 +1,29 @@
+{
+  "" : {
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests-primary.dia",
+    "emit-module-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests-primary-emit-module.dia",
+    "pch" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests-primary.swiftdeps"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICEUITests/BBSPICEUITests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITests~partial.swiftmodule"
+  },
+  "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICEUITests/BBSPICEUITestsLaunchTests.swift" : {
+    "const-values" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests.swiftconstvalues",
+    "dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests.d",
+    "diagnostics" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests.dia",
+    "index-unit-output-path" : "/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests.o",
+    "llvm-bc" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests.bc",
+    "object" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests.o",
+    "swift-dependencies" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests.swiftdeps",
+    "swiftmodule" : "/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/build/Build/Intermediates.noindex/BBSPICE.build/Debug/BBSPICEUITests.build/Objects-normal/arm64/BBSPICEUITestsLaunchTests~partial.swiftmodule"
+  }
+}

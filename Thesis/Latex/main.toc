@@ -35,7 +35,7 @@
 \contentsline {chapter}{\numberline {5}Implementacja}{24}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Struktura kodu}{24}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Parser i wynik parsowania}{24}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Tworzenie stempli}{25}{section.5.3}%
+\contentsline {section}{\numberline {5.3}Tworzenie stempli}{26}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Macierze}{26}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Solver}{27}{section.5.5}%
 \contentsline {section}{\numberline {5.6}Interfejs użytkownika i wizualizacja wyników}{28}{section.5.6}%

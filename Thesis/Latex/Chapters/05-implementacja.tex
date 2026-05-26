@@ -15,6 +15,8 @@ W implementacji przyjęto założenie, że elementy nie powinny samodzielnie int
 
 Parser pracuje na tekście zakodowanym jako UTF-8. Tekst może pochodzić z pliku albo bezpośrednio z pola edycji w interfejsie użytkownika. Każda linia jest dzielona na tokeny, a pierwszy token decyduje o dalszej interpretacji. Jeżeli token odpowiada komendzie analizy, parser zapisuje ją jako polecenie dla solvera. Jeżeli token odpowiada elementowi, parser sprawdza liczbę parametrów oraz zapamiętuje linię do późniejszego utworzenia stempla.
 
+Podczas zamiany tokenów na wartości liczbowe parser obsługuje również przedrostki mnożące. Dzięki temu użytkownik może zapisać pojemność jako \texttt{100n}, rezystancję jako \texttt{1k}, a czas symulacji jako \texttt{4m}. Przedrostki są rozpoznawane z uwzględnieniem wielkości liter, więc \texttt{M} i \texttt{m} oznaczają różne mnożniki. Niepoprawny przedrostek jest traktowany tak samo jak inny błąd typu parametru i prowadzi do błędu parsera z numerem linii.
+
 Rezultatem parsowania jest struktura zawierająca listę stempli, komendę analizy oraz listę węzłów przeznaczonych do wizualizacji. Taki wynik jest wygodny, ponieważ stanowi pełne wejście dla solvera i widoku wyniku, ale nie wiąże parsera z konkretną metodą obliczeń.
 
 \begin{lstlisting}[language=Swift,caption={Model wyniku parsowania},label={lst:parser-result}]

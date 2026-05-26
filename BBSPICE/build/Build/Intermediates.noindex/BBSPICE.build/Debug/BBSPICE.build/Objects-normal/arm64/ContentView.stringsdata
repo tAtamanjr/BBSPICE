@@ -28,7 +28,7 @@
       },
       {
         "comment": "",
-        "key": "R 1 0 1000\nDCVS 1 0 5\n.op",
+        "key": "R 1 0 1k\nDCVS 1 0 5\n.op",
         "location": {
           "startingColumn": 30,
           "startingLine": 150

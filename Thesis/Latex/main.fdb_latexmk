@@ -1,17 +1,17 @@
 # Fdb version 4
-["biber main"] 1779803690.80126 "main.bcf" "main.bbl" "main" 1779805001.12752 0
-  "main.bcf" 1779805000.13317 109867 f829ad67b3ca6dfd95fe21c632a455ce "xelatex"
+["biber main"] 1779803690.80126 "main.bcf" "main.bbl" "main" 1779805956.60953 0
+  "main.bcf" 1779805955.54969 109867 f829ad67b3ca6dfd95fe21c632a455ce "xelatex"
   "references.bib" 1779803565.17236 2376 4090cbe690194bcd728926cb5aa480f6 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["xdvipdfmx"] 1779805000.19673 "main.xdv" "main.pdf" "main" 1779805001.12899 0
-  "main.xdv" 1779805000.13421 800492 f7055741527ec8124cfd0d377590531d "xelatex"
+["xdvipdfmx"] 1779805955.61448 "main.xdv" "main.pdf" "main" 1779805956.61102 0
+  "main.xdv" 1779805955.5508 811708 95d922786af2bae194ad3a75afce37db "xelatex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["xelatex"] 1779804998.19821 "/Users/tataman/Documents/Xcode/BBSPICE/Thesis/Latex/main.tex" "main.xdv" "main" 1779805001.12758 0
+["xelatex"] 1779805953.53536 "/Users/tataman/Documents/Xcode/BBSPICE/Thesis/Latex/main.tex" "main.xdv" "main" 1779805956.60959 0
   "/Users/tataman/Documents/Xcode/BBSPICE/Thesis/Latex/main.tex" 1779803986.77579 982 d56cc98eab40fceb270dcc61d660b7bc ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -143,23 +143,23 @@
   "chapters/01-wstep.tex" 1779803582.5906 3161 6f3062f9a0db491a7c0c49883f43ee66 ""
   "chapters/02-podstawy-teoretyczne.tex" 1779804987.89775 11890 78522ab86ed8491a74699036e8b98aa1 ""
   "chapters/03-modified-nodal-analysis.tex" 1779804987.95856 10865 7ddaaf77d03faa7fd5768ad14144ee57 ""
-  "chapters/04-projekt-programu.tex" 1779804988.01898 16132 b9c8a1f0e7540a17ed7f411a47aa81d0 ""
-  "chapters/05-implementacja.tex" 1779804988.07976 13000 72545ac4084308276a3226324f011504 ""
-  "chapters/06-testy.tex" 1779558401.35472 8620 2fd96c58203227f58006e3e08376ee54 ""
-  "chapters/07-podsumowanie.tex" 1779804988.14005 6225 dc38bbb5d907dd35fa2156d22c43f731 ""
+  "chapters/04-projekt-programu.tex" 1779805931.68148 16722 2530d56c24b3c77ff754ea18fd19d3ed ""
+  "chapters/05-implementacja.tex" 1779805931.7428 13489 a68a65281a8c072ed98b6a2580e74d9b ""
+  "chapters/06-testy.tex" 1779805931.80829 9001 afd6e1f8d62fb531396e147e25e3892e ""
+  "chapters/07-podsumowanie.tex" 1779805931.87131 6334 a1be7bc2be98626d6b8fa005b23b2ca8 ""
   "figures/ACVSPlusR.png" 1779733906.58301 131266 e1fe9d33b6906f46c6b1ecdb3bbc41df ""
   "figures/EmitterFollowerResult.png" 1779733637.98719 206884 4ba3b067dfe58b326899fa0d0eb7d089 ""
   "figures/MainView.png" 1779733671.81363 90068 79cc7211857f9d05745165ffe0dff4f4 ""
   "figures/OPResultView.png" 1779734407.71878 40694 90b30da547356c0f5b88c9b27401e4b7 ""
   "figures/ThesisPWTitle.jpeg" 1779202070.47747 214521 52dca682c8148c75cdd8e3a6a6c10f7c ""
   "figures/ThesisPWTitleText.jpg" 1777952420 94898 764ce3a6d88e14f8877aabe24348aee5 ""
-  "main.aux" 1779805000.12993 29289 2c60a2cd36411b2be0f953e7c632b9e7 "xelatex"
+  "main.aux" 1779805955.54617 29289 ec5066a6d9f795511cfd7c56a00efb3c "xelatex"
   "main.bbl" 1779803692.54712 14351 47c7aab31390e5d2dacdaa9129338f5d "biber main"
-  "main.lof" 1779805000.13412 821 76406f28982608276237ac698dd607d7 "xelatex"
-  "main.lot" 1779805000.13417 425 0c8f56cafb5eb37b8228034b349e47a7 "xelatex"
-  "main.run.xml" 1779805000.13395 2499 22176f135834f62f511d80e25b19aca5 "xelatex"
+  "main.lof" 1779805955.55072 821 76406f28982608276237ac698dd607d7 "xelatex"
+  "main.lot" 1779805955.55075 425 0c8f56cafb5eb37b8228034b349e47a7 "xelatex"
+  "main.run.xml" 1779805955.55048 2499 22176f135834f62f511d80e25b19aca5 "xelatex"
   "main.tex" 1779803986.77579 982 d56cc98eab40fceb270dcc61d660b7bc ""
-  "main.toc" 1779805000.13407 4644 4661d538c3e7011472e0ffcabbfc90a0 "xelatex"
+  "main.toc" 1779805955.55066 4644 bca1fa6104d54ac1fac1cd74533d2969 "xelatex"
   "metadata.tex" 1779205030.54123 468 61302a1804019c969f412f60799e98bb ""
   "preamble.tex" 1779803718.48731 2976 a5826191a1a83efe4a3e75ce73e78b92 ""
   "titlepage.tex" 1779558700.71586 747 feac202dd63c9f4841b1168a7bf02bec ""

@@ -1,10 +1,10 @@
 * All elements parser test
 R 1 2 10
-C 2 0 0.001
+C 2 0 1m
 DCCS 0 1 2
 DCVS 2 0 5
 ACVS 3 0 10 50
-VCCS 1 0 3 0 0.5
+VCCS 1 0 3 0 500m
 VCVS 1 0 4 0 2
 CCCS 2 0 5 0 3 1
 CCVS 3 0 6 0 4 1

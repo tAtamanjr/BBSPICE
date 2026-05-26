@@ -19,7 +19,7 @@ Największą zaletą przyjętego podejścia jest modularność. Parser, elementy
 
 Drugą zaletą jest zgodność implementacji z metodą ZMPW. W metodzie tej globalny układ równań powstaje przez sumowanie lokalnych wkładów elementów. Tę samą zasadę wykorzystuje program: każdy stempel zwraca własną macierz i wektor, a solver dodaje je do macierzy globalnej. Dzięki temu kod nie wymaga osobnych algorytmów składania dla każdego typu obwodu.
 
-Ograniczeniem obecnego rozwiązania jest uproszczony format wejściowy. Netlista jest czytelna i wystarczająca dla obsługiwanych elementów, ale nie zawiera jeszcze bardziej rozbudowanych konstrukcji znanych z pełnych symulatorów SPICE, takich jak modele elementów, parametry nazwane, podukłady czy złożone źródła zależne od czasu. Jest to świadomy kompromis, ponieważ głównym celem pracy było pokazanie działania metody i architektury programu, a nie odtworzenie pełnego standardu SPICE.
+Ograniczeniem obecnego rozwiązania jest uproszczony format wejściowy. Netlista jest czytelna i wystarczająca dla obsługiwanych elementów, a wartości liczbowe mogą być zapisywane z podstawowymi przedrostkami mnożącymi. Format nie zawiera jednak jeszcze bardziej rozbudowanych konstrukcji znanych z pełnych symulatorów SPICE, takich jak modele elementów, parametry nazwane, podukłady czy złożone źródła zależne od czasu. Jest to świadomy kompromis, ponieważ głównym celem pracy było pokazanie działania metody i architektury programu, a nie odtworzenie pełnego standardu SPICE.
 
 \section{Możliwe kierunki rozwoju}
 \label{sec:kierunki-rozwoju}
@@ -28,7 +28,7 @@ Dalszy rozwój programu może obejmować kilka obszarów. Pierwszym z nich jest 
 
 Drugim kierunkiem jest rozbudowa analizy czasowej. Obecna architektura pozwala używać tych samych mechanizmów składania macierzy w kolejnych krokach czasowych, a komenda \texttt{.tran} przyjmuje czas końcowy i krok czasowy. W przyszłości można dodać jawnie definiowane warunki początkowe, adaptacyjny dobór kroku oraz różne metody całkowania numerycznego, na przykład metodę Geara. Warto również rozwinąć stabilizację metody Newtona-Raphsona przez tłumienie iteracji, ograniczanie zmian napięć w kolejnych iteracjach i bardziej rozbudowane kryteria zbieżności.
 
-Trzecim obszarem jest rozwój formatu wejściowego. Warto dodać obsługę komentarzy, jednostek z przedrostkami, parametrów nazwanych oraz bardziej opisowych komunikatów błędów. Przy większych projektach przydatne byłyby także podukłady i modele elementów definiowane w osobnych sekcjach pliku.
+Trzecim obszarem jest rozwój formatu wejściowego. Warto dodać parametry nazwane, bardziej opisowe komunikaty błędów, podukłady i modele elementów definiowane w osobnych sekcjach pliku. Przy większych projektach przydatne byłoby również rozszerzenie składni o bardziej złożone źródła zależne od czasu.
 
 Czwartym kierunkiem jest dalsza rozbudowa warstwy użytkownika. Program zawiera już okno edycji netlisty, obsługę przeciągania plików tekstowych, uruchamianie analizy oraz podstawową prezentację wyników. Dla analizy czasowej szczególnie przydatne byłyby eksport danych do plików, powiększanie i przesuwanie wykresu, możliwość porównania kilku przebiegów oraz wybór obserwowanych wielkości bez ręcznej edycji netlisty.
 

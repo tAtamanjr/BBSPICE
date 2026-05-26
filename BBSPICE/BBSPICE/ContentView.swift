@@ -147,7 +147,7 @@ private struct EditorView: View {
                         .padding(10)
                     
                     if circuitText.isEmpty {
-                        Text("R 1 0 1000\nDCVS 1 0 5\n.op")
+                        Text("R 1 0 1k\nDCVS 1 0 5\n.op")
                             .font(.system(.body, design: .monospaced))
                             .foregroundStyle(.tertiary)
                             .padding(.horizontal, 16)

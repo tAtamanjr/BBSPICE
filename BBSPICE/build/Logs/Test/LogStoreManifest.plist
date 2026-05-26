@@ -5,6 +5,68 @@
 	<key>logFormatVersion</key>
 	<integer>12</integer>
 	<key>logs</key>
-	<dict/>
+	<dict>
+		<key>818CF11B-9C3C-4486-8558-F4D448F169F9</key>
+		<dict>
+			<key>auxiliaryLogUniqueIdentifier</key>
+			<string>969BBF88-0651-4AB4-804E-B1F0CBB72078</string>
+			<key>auxiliaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>className</key>
+			<string>IDESchemeActionsInvocationRecord</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>com.apple.dt.unit.cocoaUnitTest</string>
+			<key>fileName</key>
+			<string>Test-BBSPICE-2026.05.26_16-27-17-+0200.xcresult</string>
+			<key>hasAuxiliaryLog</key>
+			<true/>
+			<key>hasCoverageData</key>
+			<true/>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>1</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>1</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>BBSPICE project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>BBSPICE</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Test BBSPICE</string>
+			<key>timeStartedRecording</key>
+			<real>801498437.80777204</real>
+			<key>timeStoppedRecording</key>
+			<real>801498444.15577996</real>
+			<key>title</key>
+			<string>Test BBSPICE</string>
+			<key>uniqueIdentifier</key>
+			<string>818CF11B-9C3C-4486-8558-F4D448F169F9</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

@@ -5,6 +5,49 @@
 	<key>logFormatVersion</key>
 	<integer>12</integer>
 	<key>logs</key>
-	<dict/>
+	<dict>
+		<key>969BBF88-0651-4AB4-804E-B1F0CBB72078</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>969BBF88-0651-4AB4-804E-B1F0CBB72078.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>BBSPICE project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>BBSPICE</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Testing project BBSPICE with scheme BBSPICE</string>
+			<key>timeStartedRecording</key>
+			<real>801498437.80637801</real>
+			<key>timeStoppedRecording</key>
+			<real>801498443.92859399</real>
+			<key>title</key>
+			<string>Testing project BBSPICE with scheme BBSPICE</string>
+			<key>uniqueIdentifier</key>
+			<string>969BBF88-0651-4AB4-804E-B1F0CBB72078</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

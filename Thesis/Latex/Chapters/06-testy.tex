@@ -36,7 +36,7 @@ Taki podział ogranicza ryzyko tworzenia testów zbyt szerokich. Jeżeli test pa
 \section{Testy parsera}
 \label{sec:testy-parsera}
 
-Parser jest testowany zarówno na krótkich opisach zawierających pojedyncze elementy, jak i na pliku zawierającym wszystkie obsługiwane typy elementów. Test z pełnym zestawem elementów sprawdza, czy parser poprawnie rozpoznaje \texttt{R}, \texttt{C}, \texttt{DCCS}, \texttt{DCVS}, \texttt{ACVS}, \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS}, \texttt{CCVS} oraz \texttt{BJT}. Dodatkowo sprawdzane jest przypisanie dodatkowych indeksów dla elementów wymagających nowych równań.
+Parser jest testowany zarówno na krótkich opisach zawierających pojedyncze elementy, jak i na pliku zawierającym zestaw obsługiwanych typów elementów. Test z takim plikiem sprawdza, czy parser poprawnie rozpoznaje \texttt{R}, \texttt{C}, \texttt{DCCS}, \texttt{DCVS}, \texttt{ACVS}, \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS} oraz \texttt{CCVS}. Dodatkowo sprawdzane jest przypisanie dodatkowych indeksów dla elementów wymagających nowych równań.
 
 \begin{lstlisting}[language=Netlist,caption={Przykładowy plik używany do sprawdzenia parsera},label={lst:test-all-elements}]
 R 1 0 10
@@ -46,15 +46,16 @@ VCCS 1 0 3 0 0.5
 VCVS 1 0 4 0 2
 CCCS 2 0 5 0 3 1
 CCVS 3 0 6 0 4 1
-C 1 2 0.0000001
-ACVS 7 0 2 1000
-BJT 2 3 4 0.000000000001 100 1
+C 1 2 100n
+ACVS 7 0 2 1k
 .op
 \end{lstlisting}
 
 Testy błędów parsera obejmują między innymi nieznany element, złą liczbę parametrów, niepoprawny typ parametru, niepoprawne parametry stempla, brak komendy, więcej niż jedną komendę analizy, więcej niż jedną komendę \texttt{.show} oraz użycie \texttt{.show} bez komendy \texttt{.tran}. Każdy z tych przypadków jest istotny z punktu widzenia użytkownika, ponieważ parser powinien wskazać linię, w której znajduje się problem.
 
 Osobno sprawdzana jest komenda \texttt{.tran}, w tym poprawność czasu końcowego i kroku czasowego. Dzięki temu format wejściowy jest przygotowany nie tylko dla punktu pracy, ale również dla analizy czasowej. Test parsera nie musi w tym miejscu sprawdzać całej symulacji czasowej; wystarczy potwierdzić, że komenda jest rozpoznawana i przekazywana do dalszej warstwy programu.
+
+Testy parsera obejmują również przedrostki mnożące. Sprawdzane są poprawne zapisy \texttt{G}, \texttt{M}, \texttt{k}, \texttt{m}, \texttt{u}, \texttt{n} i \texttt{p}, a także błędne warianty wynikające z niepoprawnej wielkości liter, na przykład \texttt{1K}, \texttt{1g} albo \texttt{1U}. Dodatkowy test potwierdza, że komenda \texttt{.tran 4m 10u} jest zamieniana na czas końcowy \SI{0.004}{\second} i krok \SI{0.00001}{\second}.
 
 \section{Testy stempli i elementów}
 \label{sec:testy-stempli}

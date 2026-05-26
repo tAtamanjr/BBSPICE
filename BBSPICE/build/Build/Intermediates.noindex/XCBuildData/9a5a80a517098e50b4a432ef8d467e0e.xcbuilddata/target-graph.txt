@@ -1,0 +1,6 @@
+Target dependency graph (3 targets)
+Target 'BBSPICEUITests' in project 'BBSPICE'
+➜ Explicit dependency on target 'BBSPICE' in project 'BBSPICE'
+Target 'BBSPICETests' in project 'BBSPICE'
+➜ Explicit dependency on target 'BBSPICE' in project 'BBSPICE'
+Target 'BBSPICE' in project 'BBSPICE' (no dependencies)

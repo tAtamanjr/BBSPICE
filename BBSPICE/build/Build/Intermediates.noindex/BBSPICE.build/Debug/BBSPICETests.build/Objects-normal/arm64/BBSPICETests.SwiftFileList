@@ -1,0 +1,11 @@
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Mathematics/BBSpiceLUDivisionTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Mathematics/BBSpiceMatrixTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Parser/BBSpiceParserTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Plotter/BBSpicePlotterTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Solver/BBSpiceSolverTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/AcriveElements/BBSpiceActiveElementsTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/PassiveElements/Linear/BBSpiceLinearPassiveElementsTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/PassiveElements/NonLinear/BBSpiceNonLinearPassiveElementsTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/Source/Linear/BBSpiceLinearSourceTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/Source/NonLinear/BBSpiceNonLinearSourceTests.swift
+/Users/tataman/Documents/Xcode/BBSPICE/BBSPICE/BBSPICETests/Stamps/BBSpiceStampErrorTests.swift

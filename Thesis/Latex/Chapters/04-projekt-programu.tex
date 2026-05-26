@@ -45,6 +45,8 @@ Cały przepływ danych można przedstawić jako przejście od interfejsu użytko
 
 Opis obwodu ma postać tekstową zbliżoną do uproszczonej netlisty SPICE. Jedna linia opisuje jeden element albo jedną komendę analizy. W przypadku elementu pierwszy token określa jego typ, kolejne tokeny oznaczają numery węzłów, a ostatnie wartości są parametrami elementu. Węzeł o numerze \texttt{0} pełni rolę węzła odniesienia. Taki format jest prosty do edycji ręcznej i dobrze pasuje do programowego parsowania opisu obwodu \cite{nagel1975spice2,kundert1995designer}.
 
+Wartości liczbowe mogą być zapisane w postaci pełnej albo z przedrostkiem mnożącym. Parser rozpoznaje przedrostki z uwzględnieniem wielkości liter: \texttt{G} oznacza \(10^9\), \texttt{M} oznacza \(10^6\), \texttt{k} oznacza \(10^3\), \texttt{m} oznacza \(10^{-3}\), \texttt{u} oznacza \(10^{-6}\), \texttt{n} oznacza \(10^{-9}\), a \texttt{p} oznacza \(10^{-12}\). Dzięki temu zapis \texttt{1k}, \texttt{100n} albo \texttt{4m} jest równoważny odpowiednio wartościom \texttt{1000}, \texttt{0.0000001} i \texttt{0.004}. Rozróżnianie wielkości liter jest istotne, ponieważ \texttt{M} oznacza mega, natomiast \texttt{m} oznacza mili.
+
 Aktualnie obsługiwane są: rezystor \texttt{R}, kondensator \texttt{C}, niezależne źródło prądowe \texttt{DCCS}, niezależne źródła napięciowe \texttt{DCVS} i \texttt{ACVS}, źródła sterowane \texttt{VCCS}, \texttt{VCVS}, \texttt{CCCS}, \texttt{CCVS} oraz tranzystor bipolarny \texttt{BJT}. Komenda \texttt{.op} oznacza analizę punktu pracy, natomiast \texttt{.tran} uruchamia analizę czasową. W przypadku analizy czasowej można dodatkowo użyć komendy \texttt{.show}, która wskazuje węzły przeznaczone do wizualizacji.
 
 \begin{table}[H]
@@ -72,16 +74,16 @@ Oznaczenie & Postać linii & Znaczenie parametrów \\
 \Cref{lst:all-elements-netlist} przedstawia przykładową netlistę zawierającą wszystkie obsługiwane obecnie typy elementów. Sam układ nie musi mieć znaczenia praktycznego; jego zadaniem jest pokazanie składni wejściowej i kolejności parametrów.
 
 \begin{lstlisting}[language=Netlist,caption={Przykładowy opis obwodu z wszystkimi obsługiwanymi elementami},label={lst:all-elements-netlist}]
-R 1 0 1000
-DCCS 0 1 0.001
+R 1 0 1k
+DCCS 0 1 1m
 DCVS 2 0 5
 VCCS 1 0 3 0 0.5
 VCVS 1 0 4 0 2
 CCCS 2 0 5 0 3 1
 CCVS 3 0 6 0 4 1
-C 1 2 0.0000001
-ACVS 7 0 2 1000
-BJT 2 3 4 0.000000000001 100 1
+C 1 2 100n
+ACVS 7 0 2 1k
+BJT 2 3 4 1p 100 1
 .op
 \end{lstlisting}
 
@@ -90,13 +92,13 @@ Dla źródeł napięciowych przyjęto konwencję zgodną z równaniami ZMPW: zap
 \Cref{lst:emitter-follower-netlist} pokazuje netlistę układu wtórnika emiterowego użytego do sprawdzenia analizy czasowej. Węzeł \texttt{1} jest wyjściem źródła sinusoidalnego, węzeł \texttt{2} odpowiada bazie tranzystora, węzeł \texttt{3} kolektorowi, a węzeł \texttt{4} emiterowi. Komenda \texttt{.show 2 4} oznacza, że na wykresie mają zostać pokazane napięcia bazy i emitera.
 
 \begin{lstlisting}[language=Netlist,caption={Opis układu wtórnika emiterowego},label={lst:emitter-follower-netlist}]
-R 3 2 27000
-R 0 4 1000
-ACVS 1 0 2 1000
+R 3 2 27k
+R 0 4 1k
+ACVS 1 0 2 1k
 DCVS 3 0 5
-C 1 2 0.0000001
-BJT 2 3 4 0.000000000001 100 1
-.tran 0.004 0.00001
+C 1 2 100n
+BJT 2 3 4 1p 100 1
+.tran 4m 10u
 .show 2 4
 \end{lstlisting}
 
@@ -142,8 +144,8 @@ Komenda \texttt{.tran} wykorzystuje tę samą ideę składania stempli, ale obli
 \Cref{fig:op-result-view} pokazuje wynik analizy punktu pracy dla prostego dzielnika napięcia. Opis układu zawiera dwa rezystory \SI{1}{\kilo\ohm} oraz źródło napięciowe \SI{5}{\volt}. Ponieważ rezystory mają takie same wartości, napięcie w węźle pośrednim wynosi połowę napięcia zasilania, czyli około \SI{2.5}{\volt}. Wynik programu pokazuje również \SI{5}{\volt} w węźle połączonym z dodatnim zaciskiem źródła.
 
 \begin{lstlisting}[language=Netlist,caption={Netlista dzielnika napięcia użytego do analizy punktu pracy},label={lst:op-divider-netlist}]
-R 1 2 1000
-R 2 0 1000
+R 1 2 1k
+R 2 0 1k
 DCVS 1 0 5
 .op
 \end{lstlisting}

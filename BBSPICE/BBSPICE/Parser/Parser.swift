@@ -241,8 +241,43 @@ class Parser {
     }
     
     private func parseDouble(_ token: String, _ lineNumber: Int) throws -> Double {
-        guard let value = Double(token) else { throw ParserError.wrongParameterType(lineNumber) }
-        return value
+        if let value = Double(token) {
+            return value
+        }
+        
+        guard let suffix = token.last,
+              let multiplier = multiplier(suffix) else {
+            throw ParserError.wrongParameterType(lineNumber)
+        }
+        
+        let numberPart = String(token.dropLast())
+        guard !numberPart.isEmpty,
+              let value = Double(numberPart) else {
+            throw ParserError.wrongParameterType(lineNumber)
+        }
+        
+        return value * multiplier
+    }
+    
+    private func multiplier(_ suffix: Character) -> Double? {
+        switch suffix {
+        case "G":
+            return 1e9
+        case "M":
+            return 1e6
+        case "k":
+            return 1e3
+        case "m":
+            return 1e-3
+        case "u":
+            return 1e-6
+        case "n":
+            return 1e-9
+        case "p":
+            return 1e-12
+        default:
+            return nil
+        }
     }
     
     private func parseCommand(_ tokens: [String], _ lineNumber: Int) throws -> SolverCommand? {
