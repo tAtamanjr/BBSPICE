@@ -1,0 +1,8 @@
+R 3 2 27k
+R 0 4 1k
+ACVS 1 0 2 1k
+DCVS 3 0 5
+C 1 2 100n
+BJT 2 3 4 1p 100 1
+.tran 4m 10u
+.show 2 4

@@ -1,0 +1,5 @@
+ACVS 1 0 5 1k
+R 1 2 1k
+C 2 0 100n
+.tran 5m 10u
+.show 1 2
